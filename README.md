@@ -50,22 +50,10 @@ Official website repository and legal hub for **KeepIt**, a modern Chrome extens
 
 ## 📄 Web Pages Included for GitHub Pages
 
-1. **Landing Page:** [`index.html`](file:///d:/projects/Extension%20Dev/keepit/index.html) — Feature showcases, screenshots, problem/solution breakdown, pricing matrix, and Razorpay merchant compliance disclosures.
-2. **User Documentation:** [`docs.html`](file:///d:/projects/Extension%20Dev/keepit/docs.html) — Full feature guide, keyboard shortcuts (`/` search focus, `Alt+Shift+S` quick save), interactive screenshot cards, and tab hygiene guide.
-3. **Privacy Policy:** [`privacy.html`](file:///d:/projects/Extension%20Dev/keepit/privacy.html) — Data minimization disclosure, Google OAuth (`chrome.identity`), Supabase Row-Level Security, Chrome permissions breakdown, and 30-day account deletion policy.
-4. **Terms of Service:** [`terms.html`](file:///d:/projects/Extension%20Dev/keepit/terms.html) — Free/Pro subscription terms, Razorpay recurring billing rules, 100% 7-day refund guarantee, and Indian legal jurisdiction framework.
-
----
-
-## 🌐 Deploying to GitHub Pages
-
-To host these web pages on GitHub Pages:
-
-1. Create a repository on GitHub (e.g. `KeepIt`).
-2. Push the files (`index.html`, `docs.html`, `privacy.html`, `terms.html`, `images/`, `js/`) to your main branch.
-3. Go to **Repository Settings ➔ Pages**.
-4. Under **Source**, select `Deploy from a branch` and choose `main` / `root`.
-5. Your live site will be accessible at: `https://<your-github-username>.github.io/<repo-name>/`
+1. **Landing Page:** [`index.html`](https://official-naveen.github.io/KeepIt/index.html) — Feature showcases, screenshots, problem/solution breakdown, pricing matrix, and Razorpay merchant compliance disclosures.
+2. **User Documentation:** [`docs.html`](https://official-naveen.github.io/KeepIt/docs.html) — Full feature guide, keyboard shortcuts (`/` search focus, `Alt+Shift+S` quick save), interactive screenshot cards, and tab hygiene guide.
+3. **Privacy Policy:** [`privacy.html`](https://official-naveen.github.io/KeepIt/privacy.html) — Data minimization disclosure, Google OAuth (`chrome.identity`), Supabase Row-Level Security, Chrome permissions breakdown, and 30-day account deletion policy.
+4. **Terms of Service:** [`terms.html`](https://official-naveen.github.io/KeepIt/terms.html) — Free/Pro subscription terms, Razorpay recurring billing rules, 100% 7-day refund guarantee, and Indian legal jurisdiction framework.
 
 ---
 
