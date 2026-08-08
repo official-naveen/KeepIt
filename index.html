@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KeepIt — Tab Session Manager & RAM Saver Chrome Extension</title>
+  <meta name="description"
+    content="KeepIt is the ultimate Chrome extension to save open tab sessions, preserve native Tab Groups, freeze idle tabs to reduce RAM usage by up to 80%, and sync across devices.">
+  <style>
+    /* CSS Reset & Variable Definitions - Matching KeepIt Design System */
+    :root {
+      color-scheme: dark;
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-tertiary: #334155;
+      --bg-card: rgba(30, 41, 59, 0.75);
+      --bg-hover: #475569;
+
+      --accent-primary: #6366f1;
+      --accent-hover: #4f46e5;
+      --accent-light: rgba(99, 102, 241, 0.15);
+
+      --gold-primary: #f59e0b;
+      --gold-light: rgba(245, 158, 11, 0.15);
+
+      --success-primary: #10b981;
+      --success-light: rgba(16, 185, 129, 0.15);
+
+      --danger-primary: #ef4444;
+      --danger-light: rgba(239, 68, 68, 0.15);
+
+      --info-primary: #3b82f6;
+      --info-light: rgba(59, 130, 246, 0.15);
+
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+
+      --border-color: #334155;
+      --border-subtle: #1e293b;
+
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+      --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.25);
+
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-family);
+      font-size: 15px;
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background-color: var(--accent-primary);
+      color: #ffffff;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-full);
+      border: 2px solid var(--bg-primary);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--bg-hover);
+    }
+
+    /* Links */
+    a {
+      color: #818cf8;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    a:hover {
+      color: #a5b4fc;
+    }
+
+    /* Top Navigation Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 14px 24px;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none !important;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent-primary), #818cf8);
+      color: #ffffff;
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-menu a {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .btn-header {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-hover));
+      color: #ffffff !important;
+      padding: 7px 16px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 13.5px;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+      transition: all 0.15s ease;
+    }
+
+    .btn-header:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    }
+
+    /* Main Container & Hero */
+    .main-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 24px 80px 24px;
+      width: 100%;
+      flex: 1;
+    }
+
+    .hero-section {
+      text-align: center;
+      padding: 48px 20px 64px 20px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .badge-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--accent-light);
+      color: #818cf8;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      padding: 4px 14px;
+      border-radius: var(--radius-full);
+      font-size: 12.5px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ffffff 30%, var(--text-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-cta-primary {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-hover));
+      color: #ffffff !important;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.15s ease;
+    }
+
+    .btn-cta-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 26px rgba(99, 102, 241, 0.5);
+    }
+
+    .btn-cta-secondary {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary) !important;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 13px 26px;
+      border-radius: var(--radius-md);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+    }
+
+    .btn-cta-secondary:hover {
+      background-color: var(--bg-tertiary);
+      border-color: var(--accent-primary);
+    }
+
+    /* Screenshots Grid Section */
+    .screenshots-section {
+      margin: 40px 0 80px 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-heading h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .section-heading p {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+    }
+
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 24px;
+    }
+
+    .doc-screenshot-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .doc-screenshot-card:hover {
+      border-color: rgba(99, 102, 241, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .doc-screenshot-header {
+      background-color: #0b1329;
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .window-dots {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .w-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background-color: #ef4444; }
+    .dot-yellow { background-color: #f59e0b; }
+    .dot-green { background-color: #10b981; }
+
+    .window-title-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: monospace;
+      font-weight: 500;
+    }
+
+    .window-badge {
+      font-size: 10px;
+      font-weight: 700;
+      color: #818cf8;
+      background-color: var(--accent-light);
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .doc-screenshot-body {
+      padding: 24px;
+      background-color: var(--bg-primary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .doc-img {
+      max-width: 380px;
+      width: 100%;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      display: block;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin: 40px 0 80px 0;
+    }
+
+    .feature-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      transition: border-color 0.15s ease;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Pricing Section */
+    .pricing-section {
+      margin: 60px 0;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .pricing-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .pricing-card.popular {
+      border-color: var(--accent-primary);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .popular-tag {
+      position: absolute;
+      top: -12px;
+      right: 24px;
+      background: linear-gradient(135deg, var(--gold-primary), #f59e0b);
+      color: #000000;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 12px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pricing-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .pricing-price {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .pricing-subprice {
+      color: #818cf8;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 32px;
+      flex: 1;
+    }
+
+    .pricing-features li {
+      margin-bottom: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .pricing-features li svg {
+      width: 18px;
+      height: 18px;
+      color: var(--success-primary);
+      flex-shrink: 0;
+    }
+
+    /* Razorpay Guarantee Refund Callout */
+    .refund-callout {
+      background-color: var(--success-light);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-top: 32px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .refund-icon {
+      font-size: 1.8rem;
+    }
+
+    .refund-content h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #34d399;
+      margin-bottom: 6px;
+    }
+
+    .refund-content p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    /* Merchant Contact Card */
+    .merchant-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .merchant-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .merchant-card p {
+      color: var(--text-secondary);
+      max-width: 560px;
+      margin: 0 auto 20px auto;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13.5px;
+      margin-top: auto;
+    }
+
+    footer a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      margin: 0 12px;
+    }
+
+    footer a:hover {
+      color: var(--accent-primary);
+    }
+
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.2rem; }
+      .nav-menu { gap: 14px; }
+      .pricing-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="index.html" class="brand">
+        <div class="brand-logo" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
+            <line x1="3" y1="9" x2="21" y2="9"></line>
+            <line x1="9" y1="21" x2="9" y2="9"></line>
+          </svg>
+        </div>
+        <span class="brand-title">KeepIt</span>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="active">Home</a>
+        <a href="docs.html">Docs</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="#pricing" class="btn-header">Get Pro</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-wrapper">
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="badge-hero">⚡ Chrome Extension Tab Manager & Memory Saver</div>
+      <h1 class="hero-title">Organize Open Tabs.<br>Reclaim Your RAM.</h1>
+      <p class="hero-subtitle">
+        KeepIt captures open browser windows into organized session bundles, preserves native Chrome Tab Groups, and automatically discards idle background tabs to slash memory usage by up to 80%.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="docs.html" class="btn-cta-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          Explore User Guide & Documentation
+        </a>
+        <a href="#pricing" class="btn-cta-secondary">
+          View Plans & Pricing
+        </a>
+      </div>
+    </section>
+
+    <!-- Screenshots Preview Section -->
+    <section class="screenshots-section">
+      <div class="section-heading">
+        <h2>Designed for Speed & Simplicity</h2>
+        <p>Take a look inside KeepIt's modern, dark-themed Chrome extension popup interface.</p>
+      </div>
+
+      <div class="screenshots-grid">
+        <!-- Card 1 -->
+        <div class="doc-screenshot-card">
+          <div class="doc-screenshot-header">
+            <div class="window-dots">
+              <span class="w-dot dot-red"></span>
+              <span class="w-dot dot-yellow"></span>
+              <span class="w-dot dot-green"></span>
+            </div>
+            <span class="window-title-text">KeepIt — Session List Overview</span>
+            <span class="window-badge">Extension UI</span>
+          </div>
+          <div class="doc-screenshot-body">
+            <img src="images/1.png" alt="KeepIt Session List Overview" class="doc-img">
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="doc-screenshot-card">
+          <div class="doc-screenshot-header">
+            <div class="window-dots">
+              <span class="w-dot dot-red"></span>
+              <span class="w-dot dot-yellow"></span>
+              <span class="w-dot dot-green"></span>
+            </div>
+            <span class="window-title-text">KeepIt — Interactive Save Modal</span>
+            <span class="window-badge">Save Modal</span>
+          </div>
+          <div class="doc-screenshot-body">
+            <img src="images/2.png" alt="KeepIt Interactive Save Modal" class="doc-img">
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="doc-screenshot-card">
+          <div class="doc-screenshot-header">
+            <div class="window-dots">
+              <span class="w-dot dot-red"></span>
+              <span class="w-dot dot-yellow"></span>
+              <span class="w-dot dot-green"></span>
+            </div>
+            <span class="window-title-text">KeepIt — Tools & Memory Saver</span>
+            <span class="window-badge">Tab Hygiene</span>
+          </div>
+          <div class="doc-screenshot-body">
+            <img src="images/5.png" alt="KeepIt Tools & Tab Hygiene Modal" class="doc-img">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">💾</div>
+        <h3>1-Click Session Saving</h3>
+        <p>Instantly snapshot all open tabs or select specific tabs using live search filters. Save locally on disk or sync to the cloud.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🗄️</div>
+        <h3>Native Tab Groups Preservation</h3>
+        <p>KeepIt captures native Chrome Tab Group titles, colors, and collapsed states, automatically restoring them when you re-open sessions.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">❄️</div>
+        <h3>Auto-Freeze Memory Saver</h3>
+        <p>Discard idle background tabs from RAM without closing them. Set auto-freeze timers (15m, 30m, 60m) to keep your browser fast.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Background Auto-Save Snapshots</h3>
+        <p>Continuous window snapshot auto-saves run every 3 minutes (1 min on Pro) to protect against browser crashes or accidental closures.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📁</div>
+        <h3>Drag & Drop Folders</h3>
+        <p>Organize saved sessions into custom folders with effortless HTML5 drag and drop pill navigation.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📤</div>
+        <h3>Peer Session Sharing</h3>
+        <p>Send curated tab bundles directly to colleagues or classmates using custom <code>@username</code> handles.</p>
+      </div>
+    </section>
+
+    <!-- Pricing Section (Razorpay Merchant Compliant) -->
+    <section id="pricing" class="pricing-section">
+      <div class="section-heading">
+        <h2>Transparent & Affordable Pricing</h2>
+        <p>Get started for free or upgrade to Pro for unlimited cloud sync and advanced features.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Free Plan -->
+        <div class="pricing-card">
+          <div class="pricing-name">KeepIt Free</div>
+          <div class="pricing-price">₹0</div>
+          <div class="pricing-subprice">$0 / Forever</div>
+
+          <ul class="pricing-features">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Unlimited local session storage
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Up to 3 custom folders
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Up to 3 cloud-synced sessions
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              3-minute auto-save snapshot frequency
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Tab freezing RAM memory saver
+            </li>
+          </ul>
+
+          <a href="docs.html#installation" class="btn-cta-secondary" style="text-align: center; justify-content: center;">
+            Get Free Extension
+          </a>
+        </div>
+
+        <!-- Pro Plan -->
+        <div class="pricing-card popular">
+          <div class="popular-tag">Most Popular</div>
+          <div class="pricing-name">KeepIt Pro</div>
+          <div class="pricing-price">₹149 <span style="font-size: 1rem; color: var(--text-muted);">/ month</span></div>
+          <div class="pricing-subprice">or ₹1,199 / year (~$1.79 USD/mo or ~$14.99 USD/yr)</div>
+
+          <ul class="pricing-features">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <strong>Unlimited</strong> custom folder creation
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <strong>Unlimited</strong> cloud-synced sessions across devices
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Fast 1-minute auto-save snapshot frequency
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Peer-to-peer session sharing by @username
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Priority updates & developer support
+            </li>
+          </ul>
+
+          <a href="docs.html#pricing-matrix" class="btn-cta-primary" style="text-align: center; justify-content: center;">
+            Subscribe via Razorpay
+          </a>
+        </div>
+      </div>
+
+      <!-- Razorpay 7-Day Money Back Guarantee -->
+      <div class="refund-callout">
+        <div class="refund-icon">🛡️</div>
+        <div class="refund-content">
+          <h4>100% 7-Day Money-Back Guarantee</h4>
+          <p>
+            We stand behind KeepIt Pro. If you are not completely satisfied with your subscription for any reason within <strong>7 calendar days</strong> of purchase, send an email to <a href="mailto:contact.naveen.work@gmail.com" style="color: #34d399; font-weight:700;">contact.naveen.work@gmail.com</a> and we will issue a full 100% refund. Subscriptions are billed securely via PCI-DSS compliant Razorpay APIs.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Merchant Contact Section -->
+    <section class="merchant-card">
+      <h3>Need Help or Have Questions?</h3>
+      <p>Have questions about KeepIt Pro subscriptions, account data deletion, or feature requests? We're here to help!</p>
+      <a href="mailto:contact.naveen.work@gmail.com" class="btn-cta-primary">
+        ✉️ Contact Support: contact.naveen.work@gmail.com
+      </a>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div>
+      <a href="index.html">Home</a> •
+      <a href="docs.html">Documentation</a> •
+      <a href="privacy.html">Privacy Policy</a> •
+      <a href="terms.html">Terms of Service</a> •
+      <a href="terms.html#billing">Refund Policy</a>
+    </div>
+    <div style="margin-top: 10px; color: var(--text-muted); font-size: 12.5px;">
+      © 2026 KeepIt. All rights reserved. Billed via Razorpay. Built for power browser users worldwide.
+    </div>
+  </footer>
+
+</body>
+</html>

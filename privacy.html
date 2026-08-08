@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KeepIt — Privacy Policy</title>
+  <meta name="description"
+    content="Privacy Policy for KeepIt tab session manager Chrome extension. Learn how your session data, authentication, and privacy are handled securely.">
+  <style>
+    /* CSS Reset & Variable Definitions - Styled natively to match KeepIt Chrome Extension */
+    :root {
+      color-scheme: dark;
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-tertiary: #334155;
+      --bg-card: rgba(30, 41, 59, 0.75);
+      --bg-hover: #475569;
+
+      --accent-primary: #6366f1;
+      --accent-hover: #4f46e5;
+      --accent-light: rgba(99, 102, 241, 0.15);
+
+      --gold-primary: #f59e0b;
+      --gold-light: rgba(245, 158, 11, 0.15);
+
+      --success-primary: #10b981;
+      --success-light: rgba(16, 185, 129, 0.15);
+
+      --danger-primary: #ef4444;
+      --danger-light: rgba(239, 68, 68, 0.15);
+
+      --info-primary: #3b82f6;
+      --info-light: rgba(59, 130, 246, 0.15);
+
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+
+      --border-color: #334155;
+      --border-subtle: #1e293b;
+
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+      --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.2);
+
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-family);
+      font-size: 15px;
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background-color: var(--accent-primary);
+      color: #ffffff;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-full);
+      border: 2px solid var(--bg-primary);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--bg-hover);
+    }
+
+    /* Links */
+    a {
+      color: #818cf8;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    a:hover {
+      color: #a5b4fc;
+      text-decoration: underline;
+    }
+
+    /* Top Sticky Header */
+    .app-header-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background-color: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 14px 24px;
+    }
+
+    .nav-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none !important;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent-primary), #818cf8);
+      color: #ffffff;
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-menu a {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* Main Container */
+    .main-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px 64px 24px;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* Policy Hero Card */
+    .policy-hero {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .policy-hero-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--text-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .meta-bar {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    .meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .meta-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--accent-primary);
+    }
+
+    .divider-dot {
+      color: var(--border-color);
+    }
+
+    /* Quick Jump Pills */
+    .quick-jump-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .quick-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none !important;
+      transition: all 0.15s ease;
+    }
+
+    .quick-pill:hover {
+      color: var(--text-primary);
+      border-color: var(--accent-primary);
+      background-color: var(--bg-tertiary);
+    }
+
+    /* Executive Summary Box */
+    .summary-box {
+      background-color: var(--accent-light);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+
+    .summary-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #818cf8;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .summary-title svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .summary-box p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    /* Content Cards & Sections */
+    .policy-section {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s ease;
+      scroll-margin-top: 80px;
+    }
+
+    .policy-section:hover {
+      border-color: rgba(99, 102, 241, 0.35);
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .section-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-sm);
+      background-color: var(--accent-light);
+      color: #818cf8;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    p {
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+
+    ul, ol {
+      margin: 0 0 16px 20px;
+      color: var(--text-secondary);
+    }
+
+    li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    li strong {
+      color: var(--text-primary);
+    }
+
+    code {
+      font-family: monospace;
+      font-size: 12.5px;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      color: #38bdf8;
+    }
+
+    /* Grid Layout for Cards */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .info-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px;
+    }
+
+    .info-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-size: 14px;
+    }
+
+    .badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .badge-success {
+      background-color: var(--success-light);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-info {
+      background-color: var(--info-light);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .badge-warning {
+      background-color: var(--gold-light);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .info-card-body {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* Contact Card */
+    .contact-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      text-align: center;
+      margin-top: 40px;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .contact-card h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+
+    .contact-card p {
+      max-width: 540px;
+      margin: 0 auto 20px auto;
+      color: var(--text-secondary);
+    }
+
+    .btn-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-hover));
+      color: #ffffff !important;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      text-decoration: none !important;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-email:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+    }
+
+    .btn-email svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      margin-top: 48px;
+      padding-top: 24px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    footer a:hover {
+      color: var(--accent-primary);
+    }
+
+    @media (max-width: 640px) {
+      .policy-hero {
+        padding: 24px 20px;
+      }
+      .policy-hero-title {
+        font-size: 1.75rem;
+      }
+      .policy-section {
+        padding: 20px;
+      }
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="app-header-nav">
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <div class="brand-logo" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
+            <line x1="3" y1="9" x2="21" y2="9"></line>
+            <line x1="9" y1="21" x2="9" y2="9"></line>
+          </svg>
+        </div>
+        <span class="brand-title">KeepIt</span>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="docs.html">Docs</a>
+        <a href="privacy.html" class="active">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-wrapper">
+
+    <!-- Hero Card Header -->
+    <div class="policy-hero">
+      <h1 class="policy-hero-title">Privacy Policy for KeepIt</h1>
+      <div class="meta-bar">
+        <div class="meta-item">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <span>Effective Date: <strong>August 7, 2026</strong></span>
+        </div>
+        <span class="divider-dot">•</span>
+        <div class="meta-item">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          <a href="mailto:contact.naveen.work@gmail.com">contact.naveen.work@gmail.com</a>
+        </div>
+      </div>
+
+      <!-- Quick Jump Nav Pills -->
+      <div class="quick-jump-container">
+        <a href="#collect" class="quick-pill">1. Data We Collect</a>
+        <a href="#use" class="quick-pill">2. How We Use Data</a>
+        <a href="#third-parties" class="quick-pill">3. Third Parties</a>
+        <a href="#permissions" class="quick-pill">4. Permissions</a>
+        <a href="#storage" class="quick-pill">5. Security & Storage</a>
+        <a href="#retention" class="quick-pill">6. Data Rights & Deletion</a>
+      </div>
+    </div>
+
+    <!-- Executive Summary Card -->
+    <div class="summary-box">
+      <div class="summary-title">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+        <span>Privacy-First Philosophy</span>
+      </div>
+      <p>
+        KeepIt is designed with data minimization and transparency at its core. For offline users, saved sessions, auto-save snapshots, and settings are stored locally in your browser (<code>chrome.storage.local</code>). If you choose to sign in and enable Cloud Sync or Session Sharing, your selected session data is synced securely to our database. KeepIt inspects open tab metadata (titles, URLs, favicons) strictly to save sessions, organize folders, and manage tab freezing—never to track your personal browsing history, profile your activity, or serve advertisements.
+      </p>
+    </div>
+
+    <!-- Section 1 -->
+    <section id="collect" class="policy-section">
+      <h2><span class="section-number">1</span> What Information We Collect</h2>
+
+      <p>Depending on how you use KeepIt (offline local mode vs. optional Google Sign-in & Cloud Sync), we collect and process the following categories of data:</p>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-card-header">
+            <span>Session & Tab Metadata</span>
+            <span class="badge badge-success">Local Default</span>
+          </div>
+          <div class="info-card-body">
+            Tab titles, URLs, favicon references, pinned states, tab positions, custom folder names, and Chrome native Tab Group metadata (group title, color badge, collapsed state).
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-header">
+            <span>Google Account Identity</span>
+            <span class="badge badge-info">Opt-In Auth</span>
+          </div>
+          <div class="info-card-body">
+            When you sign in with Google via <code>chrome.identity</code>, we receive your email address, full name, profile picture, and Google User ID. <strong>We never receive or store your Google password.</strong>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-header">
+            <span>Username & Peer Sharing</span>
+            <span class="badge badge-info">Optional</span>
+          </div>
+          <div class="info-card-body">
+            If you choose to use the peer-to-peer session sharing feature, you select a custom username stored in our database so designated users can share sessions with you.
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-header">
+            <span>Subscription & Billing Metadata</span>
+            <span class="badge badge-warning">Pro Plan</span>
+          </div>
+          <div class="info-card-body">
+            We store plan status (Free vs. Pro/Premium, billing cycle, expiration date) to enforce plan limits. <strong>We never collect or store payment cards, UPI, or bank details.</strong> All payments are processed by Razorpay.
+          </div>
+        </div>
+      </div>
+
+      <p><strong>What we do NOT collect:</strong> We do not track ambient browsing activity outside of open tabs you explicitly save, we do not log form inputs or page contents, and we do not run third-party advertising or analytics trackers.</p>
+    </section>
+
+    <!-- Section 2 -->
+    <section id="use" class="policy-section">
+      <h2><span class="section-number">2</span> How We Use Your Data</h2>
+      <p>We process data strictly to provide, maintain, and support the core functionality of KeepIt:</p>
+      <ul>
+        <li><strong>Saving & Restoring Sessions:</strong> Capturing open window tabs, Tab Groups, and folders so you can restore them instantly.</li>
+        <li><strong>Auto-Save Recovery:</strong> Storing local periodic snapshots so you can recover lost browser tabs after unexpected Chrome crashes.</li>
+        <li><strong>Auto-Freeze Feature:</strong> Monitoring tab idle times locally to discard inactive background tabs and free up system RAM.</li>
+        <li><strong>Cloud Syncing (Opt-In):</strong> Uploading sessions to our database provider, Supabase, so you can restore your tab sessions across multiple computers or browsers.</li>
+        <li><strong>Peer Session Sharing:</strong> Delivering shared session packages directly to another user's shared inbox using their chosen username.</li>
+        <li><strong>Subscription Verification:</strong> Verifying Pro plan status via secure webhooks to unlock premium features (e.g. unlimited cloud sync, enhanced auto-save frequencies).</li>
+      </ul>
+    </section>
+
+    <!-- Section 3 -->
+    <section id="third-parties" class="policy-section">
+      <h2><span class="section-number">3</span> Third-Party Service Providers</h2>
+      <p>We work with trusted third-party service providers to handle infrastructure, authentication, and payments under strict data handling standards:</p>
+      <ul>
+        <li>
+          <strong>Google LLC (Google Identity Services)</strong> — Handles authentication via OpenID Connect OAuth 2.0. Governed by <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.
+        </li>
+        <li>
+          <strong>Supabase Inc.</strong> — Serves as our secure backend database provider (<code>*.supabase.co</code>) to host cloud-synced sessions, folders, usernames, and subscription metadata. Governed by <a href="https://supabase.com/privacy" target="_blank" rel="noopener">Supabase's Privacy Policy</a>.
+        </li>
+        <li>
+          <strong>Razorpay Software Private Limited</strong> — Manages subscription payments and checkout. When upgrading to Pro, Razorpay collects payments directly under its PCI-DSS compliant infrastructure. Governed by <a href="https://razorpay.com/privacy/" target="_blank" rel="noopener">Razorpay's Privacy Policy</a>.
+        </li>
+      </ul>
+      <p>We do not sell, rent, or trade your personal data to any third parties or advertisers.</p>
+    </section>
+
+    <!-- Section 4 -->
+    <section id="permissions" class="policy-section">
+      <h2><span class="section-number">4</span> Extension Permissions Explained</h2>
+      <p>Chrome requires explicit permissions for extensions to interact with your browser. KeepIt requests only necessary permissions:</p>
+      <ul>
+        <li><code>tabs</code>: Required to read tab titles, URLs, and favicons when saving sessions, and to discard inactive background tabs for Auto-Freeze.</li>
+        <li><code>tabGroups</code>: Required to preserve native Chrome Tab Group titles, colors, and collapsed states.</li>
+        <li><code>storage</code>: Required to store your sessions, folders, auto-save snapshots, and settings locally on your device.</li>
+        <li><code>alarms</code>: Required to trigger background auto-save snapshots and periodic subscription re-verifications.</li>
+        <li><code>sessions</code>: Required to support recovery of recently closed windows.</li>
+        <li><code>identity</code>: Required to open the Google OAuth sign-in flow.</li>
+        <li><code>bookmarks</code>: Optional permission used if you choose to import bookmarks into KeepIt sessions.</li>
+      </ul>
+    </section>
+
+    <!-- Section 5 -->
+    <section id="storage" class="policy-section">
+      <h2><span class="section-number">5</span> Data Storage & Security</h2>
+      <p>
+        <strong>Local Storage:</strong> Local sessions and auto-save snapshots are kept strictly inside Chrome's isolated extension storage (<code>chrome.storage.local</code>) on your local hard drive.
+      </p>
+      <p>
+        <strong>Cloud Security:</strong> All cloud-synced data transmitted to Supabase is encrypted in transit using TLS 1.2/1.3 (HTTPS). Cloud database access is restricted using Supabase Row Level Security (RLS) policies—ensuring your saved sessions and folders are only accessible by your authenticated Google account (or designated recipients you explicitly share sessions with).
+      </p>
+    </section>
+
+    <!-- Section 6 -->
+    <section id="retention" class="policy-section">
+      <h2><span class="section-number">6</span> Data Retention & Your Controls</h2>
+      <ul>
+        <li><strong>Local Deletion:</strong> You can edit or delete any saved session, folder, or auto-save snapshot anytime inside the KeepIt extension. Uninstalling the extension automatically removes all local data stored in <code>chrome.storage.local</code>.</li>
+        <li><strong>Cloud Session Deletion:</strong> Deleting a cloud session inside KeepIt permanently removes it from our cloud database.</li>
+        <li><strong>Full Account Deletion:</strong> You may request complete deletion of your KeepIt account, username profile, and all associated cloud-stored data by emailing us at <a href="mailto:contact.naveen.work@gmail.com">contact.naveen.work@gmail.com</a>. We will process and confirm account deletion requests within <strong>30 days</strong>.</li>
+        <li><strong>Subscription Cancellation:</strong> You can cancel your Pro subscription anytime via the extension settings. Subscription cancellation takes effect at the end of the current billing cycle.</li>
+      </ul>
+    </section>
+
+    <!-- Section 7 -->
+    <section class="policy-section">
+      <h2><span class="section-number">7</span> Children's Privacy</h2>
+      <p>
+        KeepIt is not directed at children, and we do not knowingly collect personal information from children under the age of 13 (or the minimum legal age in your jurisdiction). If we learn that a child under 13 has provided us with personal information, we will delete it promptly.
+      </p>
+    </section>
+
+    <!-- Section 8 -->
+    <section class="policy-section">
+      <h2><span class="section-number">8</span> Policy Updates</h2>
+      <p>
+        We may update this Privacy Policy from time to time to reflect feature additions or legal requirements. Material updates will be posted on this page with a revised "Effective Date" at the top.
+      </p>
+    </section>
+
+    <!-- Section 9: Contact Card -->
+    <div class="contact-card">
+      <h3>Questions or Data Requests?</h3>
+      <p>If you have any questions about this Privacy Policy, data privacy rights, or wish to request complete account deletion, please get in touch:</p>
+      <a href="mailto:contact.naveen.work@gmail.com" class="btn-email">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+        Contact Support Email
+      </a>
+    </div>
+
+    <footer>
+      <p><a href="index.html">Home</a> • <a href="docs.html">Documentation</a> • <a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms of Service</a></p>
+      <p style="margin-top: 8px;">© 2026 KeepIt. All rights reserved. Built for power browser users worldwide.</p>
+    </footer>
+
+  </main>
+
+</body>
+</html>

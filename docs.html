@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KeepIt Documentation — Comprehensive Feature & User Guide</title>
+  <meta name="description"
+    content="Official documentation for KeepIt Chrome Extension. Learn how to save tab sessions, preserve tab groups, organize folders, sync across devices, freeze tabs, and share sessions.">
+  <style>
+    /* CSS Reset & Design System Tokens */
+    :root {
+      color-scheme: dark;
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-tertiary: #334155;
+      --bg-card: rgba(30, 41, 59, 0.75);
+      --bg-hover: #475569;
+
+      --accent-primary: #6366f1;
+      --accent-hover: #4f46e5;
+      --accent-light: rgba(99, 102, 241, 0.15);
+
+      --gold-primary: #f59e0b;
+      --gold-light: rgba(245, 158, 11, 0.15);
+
+      --success-primary: #10b981;
+      --success-light: rgba(16, 185, 129, 0.15);
+
+      --danger-primary: #ef4444;
+      --danger-light: rgba(239, 68, 68, 0.15);
+
+      --info-primary: #3b82f6;
+      --info-light: rgba(59, 130, 246, 0.15);
+
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+
+      --border-color: #334155;
+      --border-subtle: #1e293b;
+
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+      --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.2);
+
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-family);
+      line-height: 1.6;
+      font-size: 15px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background-color: var(--accent-primary);
+      color: #ffffff;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-full);
+      border: 2px solid var(--bg-primary);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--bg-hover);
+    }
+
+    /* Top Navigation Header */
+    .header {
+      background-color: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 24px;
+    }
+
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #6366f1, #818cf8);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      background-color: var(--accent-light);
+      color: #818cf8;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text-primary);
+    }
+
+    .search-box {
+      position: relative;
+      width: 280px;
+    }
+
+    .search-input {
+      width: 100%;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 8px 12px 8px 34px;
+      color: var(--text-primary);
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    /* Docs Container & Layout */
+    .docs-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      flex: 1;
+      display: flex;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 280px;
+      background-color: rgba(15, 23, 42, 0.6);
+      border-right: 1px solid var(--border-color);
+      padding: 24px 16px;
+      position: sticky;
+      top: 57px;
+      height: calc(100vh - 57px);
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+
+    .sidebar-group {
+      margin-bottom: 24px;
+    }
+
+    .sidebar-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      padding-left: 10px;
+    }
+
+    .sidebar-menu {
+      list-style: none;
+    }
+
+    .sidebar-menu li {
+      margin-bottom: 2px;
+    }
+
+    .sidebar-menu a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      border-radius: var(--radius-md);
+      transition: all 0.15s ease;
+      border-left: 3px solid transparent;
+    }
+
+    .sidebar-menu a:hover {
+      color: var(--text-primary);
+      background-color: var(--bg-secondary);
+    }
+
+    .sidebar-menu a.active {
+      color: #818cf8;
+      background-color: var(--accent-light);
+      border-left-color: var(--accent-primary);
+      font-weight: 600;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      padding: 36px 48px 64px 48px;
+      max-width: 980px;
+    }
+
+    /* Docs Hero Intro Banner */
+    .docs-hero {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: var(--radius-xl);
+      padding: 28px 32px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .docs-hero-title {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--text-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .docs-hero-desc {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .quick-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .quick-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .quick-pill:hover {
+      color: var(--text-primary);
+      border-color: var(--accent-primary);
+      background-color: var(--bg-tertiary);
+    }
+
+    /* Doc Sections */
+    .doc-section {
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 44px;
+      margin-bottom: 44px;
+      scroll-margin-top: 80px;
+    }
+
+    .doc-section:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .doc-title {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .doc-subtitle {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 28px 0 12px 0;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .doc-p {
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .doc-list {
+      margin: 0 0 16px 20px;
+      color: var(--text-secondary);
+    }
+
+    .doc-list li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    .doc-list li strong {
+      color: var(--text-primary);
+    }
+
+    /* Feature Callout Alerts */
+    .callout {
+      padding: 18px 22px;
+      border-radius: var(--radius-lg);
+      margin: 20px 0;
+      border-left: 4px solid;
+      background-color: var(--bg-secondary);
+    }
+
+    .callout-info {
+      border-color: var(--info-primary);
+      background-color: var(--info-light);
+    }
+
+    .callout-tip {
+      border-color: var(--success-primary);
+      background-color: var(--success-light);
+    }
+
+    .callout-pro {
+      border-color: var(--gold-primary);
+      background-color: var(--gold-light);
+    }
+
+    .callout-security {
+      border-color: var(--accent-primary);
+      background-color: var(--accent-light);
+    }
+
+    .callout-title {
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .callout-info .callout-title {
+      color: #60a5fa;
+    }
+
+    .callout-tip .callout-title {
+      color: #34d399;
+    }
+
+    .callout-pro .callout-title {
+      color: #fbbf24;
+    }
+
+    .callout-security .callout-title {
+      color: #818cf8;
+    }
+
+    /* Code & Keyboard Shortcut Boxes */
+    .kbd {
+      font-family: monospace;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background-color: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    .code-block {
+      background-color: #020617;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      font-family: monospace;
+      font-size: 13px;
+      color: #38bdf8;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+
+    /* Polished Browser Screenshot Cards */
+    .doc-screenshot-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      margin: 28px 0;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .doc-screenshot-card:hover {
+      border-color: rgba(99, 102, 241, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .doc-screenshot-header {
+      background-color: #0b1329;
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .window-dots {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .w-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot-red {
+      background-color: #ef4444;
+    }
+
+    .dot-yellow {
+      background-color: #f59e0b;
+    }
+
+    .dot-green {
+      background-color: #10b981;
+    }
+
+    .window-title-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: monospace;
+      font-weight: 500;
+    }
+
+    .window-badge {
+      font-size: 10px;
+      font-weight: 700;
+      color: #818cf8;
+      background-color: var(--accent-light);
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .doc-screenshot-body {
+      padding: 24px;
+      background-color: var(--bg-primary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .doc-img {
+      max-width: 380px;
+      width: 100%;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      display: block;
+    }
+
+    /* Comparison Table Styling */
+    .table-container {
+      overflow-x: auto;
+      margin: 20px 0;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+    }
+
+    .docs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      text-align: left;
+    }
+
+    .docs-table th {
+      background-color: var(--bg-secondary);
+      padding: 14px 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .docs-table td {
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      background-color: rgba(15, 23, 42, 0.4);
+    }
+
+    .docs-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Empty Search Result Container */
+    #search-no-results {
+      display: none;
+      text-align: center;
+      padding: 48px 24px;
+      background-color: var(--bg-secondary);
+      border: 1px dashed var(--border-color);
+      border-radius: var(--radius-lg);
+      margin-top: 24px;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border-color);
+      background-color: var(--bg-primary);
+      padding: 32px 24px;
+      margin-top: auto;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .footer a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    .footer a:hover {
+      color: var(--accent-primary);
+    }
+
+    @media (max-width: 900px) {
+      .docs-wrapper {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .main-content {
+        padding: 24px 16px;
+      }
+
+      .search-box {
+        width: 180px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top Header Navigation -->
+  <header class="header">
+    <div class="header-container">
+      <a href="index.html" class="brand">
+        <div class="brand-logo" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
+            <line x1="3" y1="9" x2="21" y2="9"></line>
+            <line x1="9" y1="21" x2="9" y2="9"></line>
+          </svg>
+        </div>
+        <span class="brand-title">KeepIt</span>
+        <span class="brand-tag">Docs</span>
+      </a>
+
+      <div class="search-box">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2.2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="docs-search-input" class="search-input" placeholder="Search documentation... (/)" />
+      </div>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="docs.html" class="active">Docs</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">Terms</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Docs Main Wrapper -->
+  <div class="docs-wrapper">
+
+    <!-- Left Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-group">
+        <div class="sidebar-title">🚀 Getting Started</div>
+        <ul class="sidebar-menu">
+          <li><a href="#overview" class="active">Overview & Concepts</a></li>
+          <li><a href="#installation">Installation & Setup</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-title">💾 Session Management</div>
+        <ul class="sidebar-menu">
+          <li><a href="#save-sessions">1-Click Saving & Checklist</a></li>
+          <li><a href="#tab-groups">Tab Groups Preservation</a></li>
+          <li><a href="#quick-save">Quick Save Shortcut</a></li>
+          <li><a href="#onetab-import">OneTab Text Import</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-title">📁 Folder Organization</div>
+        <ul class="sidebar-menu">
+          <li><a href="#folders-create">Creating & Managing Folders</a></li>
+          <li><a href="#drag-drop">Drag & Drop Organization</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-title">☁️ Cloud Sync & Account</div>
+        <ul class="sidebar-menu">
+          <li><a href="#google-auth">Google Sign-In & Auth</a></li>
+          <li><a href="#cloud-sync">Cross-Device Synchronization</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-title">⚡ Auto-Save & Recovery</div>
+        <ul class="sidebar-menu">
+          <li><a href="#autosave-snapshot">Background Auto-Save</a></li>
+          <li><a href="#closed-window-recovery">Closed Window Recovery</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-title">❄️ Tab Memory Saver</div>
+        <ul class="sidebar-menu">
+          <li><a href="#tab-freezing">Manual Tab Freezing</a></li>
+          <li><a href="#auto-freeze">Auto-Freeze Timer</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-title">📤 Sharing & Inbox</div>
+        <ul class="sidebar-menu">
+          <li><a href="#username-handle">Claiming @username</a></li>
+          <li><a href="#send-session">Sending Session to Teammates</a></li>
+          <li><a href="#shared-inbox">Shared Inbox & Redeem Code</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-title">👑 Plans & Billing</div>
+        <ul class="sidebar-menu">
+          <li><a href="#pricing-matrix">Free vs Pro Feature Split</a></li>
+          <li><a href="#manage-subscription">Managing & Cancelling Pro</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-title">🔒 Security & Privacy</div>
+        <ul class="sidebar-menu">
+          <li><a href="#privacy-security">Local-First Architecture</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Documentation Content -->
+    <main class="main-content">
+
+      <!-- Docs Hero Intro Banner -->
+      <div class="docs-hero">
+        <h1 class="docs-hero-title">KeepIt Documentation Hub</h1>
+        <p class="docs-hero-desc">
+          Learn how to organize browser tabs into named session bundles, preserve native Chrome Tab Groups, reclaim
+          memory with Auto-Freeze, and sync across computers.
+        </p>
+        <div class="quick-pills">
+          <a href="#save-sessions" class="quick-pill">💾 1-Click Saving</a>
+          <a href="#tab-groups" class="quick-pill">🗄️ Native Tab Groups</a>
+          <a href="#tab-freezing" class="quick-pill">❄️ Memory Saver</a>
+          <a href="#quick-save" class="quick-pill">⚡ Alt+Shift+S Shortcut</a>
+          <a href="#pricing-matrix" class="quick-pill">👑 Free vs Pro Matrix</a>
+        </div>
+      </div>
+
+      <!-- Search No Results Container -->
+      <div id="search-no-results">
+        <h3 style="color: var(--text-primary); margin-bottom: 8px;">No Matching Documentation Found</h3>
+        <p style="color: var(--text-secondary); font-size: 14px;">Try searching for terms like <em>"session"</em>,
+          <em>"shortcut"</em>, <em>"tab groups"</em>, or <em>"cloud"</em>.
+        </p>
+      </div>
+
+      <!-- Section: Overview -->
+      <section id="overview" class="doc-section">
+        <h1 class="doc-title">🚀 Overview & Key Concepts</h1>
+        <p class="doc-p">
+          <strong>KeepIt</strong> is a high-performance Chrome extension designed for power users, developers, and
+          researchers who work with dozens of open browser tabs. It replaces messy tab chaos with structured, organized,
+          and recoverable tab session bundles.
+        </p>
+
+        <div class="callout callout-info">
+          <div class="callout-title">💡 Why KeepIt?</div>
+          KeepIt preserves full <strong>Chrome Tab Groups</strong> (colors, titles, and collapsed states), runs
+          local-first for instant speed, automatically snapshots open windows for crash protection, and reduces RAM
+          consumption by up to 80% via native Chrome Tab Freezing.
+        </div>
+
+        <!-- SCREENSHOT 1: Main Overview -->
+        <div class="doc-screenshot-card">
+          <div class="doc-screenshot-header">
+            <div class="window-dots">
+              <span class="w-dot dot-red"></span>
+              <span class="w-dot dot-yellow"></span>
+              <span class="w-dot dot-green"></span>
+            </div>
+            <span class="window-title-text">KeepIt Extension Popup — Main Session List</span>
+            <span class="window-badge">Extension UI</span>
+          </div>
+          <div class="doc-screenshot-body">
+            <img src="images/1.png" alt="KeepIt Extension Main Overview" class="doc-img" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Installation -->
+      <section id="installation" class="doc-section">
+        <h2 class="doc-subtitle">📥 Installation & Setup</h2>
+        <p class="doc-p">KeepIt can be installed directly from the Chrome Web Store or loaded unpacked in Developer
+          Mode:</p>
+
+        <ol class="doc-list">
+          <li><strong>Chrome Web Store:</strong> Visit the Store listing and click <strong>Add to Chrome</strong>.</li>
+          <li><strong>Developer Mode (Local Unpacked):</strong>
+            <ul>
+              <li>Download or clone the KeepIt repository.</li>
+              <li>Open <code>chrome://extensions</code> in your Chrome browser.</li>
+              <li>Toggle <strong>Developer mode</strong> ON in the top-right corner.</li>
+              <li>Click <strong>Load unpacked</strong> and select the <code>keepit</code> extension folder.</li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <!-- Section: Session Management -->
+      <section id="save-sessions" class="doc-section">
+        <h1 class="doc-title">💾 Session Management</h1>
+        <p class="doc-p">
+          KeepIt allows you to capture your entire browser window or cherry-pick specific open tabs into a saved session
+          bundle.
+        </p>
+
+        <h3 class="doc-subtitle">1-Click Saving & Checklist Search</h3>
+        <p class="doc-p">
+          Clicking the primary <strong>+ Save</strong> button opens the Interactive Save Modal:
+        </p>
+        <ul class="doc-list">
+          <li><strong>Session Naming:</strong> Auto-generates a title like <em>"Session - Aug 8, 2:30 PM"</em> or enter
+            a custom name.</li>
+          <li><strong>Folder Assignment:</strong> Select an existing folder or assign later.</li>
+          <li><strong>Tab Checklist Preview:</strong> Search and check/uncheck individual tabs to save only what you
+            need.</li>
+          <li><strong>Location Switch:</strong> Choose whether to store the session <strong>💾 Locally</strong> on disk
+            or sync to <strong>☁️ Cloud</strong>.</li>
+        </ul>
+
+        <!-- SCREENSHOT 2: Save Session Modal -->
+        <div class="doc-screenshot-card">
+          <div class="doc-screenshot-header">
+            <div class="window-dots">
+              <span class="w-dot dot-red"></span>
+              <span class="w-dot dot-yellow"></span>
+              <span class="w-dot dot-green"></span>
+            </div>
+            <span class="window-title-text">KeepIt Extension Popup — Interactive Save Modal</span>
+            <span class="window-badge">Save Modal</span>
+          </div>
+          <div class="doc-screenshot-body">
+            <img src="images/2.png" alt="KeepIt Interactive Save Session Modal" class="doc-img" />
+          </div>
+        </div>
+
+        <h3 id="tab-groups" class="doc-subtitle">Chrome Tab Groups Preservation</h3>
+        <p class="doc-p">
+          KeepIt natively reads Chrome's Tab Group API (`chrome.tabGroups`). When you save a window with tab groups
+          (e.g. <code>Nexora</code> [Purple], <code>Work</code> [Blue]):
+        </p>
+        <ul class="doc-list">
+          <li>Group colors, titles, and collapsed states are captured into session metadata.</li>
+          <li>When clicking <strong>Restore Session</strong>, KeepIt opens the tabs and automatically reinstates native
+            Chrome Tab Groups in your tab bar!</li>
+        </ul>
+
+        <!-- SCREENSHOT 3: Tab Groups Badges -->
+        <div class="doc-screenshot-card">
+          <div class="doc-screenshot-header">
+            <div class="window-dots">
+              <span class="w-dot dot-red"></span>
+              <span class="w-dot dot-yellow"></span>
+              <span class="w-dot dot-green"></span>
+            </div>
+            <span class="window-title-text">KeepIt Extension Popup — Tab Group Chips</span>
+            <span class="window-badge">Tab Groups</span>
+          </div>
+          <div class="doc-screenshot-body">
+            <img src="images/3.png" alt="KeepIt Native Tab Group Badges" class="doc-img" />
+          </div>
+        </div>
+
+        <h3 id="quick-save" class="doc-subtitle">⚡ Quick Save Shortcut</h3>
+        <div class="callout callout-tip">
+          <div class="callout-title">⚡ Keyboard Shortcut</div>
+          Press <kbd class="kbd">Alt</kbd> + <kbd class="kbd">Shift</kbd> + <kbd class="kbd">S</kbd> (or <kbd
+            class="kbd">Cmd</kbd> + <kbd class="kbd">Shift</kbd> + <kbd class="kbd">S</kbd> on Mac) anytime while
+          browsing to instantly save the current active window in the background! The extension toolbar icon briefly
+          pulses a green checkmark <span style="color:#10b981; font-weight:bold;">✓</span> as visual confirmation.
+        </div>
+
+        <h3 id="onetab-import" class="doc-subtitle">📥 OneTab Text Import</h3>
+        <p class="doc-p">
+          Migrating from OneTab? Open <strong>Tools & Settings (⚙️) ➔ OneTab Import</strong>, paste your exported raw
+          text URLs, and KeepIt instantly parses and converts them into a structured session bundle.
+        </p>
+      </section>
+
+      <!-- Section: Folder Organization -->
+      <section id="folders-create" class="doc-section">
+        <h1 class="doc-title">📁 Folder Organization</h1>
+        <p class="doc-p">
+          Categorize sessions by project, client, or topic to keep your workspace clutter-free.
+        </p>
+
+        <ul class="doc-list">
+          <li><strong>Folder Pills Bar:</strong> Easily filter your main list by clicking folder pills at the top of the
+            extension.</li>
+          <li><strong>Folder Limits:</strong> Free tier includes up to <strong>3 folders</strong>; Pro tier includes
+            <strong>Unlimited folders</strong>.
+          </li>
+        </ul>
+
+        <h3 id="drag-drop" class="doc-subtitle">Drag & Drop Sessions into Folders</h3>
+        <p class="doc-p">
+          Re-organizing sessions is completely effortless with HTML5 Drag & Drop:
+        </p>
+        <ol class="doc-list">
+          <li>Click and hold any session card.</li>
+          <li>Drag it over a target Folder Pill at the top (the folder pill highlights with an indigo pulse).</li>
+          <li>Release to instantly assign the session to that folder!</li>
+        </ol>
+
+        <!-- SCREENSHOT 4: Folder Pills Organization -->
+        <div class="doc-screenshot-card">
+          <div class="doc-screenshot-header">
+            <div class="window-dots">
+              <span class="w-dot dot-red"></span>
+              <span class="w-dot dot-yellow"></span>
+              <span class="w-dot dot-green"></span>
+            </div>
+            <span class="window-title-text">KeepIt Extension Popup — Folder Pills Bar</span>
+            <span class="window-badge">Folders</span>
+          </div>
+          <div class="doc-screenshot-body">
+            <img src="images/4.png" alt="KeepIt Folder Pills Bar & Organization" class="doc-img" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Cloud Sync & Auth -->
+      <section id="google-auth" class="doc-section">
+        <h1 class="doc-title">☁️ Cloud Sync & Account</h1>
+        <p class="doc-p">
+          KeepIt features an opt-in cloud synchronization system powered by Supabase and Google OAuth 2.0.
+        </p>
+
+        <h3 class="doc-subtitle">Google OAuth Sign-In</h3>
+        <p class="doc-p">
+          Signing in unlocks:
+        </p>
+        <ul class="doc-list">
+          <li><strong>3 Free Cloud Sessions</strong> (Unlimited for Pro users).</li>
+          <li><strong>Unique Username Handle (@username):</strong> Allows teammates to send session bundles directly to
+            your inbox.</li>
+          <li><strong>Cross-Device Access:</strong> Access saved cloud sessions and folder structures across Chrome
+            browsers on Mac, Windows, Linux, or ChromeOS.</li>
+        </ul>
+
+        <h3 id="cloud-sync" class="doc-subtitle">Dual Storage & Offline Protection</h3>
+        <div class="callout callout-security">
+          <div class="callout-title">🔒 Offline-First Local Fallback</div>
+          Even if your internet connection drops or cloud sync is temporarily unreachable, KeepIt automatically caches
+          all cloud sessions in <code>chrome.storage.local</code>. Your folder structures and tab metadata are never
+          lost.
+        </div>
+      </section>
+
+      <!-- Section: Auto-Save & Recovery -->
+      <section id="autosave-snapshot" class="doc-section">
+        <h1 class="doc-title">⚡ Auto-Save & Recovery</h1>
+        <p class="doc-p">
+          Never lose work due to sudden browser crashes, OS updates, or accidental window closures.
+        </p>
+
+        <h3 class="doc-subtitle">Background Auto-Save Snapshot</h3>
+        <p class="doc-p">
+          KeepIt continuously snapshots your open window in the background:
+        </p>
+        <ul class="doc-list">
+          <li><strong>Free Tier:</strong> Runs snapshot auto-save every <strong>3 minutes</strong>.</li>
+          <li><strong>Pro Tier:</strong> High-frequency snapshot auto-save every <strong>1 minute</strong>.</li>
+          <li>The snapshot card appears prominently at the top of your session list with a 1-click <strong>Restore
+              Tabs</strong> button.</li>
+        </ul>
+
+        <h3 id="closed-window-recovery" class="doc-subtitle">Closed Window & Tab Recovery</h3>
+        <p class="doc-p">
+          Accidentally closed a window? Navigate to <strong>Tools & Settings (⚙️) ➔ Recover Closed</strong> to view and
+          instantly restore recently closed Chrome windows and tabs directly from Chrome's Sessions API.
+        </p>
+      </section>
+
+      <!-- Section: Tab Hygiene & Memory Saver -->
+      <section id="tab-freezing" class="doc-section">
+        <h1 class="doc-title">❄️ Tab Memory Saver</h1>
+        <p class="doc-p">
+          Running 50+ open tabs can consume gigabytes of RAM. KeepIt utilizes Chrome's native Tab Discarding API to
+          reclaim memory without closing your tabs.
+        </p>
+
+        <h3 class="doc-subtitle">Manual & Auto-Freeze Timers</h3>
+        <ul class="doc-list">
+          <li><strong>Freeze Inactive Tabs Now:</strong> Instantly unloads background tabs in the current window from
+            RAM. Tab titles and favicons remain visible in your tab bar, and reload instantly when clicked.</li>
+          <li><strong>Auto-Freeze Timer:</strong> Enable auto-freezing in Settings to automatically discard tabs that
+            have been inactive for 15, 30, or 60 minutes.</li>
+        </ul>
+
+        <!-- SCREENSHOT 5: Tools & Tab Hygiene Modal -->
+        <div class="doc-screenshot-card">
+          <div class="doc-screenshot-header">
+            <div class="window-dots">
+              <span class="w-dot dot-red"></span>
+              <span class="w-dot dot-yellow"></span>
+              <span class="w-dot dot-green"></span>
+            </div>
+            <span class="window-title-text">KeepIt Extension Popup — Tools & Tab Hygiene Modal</span>
+            <span class="window-badge">Memory Saver</span>
+          </div>
+          <div class="doc-screenshot-body">
+            <img src="images/5.png" alt="KeepIt Tools & Tab Hygiene Modal" class="doc-img" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Sharing & Inbox -->
+      <section id="username-handle" class="doc-section">
+        <h1 class="doc-title">📤 Session Sharing & Inbox</h1>
+        <p class="doc-p">
+          Share curated tab collections directly with colleagues, students, or teammates without sending long lists of
+          links over chat.
+        </p>
+
+        <h3 id="send-session" class="doc-subtitle">Sending Sessions to Teammates</h3>
+        <ol class="doc-list">
+          <li>On any cloud session card, click the <strong>📤 Share</strong> button.</li>
+          <li>Enter the recipient's handle (e.g. <code>@sarah_dev</code>).</li>
+          <li>Click <strong>Send Session</strong>. The tab bundle is delivered straight to Sarah's KeepIt Shared Inbox!
+          </li>
+        </ol>
+
+        <h3 id="shared-inbox" class="doc-subtitle">Shared Inbox & Redeem Code</h3>
+        <p class="doc-p">
+          Free users can receive unlimited shared sessions. When someone sends you a session, a notification badge
+          appears on the <strong>📥 Shared Inbox</strong> icon in the header. Click to preview the tabs and add the
+          session to your workspace with 1 click!
+        </p>
+      </section>
+
+      <!-- Section: Plans & Billing -->
+      <section id="pricing-matrix" class="doc-section">
+        <h1 class="doc-title">👑 Plans & Pro Subscription Management</h1>
+        <p class="doc-p">
+          KeepIt offers a generous Free tier alongside a feature-packed Pro plan billed monthly at <strong>₹149/mo
+            (~$1.79 USD)</strong> or yearly at <strong>₹1,199/yr (~$14.99 USD)</strong>.
+        </p>
+
+        <div class="table-container">
+          <table class="docs-table">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>KeepIt Free ($0 / ₹0)</th>
+                <th>KeepIt Premium (₹149/mo [~$1.79] or ₹1,199/yr [~$14.99])</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Local Sessions</strong></td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+              </tr>
+              <tr>
+                <td><strong>Folder Organization</strong></td>
+                <td>Up to 3 Folders</td>
+                <td><strong>Unlimited Folders</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Cloud Sync</strong></td>
+                <td>3 Cloud Sessions</td>
+                <td><strong>Unlimited Cloud Sessions</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Background Auto-Save</strong></td>
+                <td>Every 3 minutes</td>
+                <td><strong>Every 1 minute</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Tab Groups & Checklist</strong></td>
+                <td>Full Support</td>
+                <td>Full Support</td>
+              </tr>
+              <tr>
+                <td><strong>Session Sharing</strong></td>
+                <td>Receive Only</td>
+                <td><strong>Send + Receive</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="manage-subscription" class="doc-subtitle">Managing & Cancelling Subscription</h3>
+        <p class="doc-p">
+          KeepIt Pro users can manage their subscription at any time:
+        </p>
+        <ul class="doc-list">
+          <li>Click the <strong>⚙️ Gear Icon</strong> in the top header and select <strong>💳 Manage
+              Subscription</strong> (or click the <strong>✨ PRO</strong> header badge).</li>
+          <li>View your active Subscription ID (with copy button), billing plan (Monthly/Yearly), and next renewal date.
+          </li>
+          <li>To cancel, click <strong>Cancel Subscription</strong>. Razorpay will cancel future auto-renews at the end
+            of the billing cycle, allowing you to enjoy your Pro benefits through the end of your paid period.</li>
+        </ul>
+
+        <!-- SCREENSHOT 6: Manage Pro Subscription Modal -->
+        <div class="doc-screenshot-card">
+          <div class="doc-screenshot-header">
+            <div class="window-dots">
+              <span class="w-dot dot-red"></span>
+              <span class="w-dot dot-yellow"></span>
+              <span class="w-dot dot-green"></span>
+            </div>
+            <span class="window-title-text">KeepIt Extension Popup — Razorpay Pro Checkout</span>
+            <span class="window-badge">Subscription</span>
+          </div>
+          <div class="doc-screenshot-body">
+            <img src="images/6.png" alt="KeepIt Upgrade & Subscription Modal" class="doc-img" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Privacy & Security -->
+      <section id="privacy-security" class="doc-section">
+        <h1 class="doc-title">🔒 Privacy & Data Security</h1>
+        <p class="doc-p">
+          We take user privacy extremely seriously. KeepIt operates under strict data security principles:
+        </p>
+
+        <div class="callout callout-security">
+          <div class="callout-title">🔒 Privacy Guarantees</div>
+          <ul style="margin-left: 18px; margin-top: 6px;">
+            <li><strong>No Tracking:</strong> We do not track, sell, or analyze your browsing history.</li>
+            <li><strong>Local First:</strong> All local sessions are stored strictly on your device using Chrome Local
+              Storage.</li>
+            <li><strong>Isolated Cloud Data:</strong> Cloud sync data is protected by Supabase Row-Level Security (RLS),
+              ensuring only your authenticated account can read or write your sessions.</li>
+            <li><strong>Secure Payments:</strong> Payments are processed via PCI-DSS compliant Razorpay APIs. Your
+              financial credentials never touch KeepIt servers.</li>
+          </ul>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div>
+      <a href="index.html">Home</a> •
+      <a href="docs.html">Documentation</a> •
+      <a href="privacy.html">Privacy Policy</a> •
+      <a href="terms.html">Terms of Service</a>
+    </div>
+    <div style="margin-top: 10px; font-size: 12px; color: var(--text-muted);">
+      © 2026 KeepIt. All rights reserved. Built for power browser users worldwide.
+    </div>
+  </footer>
+
+  <!-- Real-time Docs Search Filter & Keyboard Shortcut Script -->
+  <script src="js/docs.js"></script>
+</body>
+</html>
