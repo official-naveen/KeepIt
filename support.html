@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KeepIt — Support & Help Center</title>
+  <meta name="description"
+    content="Get help with KeepIt, the Chrome tab session manager. Find answers to common questions or contact support directly by email.">
+  <style>
+    /* CSS Reset & Variable Definitions - Matching KeepIt Design System */
+    :root {
+      color-scheme: dark;
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-tertiary: #334155;
+      --bg-card: rgba(30, 41, 59, 0.75);
+      --bg-hover: #475569;
+
+      --accent-primary: #6366f1;
+      --accent-hover: #4f46e5;
+      --accent-light: rgba(99, 102, 241, 0.15);
+
+      --gold-primary: #f59e0b;
+      --gold-light: rgba(245, 158, 11, 0.15);
+
+      --success-primary: #10b981;
+      --success-light: rgba(16, 185, 129, 0.15);
+
+      --danger-primary: #ef4444;
+      --danger-light: rgba(239, 68, 68, 0.15);
+
+      --info-primary: #3b82f6;
+      --info-light: rgba(59, 130, 246, 0.15);
+
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+
+      --border-color: #334155;
+      --border-subtle: #1e293b;
+
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+      --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.25);
+
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-family);
+      font-size: 15px;
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background-color: var(--accent-primary);
+      color: #ffffff;
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb {
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-full);
+      border: 2px solid var(--bg-primary);
+    }
+    ::-webkit-scrollbar-thumb:hover { background: var(--bg-hover); }
+
+    a {
+      color: #818cf8;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    a:hover { color: #a5b4fc; }
+
+    /* Header (shared across site) */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 14px 24px;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none !important;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent-primary), #818cf8);
+      color: #ffffff;
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-menu a {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .btn-header {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-hover));
+      color: #ffffff !important;
+      padding: 7px 16px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 13.5px;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+      transition: all 0.15s ease;
+    }
+
+    .btn-header:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    }
+
+    /* Main container */
+    .main-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 24px 80px 24px;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* Hero */
+    .support-hero {
+      text-align: center;
+      padding: 24px 20px 48px 20px;
+    }
+
+    .badge-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--accent-light);
+      color: #818cf8;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      padding: 4px 14px;
+      border-radius: var(--radius-full);
+      font-size: 12.5px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .support-hero h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+
+    .support-hero p {
+      color: var(--text-secondary);
+      font-size: 16px;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* Contact card */
+    .contact-card {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(139, 92, 246, 0.08));
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: var(--radius-xl);
+      padding: 36px 32px;
+      text-align: center;
+      margin-bottom: 48px;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .contact-card h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .contact-card p {
+      color: var(--text-secondary);
+      margin-bottom: 22px;
+      font-size: 14.5px;
+    }
+
+    .btn-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-hover));
+      color: #ffffff !important;
+      padding: 12px 26px;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 15px;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+      transition: all 0.15s ease;
+    }
+
+    .btn-email:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.5);
+    }
+
+    .response-note {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Section heading */
+    .section-heading {
+      margin-bottom: 24px;
+    }
+
+    .section-heading h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .section-heading p {
+      color: var(--text-secondary);
+      font-size: 14.5px;
+    }
+
+    /* FAQ accordion (pure CSS/JS, no backend) */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      text-align: left;
+      padding: 18px 20px;
+      cursor: pointer;
+    }
+
+    .faq-question:hover { color: #a5b4fc; }
+
+    .faq-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      color: var(--text-muted);
+      transition: transform 0.2s ease;
+    }
+
+    .faq-item.open .faq-icon { transform: rotate(45deg); color: var(--accent-primary); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.25s ease;
+    }
+
+    .faq-answer-inner {
+      padding: 0 20px 20px 20px;
+      color: var(--text-secondary);
+      font-size: 14.5px;
+      line-height: 1.7;
+    }
+
+    .faq-answer-inner a { color: #818cf8; }
+
+    /* Quick links grid */
+    .quick-links-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .quick-link-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      text-align: center;
+      transition: all 0.15s ease;
+      display: block;
+    }
+
+    .quick-link-card:hover {
+      border-color: var(--accent-primary);
+      transform: translateY(-2px);
+      color: var(--text-primary);
+    }
+
+    .quick-link-icon {
+      width: 26px;
+      height: 26px;
+      margin: 0 auto 10px auto;
+      color: var(--accent-primary);
+    }
+
+    .quick-link-card h3 {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .quick-link-card p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13.5px;
+      margin-top: auto;
+    }
+
+    footer a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      margin: 0 12px;
+    }
+
+    footer a:hover { color: var(--accent-primary); }
+
+    @media (max-width: 640px) {
+      .support-hero h1 { font-size: 1.9rem; }
+      .quick-links-grid { grid-template-columns: 1fr; }
+      .contact-card { padding: 28px 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="header-container">
+      <a href="index.html" class="brand">
+        <div class="brand-logo" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
+            <line x1="3" y1="9" x2="21" y2="9"></line>
+            <line x1="9" y1="21" x2="9" y2="9"></line>
+          </svg>
+        </div>
+        <span class="brand-title">KeepIt</span>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="docs.html">Docs</a>
+        <a href="support.html" class="active">Support</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <section class="support-hero">
+      <div class="badge-hero">Help Center</div>
+      <h1>How can we help?</h1>
+      <p>Answers to common questions about KeepIt, and a direct line to the developer if you need anything else.</p>
+    </section>
+
+    <section class="contact-card">
+      <h2>Still need help?</h2>
+      <p>Every message goes straight to the developer — no ticket system, no bots.</p>
+      <a href="mailto:contact.naveen.work@gmail.com?subject=KeepIt%20Support%20Request" class="btn-email">
+        ✉️ Email contact.naveen.work@gmail.com
+      </a>
+      <div class="response-note">We typically respond within 24–48 hours.</div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <h2>Frequently Asked Questions</h2>
+        <p>Click a question to expand the answer.</p>
+      </div>
+
+      <div class="faq-list" id="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question">
+            How do I save my open tabs as a session?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Click the KeepIt icon in your toolbar and press <strong>+ Save</strong>, or use the keyboard shortcut <strong>Alt+Shift+S</strong> (<strong>Cmd+Shift+S</strong> on Mac) to instantly save your current window in the background. You can choose to save all open tabs or pick specific ones from the checklist.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Why isn't Cloud Sync working / my sessions aren't showing on another device?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Make sure you're signed in with the <strong>same Google account</strong> on both devices, and that the session was saved with <strong>Cloud</strong> selected (not Local) at save time. Local sessions never leave your device. Free accounts are limited to 3 cloud-synced sessions — check if you've hit that limit.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            What's the difference between Free and Pro?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Free includes unlimited local sessions, 3 folders, 3 cloud-synced sessions, and 3-minute auto-save snapshots. Pro (₹149/mo or ₹1,199/yr) unlocks unlimited folders, unlimited cloud sync, 1-minute auto-save, peer session sharing, and priority support. See the <a href="index.html#pricing">pricing section</a> for full details.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            How do I cancel my Pro subscription or request a refund?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Open KeepIt's settings and use the self-serve billing portal to cancel anytime — your Pro features stay active until the end of the current billing period. If you'd like a refund within 7 calendar days of your first Pro purchase, just email us and we'll issue a full 100% refund. Full details are in our <a href="terms.html#billing">refund policy</a>.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            I accidentally closed a window — can I get my tabs back?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Yes — open <strong>Tools & Settings (⚙️) → Recover Closed</strong> inside KeepIt to see recently closed windows and restore them. KeepIt also auto-saves a background snapshot of your tabs every few minutes, so even without doing anything you usually have a safety net.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Does KeepIt slow down Chrome or use a lot of memory itself?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              No — KeepIt is designed to reduce Chrome's memory usage, not add to it. Its Tab Freeze feature discards inactive background tabs from RAM (without closing them) and can free up gigabytes on tab-heavy setups. Pinned tabs and tools like Google Docs are protected from auto-freezing by default.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            How do I delete my account and all my data?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Email us at <a href="mailto:contact.naveen.work@gmail.com?subject=Account%20Deletion%20Request">contact.naveen.work@gmail.com</a> requesting full account deletion. We'll delete your cloud-stored sessions, folders, username, and profile data within 30 days and confirm by email. See our <a href="privacy.html#retention">privacy policy</a> for details.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <h2>More Resources</h2>
+      </div>
+      <div class="quick-links-grid">
+        <a href="docs.html" class="quick-link-card">
+          <svg class="quick-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          <h3>Documentation</h3>
+          <p>Full user guide & features</p>
+        </a>
+        <a href="privacy.html" class="quick-link-card">
+          <svg class="quick-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          <h3>Privacy Policy</h3>
+          <p>How your data is handled</p>
+        </a>
+        <a href="terms.html" class="quick-link-card">
+          <svg class="quick-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"></path><circle cx="12" cy="12" r="10"></circle></svg>
+          <h3>Terms of Service</h3>
+          <p>Billing, refunds & policies</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div>
+      <a href="index.html">Home</a> •
+      <a href="docs.html">Documentation</a> •
+      <a href="support.html">Support</a> •
+      <a href="privacy.html">Privacy Policy</a> •
+      <a href="terms.html">Terms of Service</a>
+    </div>
+    <div style="margin-top: 10px; color: var(--text-muted); font-size: 12.5px;">
+      © 2026 KeepIt. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    // Simple client-side accordion — no backend, no network calls.
+    document.querySelectorAll('.faq-item').forEach(function (item) {
+      var question = item.querySelector('.faq-question');
+      var answer = item.querySelector('.faq-answer');
+
+      question.addEventListener('click', function () {
+        var isOpen = item.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(function (i) {
+          i.classList.remove('open');
+          i.querySelector('.faq-answer').style.maxHeight = null;
+        });
+
+        // Open clicked one if it wasn't already open
+        if (!isOpen) {
+          item.classList.add('open');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
