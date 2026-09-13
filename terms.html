@@ -110,10 +110,10 @@
     }
 
     /* Top Sticky Header Navigation */
-    .app-header-nav {
+    .header {
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 100;
       background-color: rgba(15, 23, 42, 0.85);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -121,8 +121,8 @@
       padding: 14px 24px;
     }
 
-    .nav-container {
-      max-width: 900px;
+    .header-container {
+      max-width: 1200px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -160,7 +160,7 @@
     .nav-menu {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 24px;
     }
 
     .nav-menu a {
@@ -169,12 +169,39 @@
       font-weight: 500;
       text-decoration: none;
       transition: color 0.15s ease;
+      white-space: nowrap;
     }
 
     .nav-menu a:hover,
     .nav-menu a.active {
       color: var(--text-primary);
       font-weight: 600;
+    }
+
+    .btn-header {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-hover));
+      color: #fff !important;
+      padding: 7px 16px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 13.5px;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+      transition: all 0.15s ease;
+      border: none;
+      cursor: pointer;
+      text-decoration: none !important;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-header:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    }
+
+    @media (max-width: 900px) {
+      .nav-menu { gap: 14px; }
     }
 
     /* Main Container */
@@ -536,8 +563,8 @@
 <body>
 
   <!-- Top Sticky Header Navigation -->
-  <header class="app-header-nav">
-    <div class="nav-container">
+  <header class="header">
+    <div class="header-container">
       <a href="index.html" class="brand">
         <div class="brand-logo" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
@@ -553,9 +580,16 @@
       <nav class="nav-menu">
         <a href="index.html">Home</a>
         <a href="docs.html">Docs</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html" class="active">Terms of Service</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html" class="active">Terms</a>
+        <a href="support.html">Support</a>
         <a href="login.html" id="navAccountLink">Sign in</a>
+        <a href="https://chromewebstore.google.com/detail/keepit/mhldbdlepccoejdjnhogckbgijohddlg" target="_blank" rel="noopener noreferrer" class="btn-header" data-keepit-cta="install" data-installed-label="Open Dashboard">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-.47.05-.93.13-1.38L8.6 15.1c.39.39 1.02.39 1.41 0l3.1-3.1 3.1 3.1c.39.39 1.02.39 1.41 0l4.26-4.26c.08.45.13.91.13 1.38 0 4.41-3.59 8-8 8z"/>
+          </svg>
+          Add to Chrome
+        </a>
       </nav>
     </div>
   </header>
@@ -789,7 +823,7 @@
     </div>
 
     <footer>
-      <p><a href="index.html">Home</a> • <a href="docs.html">Documentation</a> • <a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms of Service</a></p>
+      <p><a href="index.html">Home</a> • <a href="docs.html">Documentation</a> • <a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms of Service</a> • <a href="support.html">Support</a></p>
       <p style="margin-top: 8px;">© 2026 KeepIt. All rights reserved. Built for power browser users worldwide.</p>
     </footer>
 

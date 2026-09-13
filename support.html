@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KeepIt — Support</title>
+  <meta name="description"
+    content="Get help with KeepIt. Contact our support team directly by email for billing, account, sync, or technical questions.">
+  <link rel="icon" href="icons/icon32.png">
+  <style>
+    /* CSS Reset & Variable Definitions - Styled natively to match KeepIt Chrome Extension */
+    :root {
+      color-scheme: dark;
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-tertiary: #334155;
+      --bg-card: rgba(30, 41, 59, 0.75);
+      --bg-hover: #475569;
+
+      --accent-primary: #6366f1;
+      --accent-hover: #4f46e5;
+      --accent-light: rgba(99, 102, 241, 0.15);
+
+      --gold-primary: #f59e0b;
+      --gold-light: rgba(245, 158, 11, 0.15);
+
+      --success-primary: #10b981;
+      --success-light: rgba(16, 185, 129, 0.15);
+
+      --danger-primary: #ef4444;
+      --danger-light: rgba(239, 68, 68, 0.15);
+
+      --info-primary: #3b82f6;
+      --info-light: rgba(59, 130, 246, 0.15);
+
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+
+      --border-color: #334155;
+      --border-subtle: #1e293b;
+
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+      --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.2);
+
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-family);
+      font-size: 15px;
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background-color: var(--accent-primary);
+      color: #ffffff;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-full);
+      border: 2px solid var(--bg-primary);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--bg-hover);
+    }
+
+    /* Links */
+    a {
+      color: #818cf8;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    a:hover {
+      color: #a5b4fc;
+      text-decoration: underline;
+    }
+
+    /* Top Sticky Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 14px 24px;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none !important;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent-primary), #818cf8);
+      color: #ffffff;
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-menu a {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .btn-header {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-hover));
+      color: #fff !important;
+      padding: 7px 16px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 13.5px;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+      transition: all 0.15s ease;
+      border: none;
+      cursor: pointer;
+      text-decoration: none !important;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-header:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    }
+
+    @media (max-width: 900px) {
+      .nav-menu { gap: 14px; }
+    }
+
+    /* Main Container */
+    .main-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px 64px 24px;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* Hero */
+    .support-hero {
+      text-align: center;
+      padding: 20px 20px 8px 20px;
+      margin-bottom: 8px;
+    }
+
+    .support-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--accent-light);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: #a5b4fc;
+      padding: 5px 14px;
+      border-radius: var(--radius-full);
+      font-size: 12.5px;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .support-hero-title {
+      font-size: 2.3rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--text-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .support-hero-subtitle {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Big Contact Card */
+    .contact-hero-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      border-radius: var(--radius-xl);
+      padding: 44px 32px;
+      text-align: center;
+      margin: 32px 0 40px 0;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .contact-hero-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, var(--accent-primary), #818cf8);
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+      margin-bottom: 20px;
+    }
+
+    .contact-hero-icon svg {
+      width: 28px;
+      height: 28px;
+      color: #fff;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .contact-hero-card h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+
+    .contact-hero-card p {
+      max-width: 480px;
+      margin: 0 auto 26px auto;
+      color: var(--text-secondary);
+    }
+
+    .btn-email-lg {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-hover));
+      color: #ffffff !important;
+      font-weight: 700;
+      font-size: 15.5px;
+      padding: 15px 30px;
+      border-radius: var(--radius-md);
+      text-decoration: none !important;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-email-lg:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(99, 102, 241, 0.5);
+    }
+
+    .btn-email-lg svg {
+      width: 19px;
+      height: 19px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    .email-plain {
+      display: block;
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .email-plain a {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .email-plain a:hover {
+      color: #a5b4fc;
+    }
+
+    /* Quick help grid */
+    .section-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin: 0 0 16px 4px;
+    }
+
+    .help-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .help-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      transition: border-color 0.2s ease;
+    }
+
+    .help-card:hover {
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+
+    .help-card-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-md);
+      background-color: var(--accent-light);
+      color: #a5b4fc;
+      margin-bottom: 14px;
+    }
+
+    .help-card-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .help-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .help-card p {
+      color: var(--text-secondary);
+      font-size: 13.5px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Response time strip */
+    .response-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px 28px;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 18px 24px;
+      margin-bottom: 40px;
+    }
+
+    .response-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+    }
+
+    .response-item svg {
+      width: 17px;
+      height: 17px;
+      color: var(--success-primary);
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      flex-shrink: 0;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      margin-top: 48px;
+      padding-top: 24px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    footer a:hover {
+      color: var(--accent-primary);
+    }
+
+    @media (max-width: 640px) {
+      .support-hero-title {
+        font-size: 1.8rem;
+      }
+      .contact-hero-card {
+        padding: 32px 20px;
+      }
+      .response-strip {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="index.html" class="brand">
+        <div class="brand-logo" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
+            <line x1="3" y1="9" x2="21" y2="9"></line>
+            <line x1="9" y1="21" x2="9" y2="9"></line>
+          </svg>
+        </div>
+        <span class="brand-title">KeepIt</span>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="docs.html">Docs</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="support.html" class="active">Support</a>
+        <a href="login.html" id="navAccountLink">Sign in</a>
+        <a href="https://chromewebstore.google.com/detail/keepit/mhldbdlepccoejdjnhogckbgijohddlg" target="_blank" rel="noopener noreferrer" class="btn-header" data-keepit-cta="install" data-installed-label="Open Dashboard">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-.47.05-.93.13-1.38L8.6 15.1c.39.39 1.02.39 1.41 0l3.1-3.1 3.1 3.1c.39.39 1.02.39 1.41 0l4.26-4.26c.08.45.13.91.13 1.38 0 4.41-3.59 8-8 8z"/>
+          </svg>
+          Add to Chrome
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-wrapper">
+
+    <!-- Hero -->
+    <div class="support-hero">
+      <div class="support-badge">💬 We're here to help</div>
+      <h1 class="support-hero-title">KeepIt Support</h1>
+      <p class="support-hero-subtitle">
+        Have a question, ran into a bug, or need help with billing? Reach the KeepIt team directly — no ticket queues, no bots, just a real reply.
+      </p>
+    </div>
+
+    <!-- Big Contact Card -->
+    <div class="contact-hero-card">
+      <div class="contact-hero-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+      </div>
+      <h2>Email Our Support Team</h2>
+      <p>The fastest way to reach us. Tell us what's going on — your Chrome version, what you expected, and what happened instead — and we'll get back to you personally.</p>
+      <a href="mailto:contact.naveen.work@gmail.com" class="btn-email-lg">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+        Email contact.naveen.work@gmail.com
+      </a>
+      <span class="email-plain">Or copy the address directly: <a href="mailto:contact.naveen.work@gmail.com">contact.naveen.work@gmail.com</a></span>
+    </div>
+
+    <!-- Response time strip -->
+    <div class="response-strip">
+      <div class="response-item">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        Typical reply within 24–48 hours
+      </div>
+      <div class="response-item">
+        <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"></path></svg>
+        Answered by a real person on the KeepIt team
+      </div>
+      <div class="response-item">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"></path></svg>
+        Pro subscribers get priority handling
+      </div>
+    </div>
+
+    <!-- Quick help topics -->
+    <p class="section-label">What can we help with?</p>
+    <div class="help-grid">
+      <div class="help-card">
+        <div class="help-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        </div>
+        <h3>Billing & Refunds</h3>
+        <p>Questions about your KeepIt Pro subscription, invoices, or our 7-day money-back guarantee.</p>
+      </div>
+      <div class="help-card">
+        <div class="help-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M23 4v6h-6"></path><path d="M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"></path></svg>
+        </div>
+        <h3>Account & Sync</h3>
+        <p>Trouble signing in, syncing sessions across devices, or restoring saved tab groups.</p>
+      </div>
+      <div class="help-card">
+        <div class="help-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+        </div>
+        <h3>Installation Help</h3>
+        <p>Getting KeepIt set up in Chrome, permissions, or issues after an update.</p>
+      </div>
+      <div class="help-card">
+        <div class="help-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"></path></svg>
+        </div>
+        <h3>Bug Reports</h3>
+        <p>Something not working as expected? Send screenshots or steps to reproduce and we'll dig in.</p>
+      </div>
+    </div>
+
+    <footer>
+      <p><a href="index.html">Home</a> • <a href="docs.html">Documentation</a> • <a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms of Service</a> • <a href="support.html">Support</a></p>
+      <p style="margin-top: 8px;">© 2026 KeepIt. All rights reserved. Built for power browser users worldwide.</p>
+    </footer>
+
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/extension-detect.js"></script>
+  <script src="js/supabase.js"></script>
+  <script>
+    (async function () {
+      try {
+        const client = supabase.createClient(window.SUPABASE_CONFIG.url, window.SUPABASE_CONFIG.anonKey);
+        const { data } = await client.auth.getSession();
+        if (data && data.session) {
+          const link = document.getElementById('navAccountLink');
+          if (link) { link.textContent = 'Dashboard'; link.href = 'chrome-extension://mhldbdlepccoejdjnhogckbgijohddlg/dashboard.html'; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.setAttribute('data-keepit-cta', 'dashboard'); }
+        }
+      } catch (e) { /* not fatal */ }
+    })();
+  </script>
+</body>
+</html>
