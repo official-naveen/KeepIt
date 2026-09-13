@@ -25,7 +25,11 @@
         </div>
         <span class="brand-title">KeepIt</span>
       </a>
-      <nav class="nav-menu">
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <nav class="nav-menu" id="navMenu">
         <a href="index.html">Home</a>
         <a href="docs.html">Docs</a>
         <a href="support.html">Support</a>
@@ -142,6 +146,7 @@
       });
     })();
   </script>
+  <script src="js/nav-toggle.js"></script>
 </body>
 
 </html>

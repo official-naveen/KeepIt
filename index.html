@@ -585,8 +585,52 @@
 
     @media (max-width: 768px) {
       .hero-title { font-size: 2.2rem; }
-      .nav-menu { gap: 14px; }
       .pricing-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Mobile nav toggle */
+    .nav-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .nav-toggle svg { width: 20px; height: 20px; }
+    .nav-toggle .icon-close { display: none; }
+    .nav-toggle.open .icon-menu { display: none; }
+    .nav-toggle.open .icon-close { display: block; }
+
+    @media (max-width: 900px) {
+      .header-container { position: relative; }
+      .nav-toggle { display: inline-flex; }
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2px;
+        background-color: var(--bg-primary);
+        border-bottom: 1px solid var(--border-color);
+        padding: 10px 24px 18px;
+        box-shadow: var(--shadow-lg);
+      }
+      .nav-menu.open { display: flex; }
+      .nav-menu a {
+        padding: 12px 4px;
+        border-bottom: 1px solid var(--border-subtle);
+        width: 100%;
+      }
+      .nav-menu .btn-header { justify-content: center; margin-top: 10px; }
     }
   </style>
 </head>
@@ -608,7 +652,12 @@
         <span class="brand-title">KeepIt</span>
       </a>
 
-      <nav class="nav-menu">
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <nav class="nav-menu" id="navMenu">
         <a href="index.html" class="active">Home</a>
         <a href="docs.html">Docs</a>
         <a href="privacy.html">Privacy</a>
@@ -888,5 +937,6 @@
       } catch (e) { /* not fatal on the marketing page */ }
     })();
   </script>
+  <script src="js/nav-toggle.js"></script>
 </body>
 </html>
