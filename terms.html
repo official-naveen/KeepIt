@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KeepIt — Terms of Service & Refund Policy</title>
   <meta name="description"
-    content="Terms of Service for KeepIt tab session manager Chrome extension. Learn about plan terms, billing via Razorpay, user rights, and service conditions.">
+    content="Terms of Service for KeepIt tab session manager Chrome extension. Learn about plan terms, billing via Lemon Squeezy, user rights, and service conditions.">
   <link rel="icon" href="icons/icon32.png">
   <style>
     /* CSS Reset & Variable Definitions - Styled natively to match KeepIt Chrome Extension */
@@ -86,14 +86,17 @@
     ::-webkit-scrollbar {
       width: 8px;
     }
+
     ::-webkit-scrollbar-track {
       background: var(--bg-primary);
     }
+
     ::-webkit-scrollbar-thumb {
       background: var(--bg-tertiary);
       border-radius: var(--radius-full);
       border: 2px solid var(--bg-primary);
     }
+
     ::-webkit-scrollbar-thumb:hover {
       background: var(--bg-hover);
     }
@@ -104,6 +107,7 @@
       text-decoration: none;
       transition: color 0.15s ease;
     }
+
     a:hover {
       color: #a5b4fc;
       text-decoration: underline;
@@ -214,14 +218,33 @@
       cursor: pointer;
       flex-shrink: 0;
     }
-    .nav-toggle svg { width: 20px; height: 20px; }
-    .nav-toggle .icon-close { display: none; }
-    .nav-toggle.open .icon-menu { display: none; }
-    .nav-toggle.open .icon-close { display: block; }
+
+    .nav-toggle svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .nav-toggle .icon-close {
+      display: none;
+    }
+
+    .nav-toggle.open .icon-menu {
+      display: none;
+    }
+
+    .nav-toggle.open .icon-close {
+      display: block;
+    }
 
     @media (max-width: 900px) {
-      .header-container { position: relative; }
-      .nav-toggle { display: inline-flex; }
+      .header-container {
+        position: relative;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
+      }
+
       .nav-menu {
         display: none;
         position: absolute;
@@ -236,13 +259,21 @@
         padding: 10px 24px 18px;
         box-shadow: var(--shadow-lg);
       }
-      .nav-menu.open { display: flex; }
+
+      .nav-menu.open {
+        display: flex;
+      }
+
       .nav-menu a {
         padding: 12px 4px;
         border-bottom: 1px solid var(--border-subtle);
         width: 100%;
       }
-      .nav-menu .btn-header { justify-content: center; margin-top: 10px; }
+
+      .nav-menu .btn-header {
+        justify-content: center;
+        margin-top: 10px;
+      }
     }
 
     /* Main Container */
@@ -406,7 +437,8 @@
       line-height: 1.7;
     }
 
-    ul, ol {
+    ul,
+    ol {
       margin: 0 0 16px 20px;
       color: var(--text-secondary);
     }
@@ -588,12 +620,15 @@
       .terms-hero {
         padding: 24px 20px;
       }
+
       .terms-hero-title {
         font-size: 1.75rem;
       }
+
       .terms-section {
         padding: 20px;
       }
+
       .plan-grid {
         grid-template-columns: 1fr;
       }
@@ -618,9 +653,19 @@
         <span class="brand-title">KeepIt</span>
       </a>
 
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
-        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"
+        aria-controls="navMenu">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
       </button>
 
       <nav class="nav-menu" id="navMenu">
@@ -630,9 +675,11 @@
         <a href="terms.html" class="active">Terms</a>
         <a href="support.html">Support</a>
         <a href="login.html" id="navAccountLink">Sign in</a>
-        <a href="https://chromewebstore.google.com/detail/keepit/mhldbdlepccoejdjnhogckbgijohddlg" target="_blank" rel="noopener noreferrer" class="btn-header" data-keepit-cta="install" data-installed-label="Open Dashboard">
+        <a href="https://chromewebstore.google.com/detail/keepit/mhldbdlepccoejdjnhogckbgijohddlg" target="_blank"
+          rel="noopener noreferrer" class="btn-header" data-keepit-cta="install" data-installed-label="Open Dashboard">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-.47.05-.93.13-1.38L8.6 15.1c.39.39 1.02.39 1.41 0l3.1-3.1 3.1 3.1c.39.39 1.02.39 1.41 0l4.26-4.26c.08.45.13.91.13 1.38 0 4.41-3.59 8-8 8z"/>
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-.47.05-.93.13-1.38L8.6 15.1c.39.39 1.02.39 1.41 0l3.1-3.1 3.1 3.1c.39.39 1.02.39 1.41 0l4.26-4.26c.08.45.13.91.13 1.38 0 4.41-3.59 8-8 8z" />
           </svg>
           Add to Chrome
         </a>
@@ -670,7 +717,7 @@
         <a href="#service-desc" class="quick-pill">2. Description of Service</a>
         <a href="#auth" class="quick-pill">3. Google Auth</a>
         <a href="#plans" class="quick-pill">4. Free & Pro Plans</a>
-        <a href="#billing" class="quick-pill">5. Billing & 7-Day Refund</a>
+        <a href="#billing" class="quick-pill">5. Billing & 10-Day Refund</a>
         <a href="#ownership" class="quick-pill">6. Data Ownership</a>
         <a href="#governing-law" class="quick-pill">11. Governing Law</a>
       </div>
@@ -686,7 +733,9 @@
         <span>Welcome to KeepIt</span>
       </div>
       <p>
-        These Terms of Service govern your use of the KeepIt Chrome extension, its online features, cloud synchronization, and subscription services. By installing, accessing, or using KeepIt, you agree to be bound by these terms.
+        These Terms of Service govern your use of the KeepIt Chrome extension, its online features, cloud
+        synchronization, and subscription services. By installing, accessing, or using KeepIt, you agree to be bound by
+        these terms.
       </p>
     </div>
 
@@ -694,7 +743,10 @@
     <section id="acceptance" class="terms-section">
       <h2><span class="section-number">1</span> Acceptance of Terms</h2>
       <p>
-        By installing, activating, or using KeepIt (the "Extension", "Service", "we", "us"), you confirm that you have read, understood, and agreed to these Terms of Service ("Terms") and our <a href="privacy.html">Privacy Policy</a>. If you do not agree to these Terms, please uninstall and discontinue using the Extension immediately.
+        By installing, activating, or using KeepIt (the "Extension", "Service", "we", "us"), you confirm that you have
+        read, understood, and agreed to these Terms of Service ("Terms") and our <a href="privacy.html">Privacy
+          Policy</a>. If you do not agree to these Terms, please uninstall and discontinue using the Extension
+        immediately.
       </p>
     </section>
 
@@ -702,7 +754,10 @@
     <section id="service-desc" class="terms-section">
       <h2><span class="section-number">2</span> Description of Service</h2>
       <p>
-        KeepIt is a productivity Chrome extension created by an independent software developer based in India. It enables users to save open browser tabs as named sessions, preserve native Chrome Tab Groups, organize sessions into custom folders, auto-freeze idle tabs to save RAM, create auto-save recovery snapshots, and optionally sync or share sessions across devices.
+        KeepIt is a productivity Chrome extension created by an independent software developer based in India. It
+        enables users to save open browser tabs as named sessions, preserve native Chrome Tab Groups, organize sessions
+        into custom folders, auto-freeze idle tabs to save RAM, create auto-save recovery snapshots, and optionally sync
+        or share sessions across devices.
       </p>
     </section>
 
@@ -710,12 +765,15 @@
     <section id="auth" class="terms-section">
       <h2><span class="section-number">3</span> Accounts & Google Authentication</h2>
       <p>
-        Basic session management functions locally on your browser without requiring an account. However, to access Cloud Sync, peer-to-peer session sharing, or Pro plan subscriptions, you must authenticate using a valid Google Account via Google OAuth 2.0.
+        Basic session management functions locally on your browser without requiring an account. However, to access
+        Cloud Sync, peer-to-peer session sharing, or Pro plan subscriptions, you must authenticate using a valid Google
+        Account via Google OAuth 2.0.
       </p>
       <ul>
         <li>You are responsible for maintaining the security of your Google account credentials.</li>
         <li>You agree that all information provided during sign-in is accurate and belongs to you.</li>
-        <li>You must be at least 13 years old (or the legal minimum age in your jurisdiction) to use cloud services.</li>
+        <li>You must be at least 13 years old (or the legal minimum age in your jurisdiction) to use cloud services.
+        </li>
       </ul>
     </section>
 
@@ -730,7 +788,7 @@
             <span>Free Plan</span>
             <span class="badge badge-info">Default</span>
           </div>
-          <div class="plan-card-price">₹0 / Forever</div>
+          <div class="plan-card-price">$0 / Forever</div>
           <ul>
             <li>Save unlimited local sessions</li>
             <li>Up to 3 custom folders</li>
@@ -745,7 +803,7 @@
             <span>Pro Plan</span>
             <span class="badge badge-warning">Premium</span>
           </div>
-          <div class="plan-card-price">₹149/mo (~$1.79 USD) or ₹1,199/yr (~$14.99 USD)</div>
+          <div class="plan-card-price">$2.99/mo or $24.99/yr</div>
           <ul>
             <li><strong>Unlimited</strong> custom folders</li>
             <li><strong>Unlimited</strong> cloud-synced sessions</li>
@@ -755,33 +813,49 @@
           </ul>
         </div>
       </div>
-      <p>We reserve the right to modify plan limits or pricing with reasonable advance notice to active subscribers prior to their next billing cycle.</p>
+      <p>We reserve the right to modify plan limits or pricing with reasonable advance notice to active subscribers
+        prior to their next billing cycle.</p>
     </section>
 
     <!-- Section 5 -->
     <section id="billing" class="terms-section">
       <h2><span class="section-number">5</span> Billing, Payments & Refund Policy</h2>
-      
+
       <div class="callout callout-tip">
-        <div class="callout-title">💡 100% 7-Day Money-Back Guarantee</div>
-        We offer a full 100% refund if requested within <strong>7 calendar days</strong> of your initial Pro subscription purchase. Contact us at <a href="mailto:contact.naveen.work@gmail.com" style="color: #34d399; font-weight:bold;">contact.naveen.work@gmail.com</a> to request a refund.
+        <div class="callout-title">💡 100% 10-Day Money-Back Guarantee</div>
+        We offer a full 100% refund if requested within <strong>7 calendar days</strong> of your initial Pro
+        subscription purchase. Contact us at <a href="mailto:contact.naveen.work@gmail.com"
+          style="color: #34d399; font-weight:bold;">contact.naveen.work@gmail.com</a> to request a refund.
       </div>
 
       <ul>
         <li>
-          <strong>Payment Processor:</strong> All Pro subscription billing is processed directly by our payment gateway, <strong>Razorpay Software Private Limited</strong>. You agree to Razorpay's independent terms and privacy practices during checkout.
+          <strong>Payment Processor:</strong> All Pro subscription billing is processed directly by our payment gateway
+          and merchant of record, <strong>Lemon Squeezy, LLC</strong>. You agree to Lemon Squeezy's independent terms
+          and privacy practices during checkout.
         </li>
         <li>
-          <strong>Automatic Renewal:</strong> Pro subscriptions are billed in advance on a recurring monthly or annual basis. Your subscription automatically renews at the end of each billing period unless cancelled prior to the renewal date.
+          <strong>Automatic Renewal:</strong> Pro subscriptions are billed in advance on a recurring monthly or annual
+          basis. Your subscription automatically renews at the end of each billing period unless cancelled prior to the
+          renewal date.
         </li>
         <li>
-          <strong>Cancellation:</strong> You can cancel your subscription at any time from the Extension's settings page or Razorpay customer portal. Upon cancellation, your Pro features remain active until the end of the current paid billing period, after which your account automatically reverts to the Free plan. Cancellation prevents future billing cycles but does not automatically issue a prorated refund for elapsed time in the current cycle.
+          <strong>Cancellation:</strong> You can cancel your subscription at any time from the Extension's settings page
+          or Lemon Squeezy customer portal. Upon cancellation, your Pro features remain active until the end of the
+          current paid billing period, after which your account automatically reverts to the Free plan. Cancellation
+          prevents future billing cycles but does not automatically issue a prorated refund for elapsed time in the
+          current cycle.
         </li>
         <li>
-          <strong>7-Day Money-Back Guarantee (Refunds):</strong> We offer a <strong>100% full refund</strong> if requested within <strong>7 calendar days</strong> of your initial Pro subscription purchase. To request a refund, email us at <a href="mailto:contact.naveen.work@gmail.com">contact.naveen.work@gmail.com</a> with your subscription details. Automatic subscription renewals beyond the initial 7-day period are non-refundable, except where mandatory under applicable consumer protection laws (such as the Consumer Protection Act, 2019 of India).
+          <strong>10-Day Money-Back Guarantee (Refunds):</strong> We offer a <strong>100% full refund</strong> if
+          requested within <strong>7 calendar days</strong> of your initial Pro subscription purchase. To request a
+          refund, email us at <a href="mailto:contact.naveen.work@gmail.com">contact.naveen.work@gmail.com</a> with your
+          subscription details. Automatic subscription renewals beyond the initial 10-day period are non-refundable,
+          except where mandatory under applicable consumer protection laws in your jurisdiction.
         </li>
         <li>
-          <strong>Failed Payments:</strong> If a recurring payment fails, Razorpay may re-attempt the charge. We reserve the right to suspend Pro access if payment remains uncollected.
+          <strong>Failed Payments:</strong> If a recurring payment fails, Lemon Squeezy may re-attempt the charge. We
+          reserve the right to suspend Pro access if payment remains uncollected.
         </li>
       </ul>
     </section>
@@ -790,10 +864,15 @@
     <section id="ownership" class="terms-section">
       <h2><span class="section-number">6</span> Ownership of Your Data & Content</h2>
       <p>
-        <strong>Your Content Belongs to You:</strong> You retain full ownership and intellectual property rights to all session data, tab titles, URLs, and folders you save or organize using KeepIt. We do not claim any ownership rights over your personal tab data.
+        <strong>Your Content Belongs to You:</strong> You retain full ownership and intellectual property rights to all
+        session data, tab titles, URLs, and folders you save or organize using KeepIt. We do not claim any ownership
+        rights over your personal tab data.
       </p>
       <p>
-        <strong>Session Sharing Responsibility:</strong> If you use the peer-to-peer session sharing feature, you are solely responsible for the links and content contained within the shared session. You represent that you have the necessary rights to share those links and that doing so does not violate any third-party privacy or copyright rights.
+        <strong>Session Sharing Responsibility:</strong> If you use the peer-to-peer session sharing feature, you are
+        solely responsible for the links and content contained within the shared session. You represent that you have
+        the necessary rights to share those links and that doing so does not violate any third-party privacy or
+        copyright rights.
       </p>
     </section>
 
@@ -802,10 +881,14 @@
       <h2><span class="section-number">7</span> Acceptable Use & Conduct</h2>
       <p>You agree not to engage in any of the following prohibited activities:</p>
       <ul>
-        <li>Reverse engineering, decompiling, or attempting to extract the source code of the backend services or edge functions.</li>
-        <li>Bypassing or attempting to circumvent Free tier plan limits, Razorpay token validation, or security controls.</li>
-        <li>Using KeepIt to store, distribute, or share URLs containing malicious code, phishing schemes, illegal content, or intellectual property infringements.</li>
-        <li>Sending spam, unauthorized requests, or automated overload attacks against our backend infrastructure (`*.supabase.co` or Razorpay APIs).</li>
+        <li>Reverse engineering, decompiling, or attempting to extract the source code of the backend services or edge
+          functions.</li>
+        <li>Bypassing or attempting to circumvent Free tier plan limits, Lemon Squeezy checkout validation, or security
+          controls.</li>
+        <li>Using KeepIt to store, distribute, or share URLs containing malicious code, phishing schemes, illegal
+          content, or intellectual property infringements.</li>
+        <li>Sending spam, unauthorized requests, or automated overload attacks against our backend infrastructure
+          (`*.supabase.co` or Lemon Squeezy APIs).</li>
       </ul>
     </section>
 
@@ -813,10 +896,16 @@
     <section id="disclaimer" class="terms-section">
       <h2><span class="section-number">8</span> Local Data Disclaimer & Service Availability</h2>
       <p>
-        <strong>Local Storage Disclaimer:</strong> Your local sessions, folders, and auto-save snapshots are stored within your browser's isolated storage (`chrome.storage.local`). Uninstalling the extension or clearing Chrome site data will remove local data. We strongly recommend using Cloud Sync or exporting periodic backups for critical sessions.
+        <strong>Local Storage Disclaimer:</strong> Your local sessions, folders, and auto-save snapshots are stored
+        within your browser's isolated storage (`chrome.storage.local`). Uninstalling the extension or clearing Chrome
+        site data will remove local data. We strongly recommend using Cloud Sync or exporting periodic backups for
+        critical sessions.
       </p>
       <p>
-        <strong>Service Availability:</strong> KeepIt is provided on an <strong>"AS IS"</strong> and <strong>"AS AVAILABLE"</strong> basis. While we strive for 99.9% uptime, cloud sync and sign-in depend on third-party infrastructure providers (Google, Supabase, Razorpay). We cannot guarantee uninterrupted availability of cloud functions.
+        <strong>Service Availability:</strong> KeepIt is provided on an <strong>"AS IS"</strong> and <strong>"AS
+          AVAILABLE"</strong> basis. While we strive for 99.9% uptime, cloud sync and sign-in depend on third-party
+        infrastructure providers (Google, Supabase, Lemon Squeezy). We cannot guarantee uninterrupted availability of
+        cloud functions.
       </p>
     </section>
 
@@ -824,10 +913,15 @@
     <section class="terms-section">
       <h2><span class="section-number">9</span> Limitation of Liability</h2>
       <p>
-        To the maximum extent permitted by applicable law in India and your jurisdiction, KeepIt and its developer shall not be liable for any indirect, incidental, special, consequential, or punitive damages—including loss of saved browser tabs, business interruption, lost profits, or data corruption—arising out of or related to your use of the Extension. This includes unsaved input in a tab (such as draft messages or unsubmitted forms) that is lost when the Auto-Freeze feature discards an inactive tab from memory.
+        To the maximum extent permitted by applicable law in your jurisdiction, KeepIt and its developer shall not be
+        liable for any indirect, incidental, special, consequential, or punitive damages—including loss of saved browser
+        tabs, business interruption, lost profits, or data corruption—arising out of or related to your use of the
+        Extension. This includes unsaved input in a tab (such as draft messages or unsubmitted forms) that is lost when
+        the Auto-Freeze feature discards an inactive tab from memory.
       </p>
       <p>
-        In no event shall our total aggregate liability exceed the total amount paid by you to KeepIt in the twelve (12) months preceding the claim (or ₹1,000 INR if on the Free tier).
+        In no event shall our total aggregate liability exceed the total amount paid by you to KeepIt in the twelve (12)
+        months preceding the claim (or $12 USD if on the Free tier).
       </p>
     </section>
 
@@ -835,7 +929,9 @@
     <section class="terms-section">
       <h2><span class="section-number">10</span> Account Termination</h2>
       <p>
-        You may terminate this agreement at any time by uninstalling KeepIt and discontinuing its use. We reserve the right to suspend or terminate cloud accounts that violate these Terms or engage in fraudulent payment activity without prior notice.
+        You may terminate this agreement at any time by uninstalling KeepIt and discontinuing its use. We reserve the
+        right to suspend or terminate cloud accounts that violate these Terms or engage in fraudulent payment activity
+        without prior notice.
       </p>
     </section>
 
@@ -843,7 +939,9 @@
     <section id="governing-law" class="terms-section">
       <h2><span class="section-number">11</span> Governing Law & Dispute Resolution</h2>
       <p>
-        These Terms are governed by and construed in accordance with the laws of <strong>India</strong>, without regard to its conflict of law principles. Any legal suit, action, or proceeding arising out of or related to these Terms shall be instituted exclusively in the competent courts located in India.
+        These Terms are governed by and construed in accordance with the laws of <strong>India</strong>, without regard
+        to its conflict of law principles. Any legal suit, action, or proceeding arising out of or related to these
+        Terms shall be instituted exclusively in the competent courts located in India.
       </p>
     </section>
 
@@ -851,14 +949,17 @@
     <section class="terms-section">
       <h2><span class="section-number">12</span> Changes to Terms</h2>
       <p>
-        We reserve the right to update or modify these Terms at any time. Any changes will be posted on this page with an updated "Effective Date". Continued use of KeepIt following any updates constitutes your acceptance of the revised Terms.
+        We reserve the right to update or modify these Terms at any time. Any changes will be posted on this page with
+        an updated "Effective Date". Continued use of KeepIt following any updates constitutes your acceptance of the
+        revised Terms.
       </p>
     </section>
 
     <!-- Section 13: Contact Box -->
     <div class="contact-card">
       <h3>Questions About These Terms?</h3>
-      <p>If you have any questions regarding these Terms of Service, billing, or subscription refunds, please reach out to us:</p>
+      <p>If you have any questions regarding these Terms of Service, billing, or subscription refunds, please reach out
+        to us:</p>
       <a href="mailto:contact.naveen.work@gmail.com" class="btn-email">
         <svg viewBox="0 0 24 24">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -869,7 +970,8 @@
     </div>
 
     <footer>
-      <p><a href="index.html">Home</a> • <a href="docs.html">Documentation</a> • <a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms of Service</a> • <a href="support.html">Support</a></p>
+      <p><a href="index.html">Home</a> • <a href="docs.html">Documentation</a> • <a href="privacy.html">Privacy
+          Policy</a> • <a href="terms.html">Terms of Service</a> • <a href="support.html">Support</a></p>
       <p style="margin-top: 8px;">© 2026 KeepIt. All rights reserved. Built for power browser users worldwide.</p>
     </footer>
 
@@ -892,4 +994,5 @@
   </script>
   <script src="js/nav-toggle.js"></script>
 </body>
+
 </html>

@@ -91,7 +91,7 @@
             <span>💸</span> 100% Refund Processed &amp; Issued
           </h4>
           <p style="color: var(--text-secondary); font-size: 13px; line-height: 1.5; margin: 0;">
-            A full 100% refund was issued for your KeepIt Pro subscription via Razorpay. Funds will credit to your original payment method within <strong>5–7 working days</strong>.
+            A full 100% refund was issued for your KeepIt Pro subscription via Lemon Squeezy. Funds will credit to your original payment method within <strong>5–10 business days</strong>.
           </p>
         </div>
 
@@ -136,7 +136,7 @@
         <div class="billing-row"><span class="k">Subscription ID</span><span class="v" style="font-size:12px;">${KeepItApp.escapeHtml(subscription.subscription_id || '—')}</span></div>
         <div class="modal-actions" style="justify-content:flex-start; margin-top:18px; flex-wrap:wrap;">
           <button class="btn-sm" id="cancelSubBtn" type="button">Cancel subscription</button>
-          <button class="btn-sm danger" id="refundSubBtn" type="button">Request refund (within 7 days)</button>
+          <button class="btn-sm danger" id="refundSubBtn" type="button">Request refund (within 10 days)</button>
         </div>
       `;
       document.getElementById('cancelSubBtn').addEventListener('click', handleCancel);
@@ -189,7 +189,7 @@
     try {
       const data = await callEdgeFunction('create-subscription', { billing_cycle: billingCycle });
       if (!data.short_url) throw new Error('Could not create checkout link.');
-      KeepItApp.showToast('Opening Razorpay checkout in a new tab…');
+      KeepItApp.showToast('Opening Lemon Squeezy checkout in a new tab…');
       window.open(data.short_url, '_blank');
     } catch (err) {
       KeepItApp.showToast(err.message || 'Could not start checkout.');
@@ -217,7 +217,7 @@
   }
 
   async function handleRefund() {
-    if (!window.confirm('Request a full refund? Under the KeepIt Terms of Service, refunds are available within 7 calendar days of purchase and Pro access will be revoked immediately if approved.')) return;
+    if (!window.confirm('Request a full refund? Under the KeepIt Terms of Service, refunds are available within 10 calendar days of purchase and Pro access will be revoked immediately if approved.')) return;
     const btn = document.getElementById('refundSubBtn');
     btn.disabled = true;
     btn.textContent = 'Processing…';
@@ -225,7 +225,7 @@
       const data = await callEdgeFunction('refund-subscription');
       window.alert(
         'Refund issued.\n\n' +
-        'Funds will be credited to your original payment method within 5–7 working days.\n' +
+        'Funds will be credited to your original payment method within 5–10 business days.\n' +
         `Reference subscription ID: ${(subscription && subscription.subscription_id) || 'N/A'}`
       );
       await loadSubscription();
@@ -233,7 +233,7 @@
     } catch (err) {
       KeepItApp.showToast(err.message || 'Could not process refund.');
       btn.disabled = false;
-      btn.textContent = 'Request refund (within 7 days)';
+      btn.textContent = 'Request refund (within 10 days)';
     }
   }
 })();

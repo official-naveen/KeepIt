@@ -1,6 +1,6 @@
 /**
- * KeepIt Chrome Extension - Configuration File
- * Contains Supabase Project credentials and Gumroad Product settings
+ * KeepIt Website - Configuration File
+ * Contains Supabase Project credentials and Lemon Squeezy product settings
  */
 
 window.SUPABASE_CONFIG = {
@@ -8,9 +8,10 @@ window.SUPABASE_CONFIG = {
   anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNyY3JoaWlyc2Vxb2R4Y2Jpa3BoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1NzkxMDIsImV4cCI6MjEwMTE1NTEwMn0.JY6J50hfVo6kbQWoKLhNqgLka1Aga1G1J4Vn2eNizpw"
 };
 
-window.RAZORPAY_CONFIG = {
-  planMonthlyId: "plan_TLga14Y84MzuP0",
-  planYearlyId: "plan_TMobnkT1QKGsW4"
+window.LEMONSQUEEZY_CONFIG = {
+  storeId: "475355",
+  variantMonthlyId: "2132966",
+  variantYearlyId: "2133034"
 };
 
 window.GOOGLE_CONFIG = {
