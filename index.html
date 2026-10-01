@@ -7,7 +7,37 @@
   <title>KeepIt — Tab Session Manager & RAM Saver Chrome Extension</title>
   <meta name="description"
     content="KeepIt is the ultimate Chrome extension to save open tab sessions, preserve native Tab Groups, freeze idle tabs to reduce RAM usage by up to 80%, and sync across devices.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="canonical" href="https://keepit.website/">
+  <link rel="sitemap" type="application/xml" href="https://keepit.website/sitemap.xml">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="KeepIt - Tab Session Manager & RAM Saver for Chrome">
+  <meta property="og:description" content="Save tab sessions, preserve Chrome Tab Groups, and reclaim browser memory with KeepIt.">
+  <meta property="og:url" content="https://keepit.website/">
+  <meta property="og:image" content="https://keepit.website/images/1.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="KeepIt - Tab Session Manager & RAM Saver for Chrome">
+  <meta name="twitter:description" content="Save tab sessions, preserve Chrome Tab Groups, and reclaim browser memory with KeepIt.">
   <link rel="icon" href="icons/icon32.png">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "KeepIt",
+      "applicationCategory": "ProductivityApplication",
+      "operatingSystem": "Chrome",
+      "description": "A Chrome extension that saves tab sessions, preserves native tab groups, and freezes idle tabs to reduce browser memory use.",
+      "downloadUrl": "https://chromewebstore.google.com/detail/keepit/mhldbdlepccoejdjnhogckbgijohddlg",
+      "url": "https://keepit.website/",
+      "image": "https://keepit.website/images/1.png",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+  </script>
   <style>
     /* CSS Reset & Variable Definitions - Matching KeepIt Design System */
     :root {
@@ -588,6 +618,35 @@
       .pricing-grid { grid-template-columns: 1fr; }
     }
 
+    /* Keep cards and screenshots within narrow mobile viewports. */
+    @media (max-width: 480px) {
+      html, body { overflow-x: hidden; }
+      .header { padding: 10px 14px; }
+      .main-wrapper { padding: 28px 14px 56px; }
+      .hero-section { padding: 24px 0 40px; }
+      .hero-title { font-size: 2rem; }
+      .hero-subtitle { font-size: 1rem; }
+      .hero-cta-group { gap: 12px; }
+      .hero-cta-group a { width: 100%; justify-content: center; }
+      .screenshots-section { margin: 28px 0 56px; }
+      .section-heading { margin-bottom: 24px; }
+      .section-heading h2 { font-size: 1.6rem; }
+      .screenshots-grid,
+      .features-grid,
+      .pricing-grid { grid-template-columns: minmax(0, 1fr); }
+      .screenshots-grid { gap: 18px; }
+      .doc-screenshot-card { min-width: 0; }
+      .doc-screenshot-header { padding: 10px 12px; gap: 8px; }
+      .window-title-text { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .window-badge { flex-shrink: 0; }
+      .doc-screenshot-body { padding: 14px; }
+      .doc-img { max-width: 100%; height: auto; }
+      .feature-card,
+      .pricing-card,
+      .merchant-card { padding: 22px; }
+      .refund-callout { padding: 18px; }
+    }
+
     /* Mobile nav toggle */
     .nav-toggle {
       display: none;
@@ -729,7 +788,7 @@
             <span class="window-badge">Extension UI</span>
           </div>
           <div class="doc-screenshot-body">
-            <img src="images/1.png" alt="KeepIt Session List Overview" class="doc-img">
+            <img src="images/1.png" alt="KeepIt Session List Overview" class="doc-img" width="1024" height="1024" loading="lazy" decoding="async">
           </div>
         </div>
 
@@ -745,7 +804,7 @@
             <span class="window-badge">Save Modal</span>
           </div>
           <div class="doc-screenshot-body">
-            <img src="images/2.png" alt="KeepIt Interactive Save Modal" class="doc-img">
+            <img src="images/2.png" alt="KeepIt Interactive Save Modal" class="doc-img" width="1024" height="1024" loading="lazy" decoding="async">
           </div>
         </div>
 
@@ -761,7 +820,7 @@
             <span class="window-badge">Tab Hygiene</span>
           </div>
           <div class="doc-screenshot-body">
-            <img src="images/5.png" alt="KeepIt Tools & Tab Hygiene Modal" class="doc-img">
+            <img src="images/5.png" alt="KeepIt Tools & Tab Hygiene Modal" class="doc-img" width="1024" height="1024" loading="lazy" decoding="async">
           </div>
         </div>
       </div>
@@ -890,7 +949,7 @@
         <div class="refund-content">
           <h4>100% 10-Day Money-Back Guarantee</h4>
           <p>
-            We stand behind KeepIt Pro. If you are not completely satisfied with your subscription for any reason within <strong>7 calendar days</strong> of purchase, send an email to <a href="mailto:contact.naveen.work@gmail.com" style="color: #34d399; font-weight:700;">contact.naveen.work@gmail.com</a> and we will issue a full 100% refund. Subscriptions are billed securely through Lemon Squeezy, our PCI-DSS compliant merchant of record.
+            We stand behind KeepIt Pro. If you are not completely satisfied with your subscription for any reason within <strong>10 calendar days</strong> of purchase, send an email to <a href="mailto:contact.naveen.work@gmail.com" style="color: #34d399; font-weight:700;">contact.naveen.work@gmail.com</a> and we will issue a full 100% refund. Subscriptions are billed securely through Lemon Squeezy, our PCI-DSS compliant merchant of record.
           </p>
         </div>
       </div>

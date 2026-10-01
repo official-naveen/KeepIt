@@ -7,6 +7,15 @@
   <title>KeepIt — Support</title>
   <meta name="description"
     content="Get help with KeepIt. Contact our support team directly by email for billing, account, sync, or technical questions.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="canonical" href="https://keepit.website/support.html">
+  <link rel="sitemap" type="application/xml" href="https://keepit.website/sitemap.xml">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="KeepIt Support">
+  <meta property="og:description" content="Get help with KeepIt for billing, accounts, sync, and technical questions.">
+  <meta property="og:url" content="https://keepit.website/support.html">
+  <meta name="twitter:card" content="summary">
   <link rel="icon" href="icons/icon32.png">
   <style>
     /* CSS Reset & Variable Definitions - Styled natively to match KeepIt Chrome Extension */
@@ -502,11 +511,30 @@
     }
 
     @media (max-width: 640px) {
+      html, body { overflow-x: hidden; }
+      .header { padding: 10px 14px; }
+      .main-wrapper { padding: 28px 14px 56px; }
       .support-hero-title {
         font-size: 1.8rem;
       }
       .contact-hero-card {
-        padding: 32px 20px;
+        padding: 32px 18px;
+      }
+      .btn-email-lg {
+        width: 100%;
+        max-width: 100%;
+        justify-content: center;
+        padding: 15px 14px;
+        font-size: 14px;
+        text-align: center;
+        white-space: normal;
+        overflow-wrap: anywhere;
+      }
+      .btn-email-lg span,
+      .email-plain a {
+        min-width: 0;
+        overflow-wrap: anywhere;
+        word-break: break-word;
       }
       .response-strip {
         flex-direction: column;
@@ -582,7 +610,7 @@
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
           <polyline points="22,6 12,13 2,6"></polyline>
         </svg>
-        Email contact.naveen.work@gmail.com
+        <span>Email contact.naveen.work@gmail.com</span>
       </a>
       <span class="email-plain">Or copy the address directly: <a href="mailto:contact.naveen.work@gmail.com">contact.naveen.work@gmail.com</a></span>
     </div>

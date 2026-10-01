@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://keepit.website/sitemap.xml
