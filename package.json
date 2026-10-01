@@ -1,0 +1,29 @@
+{
+  "name": "keepit-website",
+  "version": "1.0.0",
+  "description": "Official website repository and legal hub for KeepIt, a modern Chrome extension designed to save open tabs as named sessions, preserve native Chrome Tab Groups, auto-freeze idle background tabs to save memory, and sync across devices.",
+  "scripts": {
+    "dev": "python -m http.server 8000",
+    "test": "echo \"No tests specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/official-naveen/KeepIt.git"
+  },
+  "keywords": [
+    "chrome-extension",
+    "tab-manager",
+    "keepit",
+    "vercel",
+    "speed-insights"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/official-naveen/KeepIt/issues"
+  },
+  "homepage": "https://github.com/official-naveen/KeepIt#readme",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}
