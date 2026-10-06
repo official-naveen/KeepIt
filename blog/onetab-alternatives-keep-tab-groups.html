@@ -1,43 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KeepIt — Tab Session Manager & RAM Saver Chrome Extension</title>
-  <meta name="description"
-    content="KeepIt is the ultimate Chrome extension to save open tab sessions, preserve native Tab Groups, freeze idle tabs to reduce RAM usage by up to 80%, and sync across devices.">
+  <title>OneTab Alternatives That Keep Your Tab Groups (and Your Data) | KeepIt</title>
+  <meta name="description" content="OneTab is fast, but it flattens tab groups and has a history of data-loss complaints. Here is what to look for in an alternative and how the main options compare.">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <meta name="theme-color" content="#0f172a">
-  <link rel="canonical" href="https://keepit.website/">
-  <link rel="sitemap" type="application/xml" href="https://keepit.website/sitemap.xml">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="KeepIt - Tab Session Manager & RAM Saver for Chrome">
-  <meta property="og:description" content="Save tab sessions, preserve Chrome Tab Groups, and reclaim browser memory with KeepIt.">
-  <meta property="og:url" content="https://keepit.website/">
+  <link rel="canonical" href="https://keepit.website/blog/onetab-alternatives-keep-tab-groups.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="OneTab Alternatives That Keep Your Tab Groups (and Your Data) | KeepIt">
+  <meta property="og:description" content="OneTab is fast, but it flattens tab groups and has a history of data-loss complaints. Here is what to look for in an alternative and how the main options compare.">
+  <meta property="og:url" content="https://keepit.website/blog/onetab-alternatives-keep-tab-groups.html">
   <meta property="og:image" content="https://keepit.website/images/1.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="KeepIt - Tab Session Manager & RAM Saver for Chrome">
-  <meta name="twitter:description" content="Save tab sessions, preserve Chrome Tab Groups, and reclaim browser memory with KeepIt.">
-  <link rel="icon" href="icons/icon32.png">
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "KeepIt",
-      "applicationCategory": "ProductivityApplication",
-      "operatingSystem": "Chrome",
-      "description": "A Chrome extension that saves tab sessions, preserves native tab groups, and freezes idle tabs to reduce browser memory use.",
-      "downloadUrl": "https://chromewebstore.google.com/detail/keepit/mhldbdlepccoejdjnhogckbgijohddlg",
-      "url": "https://keepit.website/",
-      "image": "https://keepit.website/images/1.png",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
-    }
-  </script>
+  <link rel="icon" href="../icons/icon32.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"OneTab Alternatives That Keep Your Tab Groups (and Your Data)","description":"OneTab is fast, but it flattens tab groups and has a history of data-loss complaints. Here is what to look for in an alternative and how the main options compare.","datePublished":"2026-10-06","dateModified":"2026-10-06","author":{"@type":"Organization","name":"KeepIt"},"publisher":{"@type":"Organization","name":"KeepIt","url":"https://keepit.website/"},"image":"https://keepit.website/images/1.png","mainEntityOfPage":"https://keepit.website/blog/onetab-alternatives-keep-tab-groups.html"}</script>
   <style>
     /* CSS Reset & Variable Definitions - Matching KeepIt Design System */
     :root {
@@ -695,14 +673,41 @@
       .nav-menu .btn-header { justify-content: center; margin-top: 10px; }
     }
   </style>
+  <style>
+.blog-hero{text-align:center;max-width:760px;margin:0 auto;padding:40px 20px 36px}
+.blog-hero h1{font-size:2.4rem;font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:14px}
+.blog-hero p{color:var(--text-secondary);font-size:1.1rem}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin-top:12px}
+.post-card{display:flex;flex-direction:column;gap:12px;background:var(--bg-card);border:1px solid var(--border-color);border-radius:var(--radius-lg);padding:24px;color:var(--text-primary)!important;transition:border-color .15s,transform .15s}
+.post-card:hover{border-color:var(--accent-primary);transform:translateY(-2px)}
+.post-card h2{font-size:1.15rem;line-height:1.4;letter-spacing:-.01em}
+.post-card p{color:var(--text-secondary);font-size:14px;flex:1}
+.post-meta{display:flex;gap:10px;align-items:center;font-size:12.5px;color:var(--text-muted)}
+.post-tag{background:var(--accent-light);color:#a5b4fc;border-radius:var(--radius-full);padding:2px 10px;font-weight:600}
+.post-wrap{max-width:720px;margin:0 auto}
+.post-wrap h1{font-size:2.2rem;font-weight:800;letter-spacing:-.03em;line-height:1.25;margin:14px 0}
+.crumb{font-size:13px;color:var(--text-muted)}
+.post-body{margin-top:28px;font-size:16.5px;line-height:1.8;color:#cbd5e1}
+.post-body h2{font-size:1.45rem;color:var(--text-primary);margin:40px 0 12px;letter-spacing:-.02em}
+.post-body p,.post-body ul,.post-body ol{margin-bottom:18px}
+.post-body ul,.post-body ol{padding-left:24px}
+.post-body li{margin-bottom:8px}
+.post-body strong{color:var(--text-primary)}
+.post-body table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px;display:block;overflow-x:auto}
+.post-body th,.post-body td{border:1px solid var(--border-color);padding:10px 14px;text-align:left}
+.post-body th{background:var(--bg-secondary);color:var(--text-primary)}
+.post-cta{margin:48px 0 24px;padding:28px;border:1px solid rgba(99,102,241,.35);border-radius:var(--radius-lg);background:var(--accent-light);text-align:center}
+.post-cta h3{font-size:1.25rem;margin-bottom:8px}
+.post-cta p{color:var(--text-secondary);margin-bottom:18px}
+.more-posts{margin-top:40px}
+.more-posts h3{margin-bottom:14px}
+@media(max-width:600px){.blog-hero h1,.post-wrap h1{font-size:1.75rem}}
+</style>
 </head>
-
 <body>
-
-  <!-- Top Navigation Header -->
   <header class="header">
     <div class="header-container">
-      <a href="index.html" class="brand">
+      <a href="../index.html" class="brand">
         <div class="brand-logo" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
             stroke-linecap="round" stroke-linejoin="round">
@@ -720,13 +725,14 @@
       </button>
 
       <nav class="nav-menu" id="navMenu">
-        <a href="index.html" class="active">Home</a>
-        <a href="docs.html">Docs</a>
-        <a href="blog.html">Blog</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="terms.html">Terms</a>
-        <a href="support.html">Support</a>
-        <a href="login.html" id="navAccountLink">Sign in</a>
+        <a href="../index.html">Home</a>
+        <a href="../docs.html">Docs</a>
+        <a href="../blog.html">Blog</a>
+        <a href="../blog.html">Blog</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../support.html">Support</a>
+        <a href="../login.html" id="navAccountLink">Sign in</a>
         <a href="https://chromewebstore.google.com/detail/keepit/mhldbdlepccoejdjnhogckbgijohddlg" target="_blank" rel="noopener noreferrer" class="btn-header" data-keepit-cta="install" data-installed-label="Open Dashboard" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-hover)); border: none; color: #fff;">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-.47.05-.93.13-1.38L8.6 15.1c.39.39 1.02.39 1.41 0l3.1-3.1 3.1 3.1c.39.39 1.02.39 1.41 0l4.26-4.26c.08.45.13.91.13 1.38 0 4.41-3.59 8-8 8z"/>
@@ -736,271 +742,86 @@
       </nav>
     </div>
   </header>
-
-  <!-- Main Content -->
   <main class="main-wrapper">
-
-    <!-- Hero Section -->
-    <section class="hero-section">
-      <div class="badge-hero">⚡ Chrome Extension Tab Manager & Memory Saver</div>
-      <h1 class="hero-title">Organize Open Tabs.<br>Reclaim Your RAM.</h1>
-      <p class="hero-subtitle">
-        KeepIt captures open browser windows into organized session bundles, preserves native Chrome Tab Groups, and automatically discards idle background tabs to slash memory usage by up to 80%.
-      </p>
-
-      <div class="hero-cta-group">
-        <a href="https://chromewebstore.google.com/detail/keepit/mhldbdlepccoejdjnhogckbgijohddlg" target="_blank" rel="noopener noreferrer" class="btn-cta-primary" data-keepit-cta="install" data-installed-label="Open Your Dashboard">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <circle cx="12" cy="12" r="4"></circle>
-            <line x1="21.17" y1="8" x2="12" y2="8"></line>
-            <line x1="3.95" y1="6.06" x2="8.54" y2="14"></line>
-            <line x1="10.88" y1="21.94" x2="15.46" y2="14"></line>
-          </svg>
-          Add to Chrome — It's Free
-        </a>
-        <a href="docs.html" class="btn-cta-secondary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-          </svg>
-          User Guide & Docs
-        </a>
-        <a href="#pricing" class="btn-cta-secondary">
-          View Plans
-        </a>
+    <article class="post-wrap">
+      <div class="crumb"><a href="../blog.html">Blog</a> / Comparison</div>
+      <h1>OneTab Alternatives That Keep Your Tab Groups (and Your Data)</h1>
+      <div class="post-meta"><span>By the KeepIt team</span><span>Updated Oct 6, 2026</span></div>
+      <div class="post-body"><p>OneTab earned millions of users with one trick: click once, every tab collapses into a list, and your RAM breathes again. The reasons people leave are just as consistent: <strong>restored sessions lose their tab groups</strong>, and the data lives only in your browser profile, so a reinstall or reset can wipe it.</p>
+<p>If that sounds familiar, here's what to demand from a replacement, and how the main options compare.</p>
+<h2>What to demand from any tab manager</h2>
+<ol>
+<li><strong>Tab group fidelity.</strong> Group titles, colors and collapsed state should survive a save and restore.</li>
+<li><strong>Automatic snapshots.</strong> Crashes don't ask permission.</li>
+<li><strong>Local-first storage with optional cloud sync.</strong> Your sessions should work offline and shouldn't disappear behind a login or a cap.</li>
+<li><strong>Honest limits.</strong> Know what's free and what isn't <em>before</em> you've saved 500 tabs into it.</li>
+<li><strong>An easy way out.</strong> Export or copy your data in a standard format.</li>
+</ol>
+<h2>The main alternatives</h2>
+<p><strong>Session Buddy</strong> is the long-time default for named sessions and crash recovery. Some users reported lost sessions after its major storage migration in 2024, so keep your own backups.</p>
+<p><strong>Tab Session Manager</strong> is free and open source, with scheduled auto-save and tab group support. Power users like it, though some report rough edges with sync.</p>
+<p><strong>Workona</strong> is workspace-first and built for teams. It's polished, but the free plan limits the number of workspaces and paid plans cost noticeably more than a solo user usually wants to spend.</p>
+<p><strong>Toby</strong> is a visual board that replaces your new tab page. Its free tier has a saved-item cap and requires an account, which is the usual complaint.</p>
+<p><strong>KeepIt</strong> sits between a one-click saver and a full workspace tool:</p>
+<ul>
+<li>Saves a window in one click or one shortcut (Alt+Shift+S), and preserves Chrome tab group titles, colors and collapsed state.</li>
+<li>Auto-saves snapshots in the background (every 3 minutes on Free, every minute on Pro).</li>
+<li>Keeps unlimited local sessions on the free plan, with optional cloud sync.</li>
+<li>Recovers recently closed windows and tabs.</li>
+<li>Imports OneTab exports, one URL per line, so you can switch in minutes.</li>
+</ul>
+<p><em>Always check each tool's pricing page, as limits and prices change.</em></p>
+<h2>How to switch from OneTab</h2>
+<ol>
+<li>In OneTab, open <strong>Import / export</strong> and copy the exported text.</li>
+<li>In KeepIt, open <em>Tools → OneTab Import</em>, name the session and paste.</li>
+<li>Check the imported session, then restore it in a new window.</li>
+</ol>
+<p>Do this <em>before</em> uninstalling OneTab. Removing the extension can delete its stored data.</p>
+<h2>The short version</h2>
+<p>If you only ever want a dump list, OneTab is fine, as long as you export regularly. If you've been burned by lost tabs or flattened groups, pick a tool that treats groups and automatic backup as core features, not extras.</p></div>
+      <div class="post-cta">
+        <h3>Never lose a tab session again</h3>
+        <p>KeepIt saves your windows, keeps your tab groups intact and freezes idle tabs. Free to start.</p>
+        <a href="https://chromewebstore.google.com/detail/keepit/mhldbdlepccoejdjnhogckbgijohddlg" target="_blank" rel="noopener noreferrer" class="btn-cta-primary" data-keepit-cta="install" data-installed-label="Open Your Dashboard">Add to Chrome, it's free</a>
       </div>
-    </section>
-
-    <!-- Screenshots Preview Section -->
-    <section class="screenshots-section">
-      <div class="section-heading">
-        <h2>Designed for Speed & Simplicity</h2>
-        <p>Take a look inside KeepIt's modern, dark-themed Chrome extension popup interface.</p>
-      </div>
-
-      <div class="screenshots-grid">
-        <!-- Card 1 -->
-        <div class="doc-screenshot-card">
-          <div class="doc-screenshot-header">
-            <div class="window-dots">
-              <span class="w-dot dot-red"></span>
-              <span class="w-dot dot-yellow"></span>
-              <span class="w-dot dot-green"></span>
-            </div>
-            <span class="window-title-text">KeepIt — Session List Overview</span>
-            <span class="window-badge">Extension UI</span>
-          </div>
-          <div class="doc-screenshot-body">
-            <img src="images/1.png" alt="KeepIt Session List Overview" class="doc-img">
-          </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="doc-screenshot-card">
-          <div class="doc-screenshot-header">
-            <div class="window-dots">
-              <span class="w-dot dot-red"></span>
-              <span class="w-dot dot-yellow"></span>
-              <span class="w-dot dot-green"></span>
-            </div>
-            <span class="window-title-text">KeepIt — Interactive Save Modal</span>
-            <span class="window-badge">Save Modal</span>
-          </div>
-          <div class="doc-screenshot-body">
-            <img src="images/2.png" alt="KeepIt Interactive Save Modal" class="doc-img">
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="doc-screenshot-card">
-          <div class="doc-screenshot-header">
-            <div class="window-dots">
-              <span class="w-dot dot-red"></span>
-              <span class="w-dot dot-yellow"></span>
-              <span class="w-dot dot-green"></span>
-            </div>
-            <span class="window-title-text">KeepIt — Tools & Memory Saver</span>
-            <span class="window-badge">Tab Hygiene</span>
-          </div>
-          <div class="doc-screenshot-body">
-            <img src="images/5.png" alt="KeepIt Tools & Tab Hygiene Modal" class="doc-img">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Features Grid -->
-    <section class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">💾</div>
-        <h3>1-Click Session Saving</h3>
-        <p>Instantly snapshot all open tabs or select specific tabs using live search filters. Save locally on disk or sync to the cloud.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🗄️</div>
-        <h3>Native Tab Groups Preservation</h3>
-        <p>KeepIt captures native Chrome Tab Group titles, colors, and collapsed states, automatically restoring them when you re-open sessions.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">❄️</div>
-        <h3>Auto-Freeze Memory Saver</h3>
-        <p>Discard idle background tabs from RAM without closing them. Set auto-freeze timers (15m, 30m, 60m) with built-in protection for pinned tabs and essential work tools.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <h3>Background Auto-Save Snapshots</h3>
-        <p>Continuous window snapshot auto-saves run every 3 minutes (1 min on Pro) to protect against browser crashes or accidental closures.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📁</div>
-        <h3>Drag & Drop Folders</h3>
-        <p>Organize saved sessions into custom folders with effortless HTML5 drag and drop pill navigation.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📤</div>
-        <h3>Peer Session Sharing</h3>
-        <p>Send curated tab bundles directly to colleagues or classmates using custom <code>@username</code> handles.</p>
-      </div>
-    </section>
-
-    <!-- Pricing Section (Lemon Squeezy Merchant Compliant) -->
-    <section id="pricing" class="pricing-section">
-      <div class="section-heading">
-        <h2>Transparent & Affordable Pricing</h2>
-        <p>Get started for free or upgrade to Pro for unlimited cloud sync and advanced features.</p>
-      </div>
-
-      <div class="pricing-grid">
-        <!-- Free Plan -->
-        <div class="pricing-card">
-          <div class="pricing-name">KeepIt Free</div>
-          <div class="pricing-price">$0</div>
-          <div class="pricing-subprice">Forever</div>
-
-          <ul class="pricing-features">
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              Unlimited local session storage
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              Up to 3 custom folders
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              Up to 3 cloud-synced sessions
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              3-minute auto-save snapshot frequency
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              Tab freezing RAM memory saver
-            </li>
-          </ul>
-
-          <a href="https://chromewebstore.google.com/detail/keepit/mhldbdlepccoejdjnhogckbgijohddlg" target="_blank" rel="noopener noreferrer" class="btn-cta-secondary" style="text-align: center; justify-content: center;">
-            Get Free Extension from Web Store
-          </a>
-        </div>
-
-        <!-- Pro Plan -->
-        <div class="pricing-card popular">
-          <div class="popular-tag">Most Popular</div>
-          <div class="pricing-name">KeepIt Pro</div>
-          <div class="pricing-price">$2.99 <span style="font-size: 1rem; color: var(--text-muted);">/ month</span></div>
-          <div class="pricing-subprice">or $24.99 / year (save ~30%)</div>
-
-          <ul class="pricing-features">
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <strong>Unlimited</strong> custom folder creation
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <strong>Unlimited</strong> cloud-synced sessions across devices
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              Fast 1-minute auto-save snapshot frequency
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              Peer-to-peer session sharing by @username
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              Priority updates & developer support
-            </li>
-          </ul>
-
-          <a href="docs.html#pricing-matrix" class="btn-cta-primary" style="text-align: center; justify-content: center;">
-            Subscribe via Lemon Squeezy
-          </a>
-        </div>
-      </div>
-
-      <!-- Lemon Squeezy 10-Day Money Back Guarantee -->
-      <div class="refund-callout">
-        <div class="refund-icon">🛡️</div>
-        <div class="refund-content">
-          <h4>100% 10-Day Money-Back Guarantee</h4>
-          <p>
-            We stand behind KeepIt Pro. If you are not completely satisfied with your subscription for any reason within <strong>10 calendar days</strong> of purchase, send an email to <a href="mailto:contact.naveen.work@gmail.com" style="color: #34d399; font-weight:700;">contact.naveen.work@gmail.com</a> and we will issue a full 100% refund. Subscriptions are billed securely through Lemon Squeezy, our PCI-DSS compliant merchant of record.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Merchant Contact Section -->
-    <section class="merchant-card">
-      <h3>Need Help or Have Questions?</h3>
-      <p>Have questions about KeepIt Pro subscriptions, account data deletion, or feature requests? We're here to help!</p>
-      <a href="mailto:contact.naveen.work@gmail.com" class="btn-cta-primary">
-        ✉️ Contact Support: contact.naveen.work@gmail.com
-      </a>
-    </section>
-
+      <div class="more-posts"><h3>Keep reading</h3><div class="blog-grid"><a class="post-card" href="../blog/save-all-open-tabs-chrome.html">
+        <div class="post-meta"><span class="post-tag">How-to</span></div>
+        <h2>How to Save All Open Tabs in Chrome (5 Methods That Work in 2026)</h2><p>Five ways to save every open tab in Chrome, from the built-in bookmark shortcut to session managers, with the trade-offs of each.</p></a>
+<a class="post-card" href="../blog/chrome-memory-saver-vs-tab-freezing.html">
+        <div class="post-meta"><span class="post-tag">Performance</span></div>
+        <h2>Chrome Memory Saver vs Tab-Freezing Extensions: What Actually Frees RAM</h2><p>Chrome's Memory Saver and tab-freezing extensions both discard inactive tabs. Here is how they differ, what you give up, and how to freeze tabs safely.</p></a>
+<a class="post-card" href="../blog/session-buddy-alternatives.html">
+        <div class="post-meta"><span class="post-tag">Comparison</span></div>
+        <h2>Session Buddy Alternatives: 5 Tab Session Managers Worth Switching To</h2><p>Session Buddy was the default session manager for years. If you're looking for something else, here's what to compare and which options fit which kind of user.</p></a>
+<a class="post-card" href="../blog/chrome-tab-groups-disappearing.html">
+        <div class="post-meta"><span class="post-tag">Troubleshooting</span></div>
+        <h2>Chrome Tab Groups Disappearing? Why It Happens and How to Keep Them</h2><p>Tab groups vanish after a restart, a crash or an update more often than you'd expect. Here is why, and how to make sure yours survive.</p></a>
+<a class="post-card" href="../blog/recover-closed-chrome-window-tabs.html">
+        <div class="post-meta"><span class="post-tag">How-to</span></div>
+        <h2>How to Recover a Closed Chrome Window or Tab (Even After Restarting)</h2><p>Closed the wrong window? Here is how to bring back closed tabs and windows in Chrome, from the keyboard shortcut to history to automatic snapshots.</p></a>
+<a class="post-card" href="../blog/stop-tab-hoarding.html">
+        <div class="post-meta"><span class="post-tag">Productivity</span></div>
+        <h2>Tab Hoarding: Why You Do It and a Simple System to Stop</h2><p>Dozens of tabs open 'just in case' slow your browser and your thinking. Here is a practical system for keeping what matters and closing the rest.</p></a></div></div>
+    </article>
   </main>
-
-  <!-- Footer -->
   <footer>
     <div>
-      <a href="index.html">Home</a> •
-      <a href="docs.html">Documentation</a> •
-      <a href="blog.html">Blog</a> •
-      <a href="privacy.html">Privacy Policy</a> •
-      <a href="terms.html">Terms of Service</a> •
-      <a href="terms.html#billing">Refund Policy</a> •
-      <a href="support.html">Support</a>
+      <a href="../index.html">Home</a> •
+      <a href="../docs.html">Documentation</a> •
+      <a href="../blog.html">Blog</a> •
+      <a href="../blog.html">Blog</a> •
+      <a href="../privacy.html">Privacy Policy</a> •
+      <a href="../terms.html">Terms of Service</a> •
+      <a href="../terms.html#billing">Refund Policy</a> •
+      <a href="../support.html">Support</a>
     </div>
     <div style="margin-top: 10px; color: var(--text-muted); font-size: 12.5px;">
       © 2026 KeepIt. All rights reserved. Billed via Lemon Squeezy. Built for power browser users worldwide.
     </div>
   </footer>
-
-  <script src="js/config.js"></script>
-  <script src="js/extension-detect.js"></script>
-  <script src="js/supabase.js"></script>
-  <script>
-    (async function () {
-      try {
-        const client = supabase.createClient(window.SUPABASE_CONFIG.url, window.SUPABASE_CONFIG.anonKey);
-        const { data } = await client.auth.getSession();
-        if (data && data.session) {
-          const link = document.getElementById('navAccountLink');
-          if (link) { link.textContent = 'Dashboard'; link.href = 'chrome-extension://mhldbdlepccoejdjnhogckbgijohddlg/dashboard.html'; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.setAttribute('data-keepit-cta', 'dashboard'); }
-        }
-      } catch (e) { /* not fatal on the marketing page */ }
-    })();
-  </script>
-  <script src="js/nav-toggle.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/extension-detect.js"></script>
+  <script src="../js/nav-toggle.js"></script>
 </body>
 </html>
