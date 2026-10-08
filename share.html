@@ -9,34 +9,146 @@
   - Set CHROME_STORE_URL below to your Chrome Web Store listing.
 -->
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="referrer" content="no-referrer">
   <meta name="robots" content="noindex,nofollow">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
   <title>Shared tab session · KeepIt</title>
   <style>
-    :root { color-scheme: light dark; --bg:#f8fafc; --card:#fff; --text:#172033; --muted:#64748b; --accent:#4f46e5; --border:#e2e8f0; }
-    @media (prefers-color-scheme: dark) { :root { --bg:#0f172a; --card:#1e293b; --text:#e2e8f0; --muted:#94a3b8; --accent:#818cf8; --border:#334155; } }
-    * { box-sizing: border-box; }
-    body { margin:0; min-height:100vh; display:grid; place-items:center; background:var(--bg); color:var(--text); font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif; padding:16px; }
-    .card { width:min(680px,100%); padding:28px; border-radius:16px; background:var(--card); border:1px solid var(--border); box-shadow:0 16px 42px #17203318; }
-    .brand { font-weight:800; color:var(--accent); letter-spacing:-.04em; font-size:20px; }
-    h1 { margin:14px 0 4px; font-size:22px; word-break:break-word; }
-    #details, .note { color:var(--muted); font-size:14px; }
-    ol { max-height:320px; overflow:auto; padding-left:22px; margin:16px 0; }
-    li { margin:8px 0; word-break:break-word; }
-    li small { display:block; color:var(--muted); font-size:12px; }
-    a { color:var(--accent); }
-    .actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:8px; }
-    button, .btn { border:0; border-radius:8px; background:var(--accent); color:#fff; padding:10px 14px; font-weight:700; font-size:14px; cursor:pointer; text-decoration:none; display:inline-block; }
-    button.secondary, .btn.secondary { background:transparent; color:var(--accent); border:1px solid var(--accent); }
-    button:disabled { opacity:.6; cursor:default; }
-    [hidden] { display:none !important; }
-    #msg { margin-top:12px; font-size:14px; }
+    :root {
+      color-scheme: light dark;
+      --bg: #f8fafc;
+      --card: #fff;
+      --text: #172033;
+      --muted: #64748b;
+      --accent: #4f46e5;
+      --border: #e2e8f0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f172a;
+        --card: #1e293b;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --accent: #818cf8;
+        --border: #334155;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+      padding: 16px;
+    }
+
+    .card {
+      width: min(680px, 100%);
+      padding: 28px;
+      border-radius: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: 0 16px 42px #17203318;
+    }
+
+    .brand {
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -.04em;
+      font-size: 20px;
+    }
+
+    h1 {
+      margin: 14px 0 4px;
+      font-size: 22px;
+      word-break: break-word;
+    }
+
+    #details,
+    .note {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    ol {
+      max-height: 320px;
+      overflow: auto;
+      padding-left: 22px;
+      margin: 16px 0;
+    }
+
+    li {
+      margin: 8px 0;
+      word-break: break-word;
+    }
+
+    li small {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    button,
+    .btn {
+      border: 0;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 14px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    button.secondary,
+    .btn.secondary {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: default;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    #msg {
+      margin-top: 12px;
+      font-size: 14px;
+    }
   </style>
 </head>
+
 <body>
   <main class="card">
     <div class="brand">KeepIt</div>
@@ -51,111 +163,117 @@
         <button id="copy" class="secondary" type="button">Copy links</button>
       </div>
       <p id="msg" role="status"></p>
-      <p class="note">Anyone with this link can see these tab titles and addresses. Only open links from people you trust.</p>
+      <p class="note">Anyone with this link can see these tab titles and addresses. Only open links from people you
+        trust.</p>
     </section>
   </main>
   <script>
-  (() => {
-    const CHROME_STORE_URL = 'https://chromewebstore.google.com/'; // TODO: replace with your KeepIt listing URL
-    const MAX_TABS = 500;
-    const $ = (id) => document.getElementById(id);
+    (() => {
+      const CHROME_STORE_URL = 'https://chromewebstore.google.com/detail/keepit-%E2%80%93-tab-session-mana/mhldbdlepccoejdjnhogckbgijohddlg';
+      const MAX_TABS = 500;
+      const $ = (id) => document.getElementById(id);
 
-    const fromB64Url = (value) => {
-      const b64 = value.replace(/-/g, '+').replace(/_/g, '/') + '='.repeat((4 - value.length % 4) % 4);
-      const bin = atob(b64);
-      const bytes = new Uint8Array(bin.length);
-      for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-      return bytes;
-    };
-
-    async function decodeFragment(fragment) {
-      const dot = fragment.indexOf('.');
-      const version = fragment.slice(0, dot), body = fragment.slice(dot + 1);
-      let bytes = fromB64Url(body);
-      if (version === 'v2') {
-        const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
-        bytes = new Uint8Array(await new Response(stream).arrayBuffer());
-      } else if (version !== 'v1') {
-        throw new Error('unknown version');
-      }
-      return JSON.parse(new TextDecoder().decode(bytes));
-    }
-
-    function cleanSession(raw) {
-      if (!raw || !Array.isArray(raw.tabs)) return null;
-      const tabs = raw.tabs.slice(0, MAX_TABS).map((t) => {
-        try {
-          const u = new URL(t && t.url);
-          if (u.protocol !== 'http:' && u.protocol !== 'https:') return null;
-          return { url: u.href, title: String((t && t.title) || u.href).slice(0, 300), pinned: !!(t && t.pinned),
-                   sessionGroupId: t && typeof t.sessionGroupId === 'string' ? t.sessionGroupId : null };
-        } catch (_) { return null; }
-      }).filter(Boolean);
-      if (!tabs.length) return null;
-      return { name: String(raw.name || 'Shared session').slice(0, 60), tabs,
-               groups: Array.isArray(raw.groups) ? raw.groups.slice(0, 50) : [] };
-    }
-
-    (async () => {
-      let session;
-      try {
-        const fragment = location.hash.slice(1);
-        if (!fragment || fragment.length > 200000) throw new Error('empty');
-        const payload = await decodeFragment(fragment);
-        if (payload.format !== 'keepit-share' || payload.version !== 1) throw new Error('bad payload');
-        session = cleanSession(payload.session);
-        if (!session) throw new Error('no tabs');
-      } catch (_) {
-        $('status').textContent = 'This share link is invalid or has been damaged.';
-        return;
-      }
-
-      $('status').hidden = true; $('preview').hidden = false;
-      $('title').textContent = session.name;
-      $('details').textContent = `${session.tabs.length} tab${session.tabs.length === 1 ? '' : 's'} · no account needed`;
-      const list = $('tabs');
-      session.tabs.forEach((tab) => {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = tab.url; a.target = '_blank'; a.rel = 'noopener noreferrer nofollow';
-        a.textContent = tab.title;
-        const host = document.createElement('small');
-        host.textContent = new URL(tab.url).hostname;
-        li.append(a, host); list.appendChild(li);
-      });
-
-      $('copy').addEventListener('click', async () => {
-        try { await navigator.clipboard.writeText(session.tabs.map((t) => t.url).join('\n')); $('msg').textContent = 'Links copied.'; }
-        catch (_) { $('msg').textContent = 'Could not copy automatically.'; }
-      });
-
-      // Is the KeepIt extension installed? (content.js answers on keepit.website pages)
-      let hasExtension = false;
-      const onMessage = (event) => {
-        if (event.source === window && event.data && event.data.type === 'MY_EXTENSION_PRESENT') hasExtension = true;
-        if (event.source === window && event.data && event.data.type === 'KEEPIT_IMPORT_RESULT') {
-          $('import').disabled = false;
-          $('msg').textContent = event.data.ok
-            ? 'Sent! Open the KeepIt extension and confirm the import.'
-            : (event.data.error || 'Could not import. Is KeepIt enabled?');
-        }
+      const fromB64Url = (value) => {
+        const b64 = value.replace(/-/g, '+').replace(/_/g, '/') + '='.repeat((4 - value.length % 4) % 4);
+        const bin = atob(b64);
+        const bytes = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+        return bytes;
       };
-      window.addEventListener('message', onMessage);
-      window.postMessage({ type: 'CHECK_MY_EXTENSION' }, '*');
-      setTimeout(() => {
-        if (hasExtension) {
-          $('import').hidden = false;
-        } else {
-          const install = $('install'); install.href = CHROME_STORE_URL; install.hidden = false;
-        }
-      }, 700);
 
-      $('import').addEventListener('click', () => {
-        $('import').disabled = true;
-        window.postMessage({ type: 'KEEPIT_IMPORT_SHARE', session }, '*');
-      });
+      async function decodeFragment(fragment) {
+        const dot = fragment.indexOf('.');
+        const version = fragment.slice(0, dot), body = fragment.slice(dot + 1);
+        let bytes = fromB64Url(body);
+        if (version === 'v2') {
+          const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
+          bytes = new Uint8Array(await new Response(stream).arrayBuffer());
+        } else if (version !== 'v1') {
+          throw new Error('unknown version');
+        }
+        return JSON.parse(new TextDecoder().decode(bytes));
+      }
+
+      function cleanSession(raw) {
+        if (!raw || !Array.isArray(raw.tabs)) return null;
+        const tabs = raw.tabs.slice(0, MAX_TABS).map((t) => {
+          try {
+            const u = new URL(t && t.url);
+            if (u.protocol !== 'http:' && u.protocol !== 'https:') return null;
+            return {
+              url: u.href, title: String((t && t.title) || u.href).slice(0, 300), pinned: !!(t && t.pinned),
+              sessionGroupId: t && typeof t.sessionGroupId === 'string' ? t.sessionGroupId : null
+            };
+          } catch (_) { return null; }
+        }).filter(Boolean);
+        if (!tabs.length) return null;
+        return {
+          name: String(raw.name || 'Shared session').slice(0, 60), tabs,
+          groups: Array.isArray(raw.groups) ? raw.groups.slice(0, 50) : []
+        };
+      }
+
+      (async () => {
+        let session;
+        try {
+          const fragment = location.hash.slice(1);
+          if (!fragment || fragment.length > 200000) throw new Error('empty');
+          const payload = await decodeFragment(fragment);
+          if (payload.format !== 'keepit-share' || payload.version !== 1) throw new Error('bad payload');
+          session = cleanSession(payload.session);
+          if (!session) throw new Error('no tabs');
+        } catch (_) {
+          $('status').textContent = 'This share link is invalid or has been damaged.';
+          return;
+        }
+
+        $('status').hidden = true; $('preview').hidden = false;
+        $('title').textContent = session.name;
+        $('details').textContent = `${session.tabs.length} tab${session.tabs.length === 1 ? '' : 's'} · no account needed`;
+        const list = $('tabs');
+        session.tabs.forEach((tab) => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = tab.url; a.target = '_blank'; a.rel = 'noopener noreferrer nofollow';
+          a.textContent = tab.title;
+          const host = document.createElement('small');
+          host.textContent = new URL(tab.url).hostname;
+          li.append(a, host); list.appendChild(li);
+        });
+
+        $('copy').addEventListener('click', async () => {
+          try { await navigator.clipboard.writeText(session.tabs.map((t) => t.url).join('\n')); $('msg').textContent = 'Links copied.'; }
+          catch (_) { $('msg').textContent = 'Could not copy automatically.'; }
+        });
+
+        // Is the KeepIt extension installed? (content.js answers on keepit.website pages)
+        let hasExtension = false;
+        const onMessage = (event) => {
+          if (event.source === window && event.data && event.data.type === 'MY_EXTENSION_PRESENT') hasExtension = true;
+          if (event.source === window && event.data && event.data.type === 'KEEPIT_IMPORT_RESULT') {
+            $('import').disabled = false;
+            $('msg').textContent = event.data.ok
+              ? 'Sent! Open the KeepIt extension and confirm the import.'
+              : (event.data.error || 'Could not import. Is KeepIt enabled?');
+          }
+        };
+        window.addEventListener('message', onMessage);
+        window.postMessage({ type: 'CHECK_MY_EXTENSION' }, '*');
+        setTimeout(() => {
+          if (hasExtension) {
+            $('import').hidden = false;
+          } else {
+            const install = $('install'); install.href = CHROME_STORE_URL; install.hidden = false;
+          }
+        }, 700);
+
+        $('import').addEventListener('click', () => {
+          $('import').disabled = true;
+          window.postMessage({ type: 'KEEPIT_IMPORT_SHARE', session }, '*');
+        });
+      })();
     })();
-  })();
   </script>
 </body>
+
 </html>
