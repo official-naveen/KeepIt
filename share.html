@@ -2,11 +2,14 @@
 <!--
   KeepIt public share page  ->  deploy to https://keepit.website/share.html  (NOT part of the extension package)
 
-  - No server storage: the whole session lives in the URL #fragment, which browsers never send to a server.
-  - Anyone can open it. People with KeepIt installed get an "Import into KeepIt" button (handled by the
-    extension's content.js, which only queues the import; the user confirms inside the extension popup).
-  - Everyone else sees the tab list, can copy the links, and gets an install button.
-  - Set CHROME_STORE_URL below to your Chrome Web Store listing.
+  Two kinds of link open here:
+   #v1./#v2.<data>   a one-time snapshot. The whole session lives in the URL fragment (never sent to a server).
+   #l.<token>        a LIVE list. The page asks Supabase (function get_live_list, anonymous) every 15 seconds,
+                     and the answer is a few bytes when nothing changed. The token is 128 random bits; the
+                     database only stores its hash.
+  People with KeepIt get "Import / Save a copy" (queued in the extension, confirmed in its popup).
+  Everyone else sees the tabs, can open or copy them, and gets an install button.
+  Set CHROME_STORE_URL below to your Chrome Web Store listing.
 -->
 <html lang="en">
 <head>
@@ -14,8 +17,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="referrer" content="no-referrer">
   <meta name="robots" content="noindex,nofollow">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
-  <title>Shared tab session · KeepIt</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src https://srcrhiirseqodxcbikph.supabase.co; img-src data:; base-uri 'none'; form-action 'none'">
+  <title>Shared tabs · KeepIt</title>
   <style>
     :root { color-scheme: light dark; --bg:#f8fafc; --card:#fff; --text:#172033; --muted:#64748b; --accent:#4f46e5; --border:#e2e8f0; }
     @media (prefers-color-scheme: dark) { :root { --bg:#0f172a; --card:#1e293b; --text:#e2e8f0; --muted:#94a3b8; --accent:#818cf8; --border:#334155; } }
@@ -34,20 +37,28 @@
     button.secondary, .btn.secondary { background:transparent; color:var(--accent); border:1px solid var(--accent); }
     button:disabled { opacity:.6; cursor:default; }
     [hidden] { display:none !important; }
+    .pill { display:inline-flex; align-items:center; gap:6px; padding:2px 10px; border-radius:999px; font-size:12px; font-weight:700; background:#10b98122; color:#10b981; }
+    .pill::before { content:''; width:8px; height:8px; border-radius:50%; background:currentColor; animation:pulse 2s infinite; }
+    .pill.ended { background:#ef444422; color:#ef4444; } .pill.ended::before { animation:none; }
+    @keyframes pulse { 50% { opacity:.3; } }
+    em.note { display:block; margin-top:2px; font-size:12px; color:var(--muted); font-style:normal; white-space:pre-wrap; }
+    .snote { margin:10px 0 0; padding:8px 12px; border-left:3px solid var(--accent); color:var(--muted); font-size:14px; white-space:pre-wrap; }
     #msg { margin-top:12px; font-size:14px; }
   </style>
 </head>
 <body>
   <main class="card">
     <div class="brand">KeepIt</div>
-    <p id="status">Opening shared session…</p>
+    <p id="status">Opening shared tabs…</p>
     <section id="preview" hidden>
       <h1 id="title"></h1>
       <p id="details"></p>
+      <p id="snote" class="snote" hidden></p>
       <ol id="tabs"></ol>
       <div class="actions">
-        <button id="import" type="button" hidden>Import into KeepIt</button>
-        <a id="install" class="btn" href="#" rel="noopener noreferrer" hidden>Get KeepIt (free)</a>
+        <button id="openall" type="button">Open all tabs</button>
+        <button id="import" class="secondary" type="button" hidden>Import into KeepIt</button>
+        <a id="install" class="btn secondary" href="#" rel="noopener noreferrer" hidden>Get KeepIt (free)</a>
         <button id="copy" class="secondary" type="button">Copy links</button>
       </div>
       <p id="msg" role="status"></p>
@@ -57,13 +68,14 @@
   <script>
   (() => {
     const CHROME_STORE_URL = 'https://chromewebstore.google.com/'; // TODO: replace with your KeepIt listing URL
-    const MAX_TABS = 500;
+    const SUPABASE_URL = 'https://srcrhiirseqodxcbikph.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNyY3JoaWlyc2Vxb2R4Y2Jpa3BoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1NzkxMDIsImV4cCI6MjEwMTE1NTEwMn0.JY6J50hfVo6kbQWoKLhNqgLka1Aga1G1J4Vn2eNizpw'; // public by design (it is also inside the extension); data access is controlled by the SQL functions
+    const MAX_TABS = 500, POLL_MS = 15000, POLL_CAP_MS = 60 * 60 * 1000;
     const $ = (id) => document.getElementById(id);
 
     const fromB64Url = (value) => {
       const b64 = value.replace(/-/g, '+').replace(/_/g, '/') + '='.repeat((4 - value.length % 4) % 4);
-      const bin = atob(b64);
-      const bytes = new Uint8Array(bin.length);
+      const bin = atob(b64); const bytes = new Uint8Array(bin.length);
       for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
       return bytes;
     };
@@ -75,85 +87,141 @@
       if (version === 'v2') {
         const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
         bytes = new Uint8Array(await new Response(stream).arrayBuffer());
-      } else if (version !== 'v1') {
-        throw new Error('unknown version');
-      }
+      } else if (version !== 'v1') { throw new Error('unknown version'); }
       return JSON.parse(new TextDecoder().decode(bytes));
     }
 
+    const cleanNote = (v) => String(v == null ? '' : v).trim().slice(0, 500);
     function cleanSession(raw) {
       if (!raw || !Array.isArray(raw.tabs)) return null;
       const tabs = raw.tabs.slice(0, MAX_TABS).map((t) => {
         try {
           const u = new URL(t && t.url);
           if (u.protocol !== 'http:' && u.protocol !== 'https:') return null;
-          return { url: u.href, title: String((t && t.title) || u.href).slice(0, 300), pinned: !!(t && t.pinned),
-                   sessionGroupId: t && typeof t.sessionGroupId === 'string' ? t.sessionGroupId : null };
+          const tab = { url: u.href, title: String((t && t.title) || u.href).slice(0, 300), pinned: !!(t && t.pinned),
+                        sessionGroupId: t && typeof t.sessionGroupId === 'string' ? t.sessionGroupId : null };
+          if (cleanNote(t && t.note)) tab.note = cleanNote(t.note);
+          return tab;
         } catch (_) { return null; }
       }).filter(Boolean);
       if (!tabs.length) return null;
-      return { name: String(raw.name || 'Shared session').slice(0, 60), tabs,
-               groups: Array.isArray(raw.groups) ? raw.groups.slice(0, 50) : [] };
+      const out = { name: String(raw.name || 'Shared session').slice(0, 80), tabs, groups: Array.isArray(raw.groups) ? raw.groups.slice(0, 50) : [] };
+      if (raw.note) out.note = String(raw.note).trim().slice(0, 2000);
+      return out;
+    }
+
+    let current = null, live = null;       // current session being shown; live = { token, updatedAt, timer, started, ended }
+
+    function ago(iso) {
+      const s = Math.max(0, Math.round((Date.now() - new Date(iso).getTime()) / 1000));
+      return s < 20 ? 'just now' : s < 90 ? s + ' s ago' : s < 5400 ? Math.round(s / 60) + ' min ago' : s < 129600 ? Math.round(s / 3600) + ' h ago' : Math.round(s / 86400) + ' days ago';
+    }
+
+    function render(session) {
+      current = session;
+      $('status').hidden = true; $('preview').hidden = false;
+      $('title').textContent = session.name;
+      $('snote').hidden = !session.note; $('snote').textContent = session.note || '';
+      const list = $('tabs'); list.textContent = '';
+      session.tabs.forEach((tab) => {
+        const li = document.createElement('li');
+        const a = document.createElement('a'); a.href = tab.url; a.target = '_blank'; a.rel = 'noopener noreferrer nofollow'; a.textContent = tab.title;
+        const host = document.createElement('small'); host.textContent = new URL(tab.url).hostname;
+        li.append(a, host);
+        if (tab.note) { const n = document.createElement('em'); n.className = 'note'; n.textContent = tab.note; li.appendChild(n); }
+        list.appendChild(li);
+      });
+      renderDetails();
+    }
+
+    function renderDetails() {
+      const d = $('details'); d.textContent = '';
+      const count = current.tabs.length + (current.tabs.length === 1 ? ' tab' : ' tabs');
+      if (live) {
+        const pill = document.createElement('span'); pill.className = 'pill' + (live.ended ? ' ended' : ''); pill.textContent = live.ended ? 'Ended' : 'Live';
+        d.append(pill, document.createTextNode(live.ended ? ' This list was revoked or has expired · last seen ' + count
+          : ' ' + count + ' · updated ' + ago(live.updatedAt) + (live.paused ? ' · paused, reload to resume' : ' · refreshes automatically')));
+      } else { d.textContent = count + ' · no account needed'; }
+    }
+
+    async function fetchLive() {
+      const res = await fetch(SUPABASE_URL + '/rest/v1/rpc/get_live_list', {
+        method: 'POST', headers: { apikey: SUPABASE_ANON_KEY, Authorization: 'Bearer ' + SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ p_token: live.token, p_since: live.updatedAt })
+      });
+      if (!res.ok) throw new Error('http ' + res.status);
+      return res.json();
+    }
+
+    async function pollLive(first) {
+      if (live.ended || (document.hidden && !first)) return;
+      if (Date.now() - live.started > POLL_CAP_MS) { live.paused = true; clearInterval(live.timer); renderDetails(); return; }  // protects the free tier from forgotten tabs
+      try {
+        const data = await fetchLive();
+        if (data.status === 'gone') {
+          live.ended = true; clearInterval(live.timer);
+          if (!current) { $('status').textContent = 'This live list has ended or the link is not valid.'; return; }
+        } else if (data.status === 'ok') {
+          live.updatedAt = data.updated_at;
+          const session = cleanSession({ name: data.title, tabs: data.items });
+          if (session) render(session); else { live.ended = true; }
+        }
+        if (current) renderDetails();
+      } catch (_) {
+        if (!current) $('status').textContent = 'Could not load this live list. Check your connection and reload.';
+      }
+    }
+
+    function setupActions() {
+      $('copy').addEventListener('click', async () => {
+        try { await navigator.clipboard.writeText(current.tabs.map((t) => t.url).join('\n')); $('msg').textContent = 'Links copied.'; }
+        catch (_) { $('msg').textContent = 'Could not copy automatically.'; }
+      });
+      $('openall').addEventListener('click', () => {
+        const n = current.tabs.length;
+        if (n > 15 && !confirm('Open ' + n + ' tabs?')) return;
+        let blocked = 0;
+        current.tabs.forEach((t) => { if (!window.open(t.url, '_blank', 'noopener,noreferrer')) blocked++; });
+        $('msg').textContent = blocked ? 'Your browser blocked ' + blocked + ' tab(s). Allow pop-ups for this page and try again.' : '';
+      });
+      let hasExtension = false;
+      window.addEventListener('message', (event) => {
+        if (event.source !== window || !event.data) return;
+        if (event.data.type === 'MY_EXTENSION_PRESENT') hasExtension = true;
+        if (event.data.type === 'KEEPIT_IMPORT_RESULT') {
+          $('import').disabled = false;
+          $('msg').textContent = event.data.ok ? 'Sent! Open the KeepIt extension and confirm.' : (event.data.error || 'Could not import. Is KeepIt enabled?');
+        }
+      });
+      window.postMessage({ type: 'CHECK_MY_EXTENSION' }, '*');
+      setTimeout(() => {
+        if (hasExtension) { $('import').hidden = false; if (live) $('import').textContent = 'Save a copy in KeepIt'; }
+        else { const i = $('install'); i.href = CHROME_STORE_URL; i.hidden = false; }
+      }, 700);
+      $('import').addEventListener('click', () => { $('import').disabled = true; window.postMessage({ type: 'KEEPIT_IMPORT_SHARE', session: current }, '*'); });
     }
 
     (async () => {
-      let session;
+      const fragment = location.hash.slice(1);
+      setupActions();
+      const liveMatch = fragment.match(/^l\.([0-9a-f]{32})$/i);
+      if (liveMatch) {
+        live = { token: liveMatch[1].toLowerCase(), updatedAt: null, started: Date.now(), ended: false, paused: false, timer: null };
+        $('status').textContent = 'Opening live list…';
+        await pollLive(true);
+        if (!live.ended || current) live.timer = setInterval(() => pollLive(false), POLL_MS);
+        document.addEventListener('visibilitychange', () => { if (!document.hidden && live && !live.ended) pollLive(true); });
+        setInterval(() => { if (current && live && !live.ended && !live.paused) renderDetails(); }, 5000);   // keep "updated X ago" fresh
+        return;
+      }
       try {
-        const fragment = location.hash.slice(1);
         if (!fragment || fragment.length > 200000) throw new Error('empty');
         const payload = await decodeFragment(fragment);
         if (payload.format !== 'keepit-share' || payload.version !== 1) throw new Error('bad payload');
-        session = cleanSession(payload.session);
+        const session = cleanSession(payload.session);
         if (!session) throw new Error('no tabs');
-      } catch (_) {
-        $('status').textContent = 'This share link is invalid or has been damaged.';
-        return;
-      }
-
-      $('status').hidden = true; $('preview').hidden = false;
-      $('title').textContent = session.name;
-      $('details').textContent = `${session.tabs.length} tab${session.tabs.length === 1 ? '' : 's'} · no account needed`;
-      const list = $('tabs');
-      session.tabs.forEach((tab) => {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = tab.url; a.target = '_blank'; a.rel = 'noopener noreferrer nofollow';
-        a.textContent = tab.title;
-        const host = document.createElement('small');
-        host.textContent = new URL(tab.url).hostname;
-        li.append(a, host); list.appendChild(li);
-      });
-
-      $('copy').addEventListener('click', async () => {
-        try { await navigator.clipboard.writeText(session.tabs.map((t) => t.url).join('\n')); $('msg').textContent = 'Links copied.'; }
-        catch (_) { $('msg').textContent = 'Could not copy automatically.'; }
-      });
-
-      // Is the KeepIt extension installed? (content.js answers on keepit.website pages)
-      let hasExtension = false;
-      const onMessage = (event) => {
-        if (event.source === window && event.data && event.data.type === 'MY_EXTENSION_PRESENT') hasExtension = true;
-        if (event.source === window && event.data && event.data.type === 'KEEPIT_IMPORT_RESULT') {
-          $('import').disabled = false;
-          $('msg').textContent = event.data.ok
-            ? 'Sent! Open the KeepIt extension and confirm the import.'
-            : (event.data.error || 'Could not import. Is KeepIt enabled?');
-        }
-      };
-      window.addEventListener('message', onMessage);
-      window.postMessage({ type: 'CHECK_MY_EXTENSION' }, '*');
-      setTimeout(() => {
-        if (hasExtension) {
-          $('import').hidden = false;
-        } else {
-          const install = $('install'); install.href = CHROME_STORE_URL; install.hidden = false;
-        }
-      }, 700);
-
-      $('import').addEventListener('click', () => {
-        $('import').disabled = true;
-        window.postMessage({ type: 'KEEPIT_IMPORT_SHARE', session }, '*');
-      });
+        render(session);
+      } catch (_) { $('status').textContent = 'This share link is invalid or has been damaged.'; }
     })();
   })();
   </script>
