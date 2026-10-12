@@ -10,6 +10,7 @@
   People with KeepIt get "Import / Save a copy" (queued in the extension, confirmed in its popup).
   Everyone else sees the tabs, can open or copy them, and gets an install button.
   Set CHROME_STORE_URL below to your Chrome Web Store listing.
+  NOTE: the CSP below pins the inline script/style by SHA-256. After ANY edit of the <script> or <style> text, recompute the hashes (browser console shows the expected hash) or the page will stop working.
 -->
 <html lang="en">
 <head>
@@ -17,7 +18,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="referrer" content="no-referrer">
   <meta name="robots" content="noindex,nofollow">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src https://srcrhiirseqodxcbikph.supabase.co; img-src data:; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-AUTzQoblivgIp6gSSxxn6pE1QL0LAKHKBVXspoxDTkU='; style-src 'sha256-6GBX+TAg5Md3q3PVJ5RQ9BTFyFWNvE7cqXSBWAa5q6E='; connect-src https://srcrhiirseqodxcbikph.supabase.co; img-src data:; base-uri 'none'; form-action 'none'; object-src 'none'; frame-src 'none'">
   <title>Shared tabs · KeepIt</title>
   <style>
     :root { color-scheme: light dark; --bg:#f8fafc; --card:#fff; --text:#172033; --muted:#64748b; --accent:#4f46e5; --border:#e2e8f0; }
@@ -80,14 +81,27 @@
       return bytes;
     };
 
+    const MAX_DECODED_BYTES = 2 * 1024 * 1024;   // guards against decompression bombs in #v2 links
     async function decodeFragment(fragment) {
       const dot = fragment.indexOf('.');
+      if (dot < 1) throw new Error('bad fragment');
       const version = fragment.slice(0, dot), body = fragment.slice(dot + 1);
+      if (!/^[A-Za-z0-9_-]+={0,2}$/.test(body)) throw new Error('bad encoding');
       let bytes = fromB64Url(body);
       if (version === 'v2') {
-        const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
-        bytes = new Uint8Array(await new Response(stream).arrayBuffer());
+        const reader = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw')).getReader();
+        const chunks = []; let total = 0;
+        for (;;) {
+          const r = await reader.read();
+          if (r.done) break;
+          total += r.value.length;
+          if (total > MAX_DECODED_BYTES) { reader.cancel().catch(() => {}); throw new Error('too large'); }
+          chunks.push(r.value);
+        }
+        bytes = new Uint8Array(total); let off = 0;
+        chunks.forEach((c) => { bytes.set(c, off); off += c.length; });
       } else if (version !== 'v1') { throw new Error('unknown version'); }
+      else if (bytes.length > MAX_DECODED_BYTES) { throw new Error('too large'); }
       return JSON.parse(new TextDecoder().decode(bytes));
     }
 
@@ -105,7 +119,7 @@
         } catch (_) { return null; }
       }).filter(Boolean);
       if (!tabs.length) return null;
-      const out = { name: String(raw.name || 'Shared session').slice(0, 80), tabs, groups: Array.isArray(raw.groups) ? raw.groups.slice(0, 50) : [] };
+      const out = { name: String(raw.name || 'Shared session').slice(0, 80), tabs, groups: Array.isArray(raw.groups) ? raw.groups.slice(0, 50).filter((g) => g && typeof g === 'object' && !Array.isArray(g)) : [] };
       if (raw.note) out.note = String(raw.note).trim().slice(0, 2000);
       return out;
     }
@@ -186,19 +200,19 @@
       });
       let hasExtension = false;
       window.addEventListener('message', (event) => {
-        if (event.source !== window || !event.data) return;
+        if (event.source !== window || event.origin !== window.location.origin || !event.data) return;
         if (event.data.type === 'MY_EXTENSION_PRESENT') hasExtension = true;
         if (event.data.type === 'KEEPIT_IMPORT_RESULT') {
           $('import').disabled = false;
           $('msg').textContent = event.data.ok ? 'Sent! Open the KeepIt extension and confirm.' : (event.data.error || 'Could not import. Is KeepIt enabled?');
         }
       });
-      window.postMessage({ type: 'CHECK_MY_EXTENSION' }, '*');
+      window.postMessage({ type: 'CHECK_MY_EXTENSION' }, window.location.origin);
       setTimeout(() => {
         if (hasExtension) { $('import').hidden = false; if (live) $('import').textContent = 'Save a copy in KeepIt'; }
         else { const i = $('install'); i.href = CHROME_STORE_URL; i.hidden = false; }
       }, 700);
-      $('import').addEventListener('click', () => { $('import').disabled = true; window.postMessage({ type: 'KEEPIT_IMPORT_SHARE', session: current }, '*'); });
+      $('import').addEventListener('click', () => { $('import').disabled = true; window.postMessage({ type: 'KEEPIT_IMPORT_SHARE', session: current }, window.location.origin); });
     }
 
     (async () => {

@@ -1,0 +1,102 @@
+<!doctype html>
+<!--
+  KeepIt uninstall feedback  ->  deploy to https://keepit.website/feedback.html  (NOT part of the extension package)
+  Chrome opens this page after KeepIt is removed (chrome.runtime.setUninstallURL in background.js).
+  Query: ?i=<install id>&u=<account id, optional>&v=<version>. Answers go to the uninstall_feedback table through
+  the submit_uninstall_feedback() function (see supabase/migrations/20261012_uninstall_feedback.sql).
+  NOTE: the CSP below pins the inline script/style by SHA-256. After ANY edit of the <script> or <style> text, recompute the hashes (browser console shows the expected hash) or the page will stop working.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex,nofollow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-ZH4CMvrk/opxNyvexwPTeN7Roo32jUPoUzGJnYfUmpM='; style-src 'sha256-cA0ktAXKumpSlvLm3L9864utMgphK1GoHjw8rYco65A='; connect-src https://srcrhiirseqodxcbikph.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'; frame-src 'none'">
+  <title>Sorry to see you go · KeepIt</title>
+  <style>
+    :root { color-scheme: light dark; --bg:#f8fafc; --card:#fff; --text:#172033; --muted:#64748b; --accent:#4f46e5; --border:#e2e8f0; }
+    @media (prefers-color-scheme: dark) { :root { --bg:#0f172a; --card:#1e293b; --text:#e2e8f0; --muted:#94a3b8; --accent:#818cf8; --border:#334155; } }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; display:grid; place-items:center; background:var(--bg); color:var(--text); font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif; padding:16px; }
+    .card { width:min(520px,100%); padding:28px; border-radius:16px; background:var(--card); border:1px solid var(--border); box-shadow:0 16px 42px #17203318; }
+    .brand { font-weight:800; color:var(--accent); letter-spacing:-.04em; font-size:20px; }
+    h1 { margin:14px 0 4px; font-size:22px; }
+    p { color:var(--muted); font-size:14px; margin:4px 0 16px; }
+    .opts { display:grid; gap:8px; }
+    .opts button { text-align:left; border:1px solid var(--border); background:transparent; color:var(--text); border-radius:10px; padding:12px 14px; font-size:15px; cursor:pointer; font-family:inherit; }
+    .opts button:hover, .opts button:focus-visible { border-color:var(--accent); outline:none; }
+    .opts button[aria-pressed="true"] { border-color:var(--accent); background:color-mix(in srgb, var(--accent) 14%, transparent); font-weight:600; }
+    textarea { width:100%; margin-top:14px; border:1px solid var(--border); border-radius:10px; padding:10px; font:inherit; background:transparent; color:var(--text); resize:vertical; min-height:70px; }
+    .send { margin-top:14px; width:100%; border:0; border-radius:10px; background:var(--accent); color:#fff; padding:12px; font-weight:700; font-size:15px; cursor:pointer; }
+    .send:disabled { opacity:.5; cursor:default; }
+    .err { color:#dc2626; font-size:13px; margin-top:8px; }
+    [hidden] { display:none !important; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="brand">KeepIt</div>
+    <section id="form">
+      <h1>Sorry to see you go 👋</h1>
+      <p>One tap is enough: why did you remove KeepIt?</p>
+      <div class="opts" id="opts"></div>
+      <textarea id="details" maxlength="1000" placeholder="Anything else? (optional)" hidden></textarea>
+      <button class="send" id="send" disabled>Send</button>
+      <div class="err" id="err" hidden></div>
+    </section>
+    <section id="done" hidden>
+      <h1>Thank you! 💜</h1>
+      <p>Your answer helps us make KeepIt better. If you ever want to come back, your saved spaces can be restored from your account.</p>
+    </section>
+  </main>
+  <script>
+    var SUPABASE_URL = 'https://srcrhiirseqodxcbikph.supabase.co';
+    var ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNyY3JoaWlyc2Vxb2R4Y2Jpa3BoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1NzkxMDIsImV4cCI6MjEwMTE1NTEwMn0.JY6J50hfVo6kbQWoKLhNqgLka1Aga1G1J4Vn2eNizpw';
+    var REASONS = [
+      ['not_needed', "I didn't need it / not using it"],
+      ['too_complex', 'Too confusing or hard to use'],
+      ['missing_feature', 'It is missing a feature I need'],
+      ['bugs', 'It had bugs or did not work'],
+      ['too_expensive', 'Too expensive'],
+      ['found_better', 'I found a better tool'],
+      ['slow_memory', 'It made my browser slow'],
+      ['privacy', 'Privacy or permissions worry me'],
+      ['other', 'Something else']
+    ];
+    var UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    var q = new URLSearchParams(location.search);
+    var installId = UUID.test(q.get('i') || '') ? q.get('i') : (crypto.randomUUID ? crypto.randomUUID() : null);
+    var userId = UUID.test(q.get('u') || '') ? q.get('u') : null;
+    var version = (q.get('v') || '').slice(0, 20);
+    var chosen = null;
+    var $ = function (id) { return document.getElementById(id); };
+
+    REASONS.forEach(function (r) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.textContent = r[1]; b.setAttribute('aria-pressed', 'false');
+      b.onclick = function () {
+        chosen = r[0];
+        Array.prototype.forEach.call($('opts').children, function (el) { el.setAttribute('aria-pressed', el === b ? 'true' : 'false'); });
+        $('details').hidden = false; $('send').disabled = false;
+      };
+      $('opts').appendChild(b);
+    });
+
+    $('send').onclick = function () {
+      if (!chosen) return;
+      $('send').disabled = true; $('err').hidden = true;
+      fetch(SUPABASE_URL + '/rest/v1/rpc/submit_uninstall_feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: ANON_KEY, Authorization: 'Bearer ' + ANON_KEY },
+        body: JSON.stringify({ p_install_id: installId, p_user_id: userId, p_reason: chosen, p_details: $('details').value.slice(0, 1000), p_version: version })
+      }).then(function (res) {
+        if (!res.ok) throw new Error('failed');
+        $('form').hidden = true; $('done').hidden = false;
+      }).catch(function () {
+        $('err').textContent = 'Could not send right now. Please try again.'; $('err').hidden = false; $('send').disabled = false;
+      });
+    };
+  </script>
+</body>
+</html>
