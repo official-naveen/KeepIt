@@ -4,30 +4,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KeepIt — Tab Session Manager & RAM Saver Chrome Extension</title>
+  <title>KeepIt – Tab Workspaces &amp; Session Manager for Chrome</title>
   <meta name="description"
-    content="KeepIt is the ultimate Chrome extension to save open tab sessions, preserve native Tab Groups, freeze idle tabs to reduce RAM usage by up to 80%, and sync across devices.">
+    content="KeepIt is a tab manager for Chrome. Organize tabs into spaces, save and restore sessions with tab groups, sync across devices, and auto-sleep idle tabs to save memory.">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <meta name="theme-color" content="#0f172a">
   <link rel="canonical" href="https://keepit.website/">
   <link rel="sitemap" type="application/xml" href="https://keepit.website/sitemap.xml">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="KeepIt - Tab Session Manager & RAM Saver for Chrome">
-  <meta property="og:description" content="Save tab sessions, preserve Chrome Tab Groups, and reclaim browser memory with KeepIt.">
+  <meta property="og:title" content="KeepIt – Tab Workspaces &amp; Session Manager for Chrome">
+  <meta property="og:description" content="Organize tabs into spaces, save and restore sessions, sync across devices and put idle tabs to sleep.">
   <meta property="og:url" content="https://keepit.website/">
   <meta property="og:image" content="https://keepit.website/images/1.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="KeepIt - Tab Session Manager & RAM Saver for Chrome">
-  <meta name="twitter:description" content="Save tab sessions, preserve Chrome Tab Groups, and reclaim browser memory with KeepIt.">
+  <meta name="twitter:title" content="KeepIt – Tab Workspaces &amp; Session Manager for Chrome">
+  <meta name="twitter:description" content="Organize tabs into spaces, save and restore sessions, sync across devices and put idle tabs to sleep.">
   <link rel="icon" href="icons/icon32.png">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does KeepIt read what is on my pages?", "acceptedAnswer": {"@type": "Answer", "text": "No. KeepIt only uses the title, address and icon of each tab so it can save and reopen them. It never reads page contents, what you type, or your passwords."}}, {"@type": "Question", "name": "Why does Chrome say KeepIt can “read your browsing history”?", "acceptedAnswer": {"@type": "Answer", "text": "Chrome shows that line for every extension that can see your list of open tabs. KeepIt needs that to save and restore them. It stores only the tabs you choose to save or sync, and never uses it to track your browsing."}}, {"@type": "Question", "name": "Do I need an account?", "acceptedAnswer": {"@type": "Answer", "text": "No. Spaces, sessions, folders, notes, auto-save and sleeping tabs all work on your device without an account. You only sign in with Google to sync across computers, share, or use Pro."}}, {"@type": "Question", "name": "What is included in Free and Pro?", "acceptedAnswer": {"@type": "Answer", "text": "Free: unlimited local sessions and folders, up to 10 spaces, 10 cloud sessions and 30-day version history. Pro ($2.99/month or $24.99/year): unlimited spaces and cloud sessions, 90-day history, live links, and sending sessions to other users."}}, {"@type": "Question", "name": "Will a space with many tabs slow Chrome down?", "acceptedAnswer": {"@type": "Answer", "text": "No. The first time a space opens, only the tab you were last using loads. The others open asleep, a few at a time, and load when you look at them. Switching back to a space whose tabs are in the Hidden Tabs window is instant."}}, {"@type": "Question", "name": "What happens to the tabs I leave when I switch spaces?", "acceptedAnswer": {"@type": "Answer", "text": "They are moved, not closed, into one minimized “Hidden Tabs” window. When you come back they return with their pinned state and tab groups."}}, {"@type": "Question", "name": "What if I uninstall KeepIt?", "acceptedAnswer": {"@type": "Answer", "text": "Data saved only on your device is removed with the extension. Turn on account sync for the spaces and sessions you want to keep a copy of."}}, {"@type": "Question", "name": "Can I cancel or get a refund?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Cancel Pro any time from the extension settings; it stays active until the end of the billing period. Refunds are available within 7 calendar days of purchase. See the Terms for details."}}, {"@type": "Question", "name": "How do I delete my data?", "acceptedAnswer": {"@type": "Answer", "text": "Delete items inside KeepIt at any time. To delete your account and everything stored with it, email contact.naveen.work@gmail.com and we confirm within 30 days."}}]}</script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "KeepIt",
+      "name": "KeepIt – Tab Workspaces & Session Manager",
       "applicationCategory": "ProductivityApplication",
       "operatingSystem": "Chrome",
-      "description": "A Chrome extension that saves tab sessions, preserves native tab groups, and freezes idle tabs to reduce browser memory use.",
+      "description": "A Chrome extension that organizes tabs into spaces, saves and restores sessions with native tab groups, syncs across devices, and puts idle tabs to sleep to save memory.",
       "downloadUrl": "https://chromewebstore.google.com/detail/keepit/mhldbdlepccoejdjnhogckbgijohddlg",
       "url": "https://keepit.website/",
       "image": "https://keepit.website/images/1.png",
@@ -694,6 +695,25 @@
       }
       .nav-menu .btn-header { justify-content: center; margin-top: 10px; }
     }
+      /* --- Trust strip, how it works, FAQ, final CTA (added 2026-10-15) --- */
+    .trust-strip { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 24px; margin: 30px auto 0; padding: 0; list-style: none; color: var(--text-secondary); font-size: 13.5px; }
+    .trust-strip li::before { content: "✓"; color: var(--success-primary); font-weight: 700; margin-right: 7px; }
+    .steps-section { margin: 70px 0 20px; }
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 28px; }
+    .step-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 24px; }
+    .step-card h3 { font-size: 1.05rem; margin-bottom: 6px; }
+    .step-card p { color: var(--text-secondary); font-size: 14.5px; }
+    .step-num { width: 34px; height: 34px; border-radius: 50%; background: var(--accent-light); color: #a5b4fc; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 12px; }
+    .faq-section { margin: 70px auto 20px; max-width: 820px; }
+    .faq-section details { border: 1px solid var(--border-color); border-radius: var(--radius-lg); background: var(--bg-card); margin-bottom: 10px; padding: 0 18px; }
+    .faq-section summary { cursor: pointer; padding: 16px 0; font-weight: 600; list-style: none; }
+    .faq-section summary::-webkit-details-marker { display: none; }
+    .faq-section summary::after { content: "+"; float: right; color: var(--text-muted); font-size: 18px; line-height: 1; }
+    .faq-section details[open] summary::after { content: "–"; }
+    .faq-section details p { padding: 0 0 16px; color: var(--text-secondary); }
+    .cta-band { text-align: center; margin: 56px 0 10px; padding: 42px 24px; border-radius: var(--radius-xl); background: linear-gradient(135deg, rgba(99,102,241,.18), rgba(16,185,129,.10)); border: 1px solid var(--border-color); }
+    .cta-band h2 { font-size: 1.6rem; margin-bottom: 8px; }
+    .cta-band p { color: var(--text-secondary); margin-bottom: 22px; }
   </style>
 </head>
 
@@ -742,10 +762,10 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-      <div class="badge-hero">⚡ Chrome Extension Tab Manager & Memory Saver</div>
-      <h1 class="hero-title">Organize Open Tabs.<br>Reclaim Your RAM.</h1>
+      <div class="badge-hero">⚡ Chrome Tab Manager · Spaces · Sessions</div>
+      <h1 class="hero-title">One Window.<br>Every Project in Its Own Space.</h1>
       <p class="hero-subtitle">
-        KeepIt captures open browser windows into organized session bundles, preserves native Chrome Tab Groups, and automatically discards idle background tabs to slash memory usage by up to 80%.
+        KeepIt organizes your open tabs into spaces you can switch between in one click, saves sessions you can restore any time, keeps your Chrome tab groups, and puts idle tabs to sleep so your browser stays fast.
       </p>
 
       <div class="hero-cta-group">
@@ -770,6 +790,12 @@
           View Plans
         </a>
       </div>
+    <ul class="trust-strip" aria-label="Why people trust KeepIt">
+        <li>Never reads your page contents</li>
+        <li>No ads, no trackers</li>
+        <li>Works without an account</li>
+        <li>Free plan, 7-day money-back on Pro</li>
+      </ul>
     </section>
 
     <!-- Screenshots Preview Section -->
@@ -831,11 +857,35 @@
     </section>
 
     <!-- Features Grid -->
+    <section class="steps-section" id="how-it-works">
+      <div class="section-heading">
+        <h2>How KeepIt Works</h2>
+        <p>Three steps, no setup, no account needed.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card"><div class="step-num">1</div><h3>Put your tabs in a space</h3><p>Name a space for a project, client or topic. KeepIt remembers its tabs, pinned tabs and tab groups.</p></div>
+        <div class="step-card"><div class="step-num">2</div><h3>Switch in one click</h3><p>Use the popup, <code>Alt+Shift+K</code> or type <code>kt</code> in the address bar. The tabs you leave wait in one minimized window, not closed.</p></div>
+        <div class="step-card"><div class="step-num">3</div><h3>Never lose your work</h3><p>Auto-saves, earlier versions and saved sessions bring tabs back after a crash, a restart or an accidental close.</p></div>
+      </div>
+    </section>
+
     <section class="features-grid">
       <div class="feature-card">
         <div class="feature-icon">💾</div>
         <h3>1-Click Session Saving</h3>
         <p>Instantly snapshot all open tabs or select specific tabs using live search filters. Save locally on disk or sync to the cloud.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🗂️</div>
+        <h3>Spaces: Tab Workspaces</h3>
+        <p>Give every project its own space and switch in one click. Your tabs, pinned tabs and tab groups come back as you left them, and the space opens on the tab you were last using.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⌨️</div>
+        <h3>Quick Switcher</h3>
+        <p>Press <code>Alt+Shift+K</code> (<code>Cmd+Shift+K</code> on Mac) and type part of a space name. Or type <code>kt</code> in Chrome's address bar to jump straight to a space or session.</p>
       </div>
 
       <div class="feature-card">
@@ -847,7 +897,7 @@
       <div class="feature-card">
         <div class="feature-icon">❄️</div>
         <h3>Auto-Freeze Memory Saver</h3>
-        <p>Discard idle background tabs from RAM without closing them. Set auto-freeze timers (15m, 30m, 60m) with built-in protection for pinned tabs and essential work tools.</p>
+        <p>Put idle background tabs to sleep to free memory without closing them. Pick the idle time; pinned tabs, tabs playing audio and tabs you mark &quot;keep awake&quot; are left alone.</p>
       </div>
 
       <div class="feature-card">
@@ -865,7 +915,7 @@
       <div class="feature-card">
         <div class="feature-icon">📤</div>
         <h3>Peer Session Sharing</h3>
-        <p>Send curated tab bundles directly to colleagues or classmates using custom <code>@username</code> handles.</p>
+        <p>Share a session with a link, or send it directly to colleagues and classmates by <code>@username</code> (sending is a Pro feature).</p>
       </div>
     </section>
 
@@ -886,15 +936,15 @@
           <ul class="pricing-features">
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              Unlimited local session storage
+              Unlimited local sessions and folders
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              Up to 3 custom folders
+              Up to 10 spaces
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              Up to 3 cloud-synced sessions
+              Up to 10 cloud-synced sessions
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -921,7 +971,7 @@
           <ul class="pricing-features">
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <strong>Unlimited</strong> custom folder creation
+              <strong>Unlimited</strong> spaces
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -933,7 +983,7 @@
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              Peer-to-peer session sharing by @username
+              90-day history, live links and sending sessions by @username
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -947,13 +997,13 @@
         </div>
       </div>
 
-      <!-- Lemon Squeezy 10-Day Money Back Guarantee -->
+      <!-- Lemon Squeezy 7-Day Money Back Guarantee -->
       <div class="refund-callout">
         <div class="refund-icon">🛡️</div>
         <div class="refund-content">
-          <h4>100% 10-Day Money-Back Guarantee</h4>
+          <h4>100% 7-Day Money-Back Guarantee</h4>
           <p>
-            We stand behind KeepIt Pro. If you are not completely satisfied with your subscription for any reason within <strong>10 calendar days</strong> of purchase, send an email to <a href="mailto:contact.naveen.work@gmail.com" style="color: #34d399; font-weight:700;">contact.naveen.work@gmail.com</a> and we will issue a full 100% refund. Subscriptions are billed securely through Lemon Squeezy, our PCI-DSS compliant merchant of record.
+            We stand behind KeepIt Pro. If you are not completely satisfied with your subscription for any reason within <strong>7 calendar days</strong> of purchase, send an email to <a href="mailto:contact.naveen.work@gmail.com" style="color: #34d399; font-weight:700;">contact.naveen.work@gmail.com</a> and we will issue a full 100% refund. Subscriptions are billed securely through Lemon Squeezy, our PCI-DSS compliant merchant of record.
           </p>
         </div>
       </div>
@@ -971,7 +1021,29 @@
   </main>
 
   <!-- Footer -->
-  <footer>
+  <section class="faq-section" id="faq">
+      <div class="section-heading">
+        <h2>Frequently Asked Questions</h2>
+        <p>Straight answers about privacy, plans and how KeepIt behaves.</p>
+      </div>
+      <details><summary>Does KeepIt read what is on my pages?</summary><p>No. KeepIt only uses the title, address and icon of each tab so it can save and reopen them. It never reads page contents, what you type, or your passwords.</p></details>
+      <details><summary>Why does Chrome say KeepIt can “read your browsing history”?</summary><p>Chrome shows that line for every extension that can see your list of open tabs. KeepIt needs that to save and restore them. It stores only the tabs you choose to save or sync, and never uses it to track your browsing.</p></details>
+      <details><summary>Do I need an account?</summary><p>No. Spaces, sessions, folders, notes, auto-save and sleeping tabs all work on your device without an account. You only sign in with Google to sync across computers, share, or use Pro.</p></details>
+      <details><summary>What is included in Free and Pro?</summary><p>Free: unlimited local sessions and folders, up to 10 spaces, 10 cloud sessions and 30-day version history. Pro ($2.99/month or $24.99/year): unlimited spaces and cloud sessions, 90-day history, live links, and sending sessions to other users.</p></details>
+      <details><summary>Will a space with many tabs slow Chrome down?</summary><p>No. The first time a space opens, only the tab you were last using loads. The others open asleep, a few at a time, and load when you look at them. Switching back to a space whose tabs are in the Hidden Tabs window is instant.</p></details>
+      <details><summary>What happens to the tabs I leave when I switch spaces?</summary><p>They are moved, not closed, into one minimized “Hidden Tabs” window. When you come back they return with their pinned state and tab groups.</p></details>
+      <details><summary>What if I uninstall KeepIt?</summary><p>Data saved only on your device is removed with the extension. Turn on account sync for the spaces and sessions you want to keep a copy of.</p></details>
+      <details><summary>Can I cancel or get a refund?</summary><p>Yes. Cancel Pro any time from the extension settings; it stays active until the end of the billing period. Refunds are available within 7 calendar days of purchase. See the Terms for details.</p></details>
+      <details><summary>How do I delete my data?</summary><p>Delete items inside KeepIt at any time. To delete your account and everything stored with it, email contact.naveen.work@gmail.com and we confirm within 30 days.</p></details>
+    </section>
+
+    <section class="cta-band">
+      <h2>Give every project its own space</h2>
+      <p>Free to start. No account needed. Takes about a minute to set up.</p>
+      <a href="https://chromewebstore.google.com/detail/keepit/mhldbdlepccoejdjnhogckbgijohddlg" target="_blank" rel="noopener noreferrer" class="btn-cta-primary" data-keepit-cta="install" data-installed-label="Open Your Dashboard">Add to Chrome — It's Free</a>
+    </section>
+
+    <footer>
     <div>
       <a href="index.html">Home</a> •
       <a href="docs.html">Documentation</a> •
@@ -979,7 +1051,7 @@
       <a href="privacy.html">Privacy Policy</a> •
       <a href="terms.html">Terms of Service</a> •
       <a href="terms.html#billing">Refund Policy</a> •
-      <a href="support.html">Support</a>
+      <a href="security.html">Security</a> • <a href="changelog.html">Changelog</a> • <a href="support.html">Support</a>
     </div>
     <div style="margin-top: 10px; color: var(--text-muted); font-size: 12.5px;">
       © 2026 KeepIt. All rights reserved. Billed via Lemon Squeezy. Built for power browser users worldwide.

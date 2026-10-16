@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KeepIt — Privacy Policy</title>
   <meta name="description"
-    content="Privacy Policy for KeepIt tab session manager Chrome extension. Learn how your session data, authentication, and privacy are handled securely.">
+    content="Privacy Policy for the KeepIt tab workspaces and session manager Chrome extension: what data is used, what is stored, which permissions are needed and why, and how to delete your data.">
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#0f172a">
   <link rel="canonical" href="https://keepit.website/privacy.html">
@@ -679,7 +679,7 @@
             <path stroke-linecap="round" stroke-linejoin="round"
               d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
-          <span>Effective Date: <strong>August 7, 2026</strong></span>
+          <span>Effective Date: <strong>October 15, 2026</strong></span>
         </div>
         <span class="divider-dot">•</span>
         <div class="meta-item">
@@ -697,8 +697,9 @@
         <a href="#use" class="quick-pill">2. How We Use Data</a>
         <a href="#third-parties" class="quick-pill">3. Third Parties</a>
         <a href="#permissions" class="quick-pill">4. Permissions</a>
-        <a href="#storage" class="quick-pill">5. Security & Storage</a>
-        <a href="#retention" class="quick-pill">6. Data Rights & Deletion</a>
+        <a href="#limited-use" class="quick-pill">5. Google Data &amp; Limited Use</a>
+        <a href="#storage" class="quick-pill">6. Security &amp; Storage</a>
+        <a href="#retention" class="quick-pill">7. Data Rights &amp; Deletion</a>
       </div>
     </div>
 
@@ -712,12 +713,7 @@
         <span>Privacy-First Philosophy</span>
       </div>
       <p>
-        KeepIt is designed with data minimization and transparency at its core. For offline users, saved sessions,
-        auto-save snapshots, and settings are stored locally in your browser (<code>chrome.storage.local</code>). If you
-        choose to sign in and enable Cloud Sync or Session Sharing, your selected session data is synced securely to our
-        database. KeepIt inspects open tab metadata (titles, URLs, favicons) strictly to save sessions, organize
-        folders, and manage tab freezing—never to track your personal browsing history, profile your activity, or serve
-        advertisements.
+        KeepIt is designed with data minimization and transparency at its core. Your sessions, spaces, folders, notes, auto-save snapshots and settings are stored on your device (<code>chrome.storage.local</code>). Nothing is uploaded unless you sign in and turn on account sync, cloud sessions or sharing. KeepIt uses tab titles, addresses (URLs) and icons only to save, organize and restore your tabs. It <strong>never reads the contents of your pages</strong>, never tracks your browsing, and never shows or sells advertising.
       </p>
     </div>
 
@@ -725,180 +721,193 @@
     <section id="collect" class="policy-section">
       <h2><span class="section-number">1</span> What Information We Collect</h2>
 
-      <p>Depending on how you use KeepIt (offline local mode vs. optional Google Sign-in & Cloud Sync), we collect and
-        process the following categories of data:</p>
+      <p>What KeepIt handles depends on how you use it: fully on your device, or with optional Google sign-in and account features.</p>
 
       <div class="info-grid">
         <div class="info-card">
           <div class="info-card-header">
-            <span>Session & Tab Metadata</span>
-            <span class="badge badge-success">Local Default</span>
+            <span>Tabs, Sessions &amp; Spaces</span>
+            <span class="badge badge-success">On Your Device</span>
           </div>
           <div class="info-card-body">
-            Tab titles, URLs, favicon references, pinned states, tab positions, custom folder names, and Chrome native
-            Tab Group metadata (group title, color badge, collapsed state).
+            Tab titles, addresses (URLs), favicon references, pinned state, tab positions, tab group name/color/collapsed state, folder names, space names, emoji and colors, notes you write, and the address of the tab you were last viewing in each space (used to reopen the space on that tab; never uploaded).
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-header">
+            <span>Account Sync of Spaces &amp; Sessions</span>
+            <span class="badge badge-info">Opt-In, Off by Default</span>
+          </div>
+          <div class="info-card-body">
+            If you sign in and turn on cloud sessions or &quot;Use your spaces on all your devices&quot;, the names, tab titles, tab addresses, notes and colors of <em>those</em> sessions and spaces are saved to your KeepIt account so they appear on your other computers.
           </div>
         </div>
 
         <div class="info-card">
           <div class="info-card-header">
             <span>Google Account Identity</span>
-            <span class="badge badge-info">Opt-In Auth</span>
+            <span class="badge badge-info">Opt-In Sign-In</span>
           </div>
           <div class="info-card-body">
-            When you sign in with Google via <code>chrome.identity</code>, we receive your email address, full name,
-            profile picture, and Google User ID. <strong>We never receive or store your Google password.</strong>
+            When you sign in with Google via <code>chrome.identity</code>, we receive your email address, name, profile picture and Google user ID. <strong>We never receive or store your Google password.</strong>
           </div>
         </div>
 
         <div class="info-card">
           <div class="info-card-header">
-            <span>Username & Peer Sharing</span>
+            <span>Username &amp; Sharing</span>
             <span class="badge badge-info">Optional</span>
           </div>
           <div class="info-card-body">
-            If you choose to use the peer-to-peer session sharing feature, you select a custom username stored in our
-            database so designated users can share sessions with you.
+            A username you choose so others can send you sessions. A share link carries the titles and addresses you choose inside the link itself. A live link stores the tabs you select on our servers so the page can stay up to date, and anyone who has the link can view them. You can revoke a live link at any time.
           </div>
         </div>
 
         <div class="info-card">
           <div class="info-card-header">
-            <span>Subscription & Billing Metadata</span>
+            <span>Subscription &amp; Launch Offer</span>
             <span class="badge badge-warning">Pro Plan</span>
           </div>
           <div class="info-card-body">
-            We store plan status (Free vs. Pro/Premium, billing cycle, expiration date) to enforce plan limits.
-            <strong>We never collect or store payment cards or bank details.</strong> All payments are processed by
-            Lemon Squeezy.
+            Plan status, billing period and renewal date, and identifiers from Lemon Squeezy. If you claim the launch offer, we store your account ID, the date, and a normalized form of your email address so each person can claim it only once. <strong>We never collect or store payment card or bank details.</strong> Lemon Squeezy handles all payments.
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-header">
+            <span>Uninstall Feedback</span>
+            <span class="badge badge-info">Only If You Send It</span>
+          </div>
+          <div class="info-card-body">
+            When KeepIt is removed, Chrome opens a short feedback page on keepit.website. Only if you press <strong>Send</strong>, we store the reason you picked, your optional note, the KeepIt version, a random install ID and, if you were signed in, your account ID and email.
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-header">
+            <span>Error Log</span>
+            <span class="badge badge-success">On Your Device</span>
+          </div>
+          <div class="info-card-body">
+            KeepIt keeps the last few unexpected errors on your device (with page addresses removed) to help it recover. This log is never uploaded.
           </div>
         </div>
       </div>
 
-      <p><strong>What we do NOT collect:</strong> We do not track ambient browsing activity outside of open tabs you
-        explicitly save, we do not log form inputs or page contents, and we do not run third-party advertising or
-        analytics trackers.</p>
+      <p><strong>What we do NOT collect:</strong> We never read page contents, form inputs, passwords or what you type. We do not track your browsing activity outside of the tabs you save or sync, we do not use advertising or analytics trackers in the extension or on this website, and we do not sell, rent or trade personal data.</p>
     </section>
 
     <!-- Section 2 -->
     <section id="use" class="policy-section">
       <h2><span class="section-number">2</span> How We Use Your Data</h2>
-      <p>We process data strictly to provide, maintain, and support the core functionality of KeepIt:</p>
+      <p>We use data only to provide and support the features you ask for:</p>
       <ul>
-        <li><strong>Saving & Restoring Sessions:</strong> Capturing open window tabs, Tab Groups, and folders so you can
-          restore them instantly.</li>
-        <li><strong>Auto-Save Recovery:</strong> Storing local periodic snapshots so you can recover lost browser tabs
-          after unexpected Chrome crashes.</li>
-        <li><strong>Auto-Freeze Feature:</strong> Monitoring tab idle times locally to discard inactive background tabs
-          and free up system RAM.</li>
-        <li><strong>Cloud Syncing (Opt-In):</strong> Uploading sessions to our database provider, Supabase, so you can
-          restore your tab sessions across multiple computers or browsers.</li>
-        <li><strong>Peer Session Sharing:</strong> Delivering shared session packages directly to another user's shared
-          inbox using their chosen username.</li>
-        <li><strong>Subscription Verification:</strong> Verifying Pro plan status via secure webhooks to unlock premium
-          features (e.g. unlimited cloud sync, enhanced auto-save frequencies).</li>
+        <li><strong>Saving &amp; Restoring Sessions and Spaces:</strong> Capturing the tabs and tab groups of a window so you can bring them back, switch between spaces and find a tab across spaces.</li>
+        <li><strong>Hidden Tabs window &amp; Quick Switcher:</strong> Moving tabs you are not using into one minimized window, and showing a small switcher box on the current page when you press the shortcut.</li>
+        <li><strong>Auto-Save &amp; Recovery:</strong> Storing periodic snapshots and earlier versions on your device so you can recover tabs after a crash or accidental close.</li>
+        <li><strong>Auto-Freeze &amp; Sleeping Tabs:</strong> Checking tab idle times locally to discard inactive background tabs and free memory.</li>
+        <li><strong>Account Sync (Opt-In):</strong> Saving the sessions and spaces you choose to your account so they appear on your other computers.</li>
+        <li><strong>Sharing:</strong> Delivering shared sessions to a username you choose, and serving share or live links to people who have the link.</li>
+        <li><strong>Subscription &amp; Offer Verification:</strong> Confirming Pro status and launch-offer eligibility so the right limits apply.</li>
+        <li><strong>Product Improvement:</strong> Reading the uninstall feedback you choose to send.</li>
       </ul>
+      <p>We do not use your data for advertising, profiling, or to determine creditworthiness or lending eligibility, and we do not use it to train AI models.</p>
     </section>
 
     <!-- Section 3 -->
     <section id="third-parties" class="policy-section">
       <h2><span class="section-number">3</span> Third-Party Service Providers</h2>
-      <p>We work with trusted third-party service providers to handle infrastructure, authentication, and payments under
-        strict data handling standards:</p>
+      <p>We use these providers to run sign-in, storage and payments:</p>
       <ul>
         <li>
-          <strong>Google LLC (Google Identity Services)</strong> — Handles authentication via OpenID Connect OAuth 2.0.
-          Governed by <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy
-            Policy</a>.
+          <strong>Google LLC (Google Identity Services)</strong> — Handles sign-in via OpenID Connect OAuth 2.0. Governed by <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.
         </li>
         <li>
-          <strong>Supabase Inc.</strong> — Serves as our secure backend database provider (<code>*.supabase.co</code>)
-          to host cloud-synced sessions, folders, usernames, and subscription metadata. Governed by <a
-            href="https://supabase.com/privacy" target="_blank" rel="noopener">Supabase's Privacy Policy</a>.
+          <strong>Supabase Inc.</strong> — Our backend database provider (<code>*.supabase.co</code>). Hosts account-synced sessions, spaces, usernames, share links, subscription status and feedback. Governed by <a href="https://supabase.com/privacy" target="_blank" rel="noopener">Supabase's Privacy Policy</a>.
         </li>
         <li>
-          <strong>Lemon Squeezy, LLC</strong> — Our Merchant of Record; manages subscription payments and checkout. When
-          upgrading to Pro, Lemon Squeezy collects payments directly under its PCI-DSS compliant infrastructure.
-          Governed by <a href="https://www.lemonsqueezy.com/privacy" target="_blank" rel="noopener">Lemon Squeezy's
-            Privacy Policy</a>.
+          <strong>Lemon Squeezy, LLC</strong> — Our Merchant of Record. Collects payment details directly under its PCI-DSS compliant infrastructure when you upgrade to Pro. Governed by <a href="https://www.lemonsqueezy.com/privacy" target="_blank" rel="noopener">Lemon Squeezy's Privacy Policy</a>.
         </li>
       </ul>
-      <p>We do not sell, rent, or trade your personal data to any third parties or advertisers.</p>
+      <p>We do not sell, rent or trade your personal data to third parties or advertisers. We do not share it except with the providers above to operate the service, or where the law requires.</p>
     </section>
 
     <!-- Section 4 -->
     <section id="permissions" class="policy-section">
       <h2><span class="section-number">4</span> Extension Permissions Explained</h2>
-      <p>Chrome requires explicit permissions for extensions to interact with your browser. KeepIt requests only
-        necessary permissions:</p>
+      <p>Chrome requires permissions for extensions to work with your browser. KeepIt asks only for what its features need, and all of its code is inside the extension package (no remote code is loaded).</p>
       <ul>
-        <li><code>tabs</code>: Required to read tab titles, URLs, and favicons when saving sessions, and to discard
-          inactive background tabs for Auto-Freeze.</li>
-        <li><code>tabGroups</code>: Required to preserve native Chrome Tab Group titles, colors, and collapsed states.
-        </li>
-        <li><code>storage</code>: Required to store your sessions, folders, auto-save snapshots, and settings locally on
-          your device.</li>
-        <li><code>alarms</code>: Required to trigger background auto-save snapshots and periodic subscription
-          re-verifications.</li>
-        <li><code>sessions</code>: Required to support recovery of recently closed windows.</li>
-        <li><code>identity</code>: Required to open the Google OAuth sign-in flow.</li>
+        <li><code>tabs</code>: Read tab titles, URLs and favicons when saving sessions and spaces, move tabs between windows, and discard inactive background tabs.</li>
+        <li><code>tabGroups</code>: Keep Chrome tab group names, colors and collapsed states when saving and restoring.</li>
+        <li><code>storage</code> and <code>unlimitedStorage</code>: Keep your sessions, spaces, notes, snapshots, version history and settings on your device. Users with many tabs can exceed Chrome's default 10 MB limit; this permission only removes that limit.</li>
+        <li><code>alarms</code>: Run auto-save, idle-tab sleep and background sync on a timer when the popup is closed.</li>
+        <li><code>sessions</code>: Show recently closed windows and tabs so they can be brought back.</li>
+        <li><code>identity</code>: Open the Google sign-in flow for optional account features.</li>
+        <li><code>contextMenus</code>: Add the right-click item &quot;Move tab to space&quot;.</li>
+        <li><code>scripting</code> and <code>activeTab</code>: Show the quick-switcher box on the current page, only when you press its shortcut. KeepIt injects its own bundled file; it does not read or change page content, and has no access to other tabs.</li>
+        <li><strong>Access to <code>https://*.supabase.co/*</code></strong>: Talk to KeepIt's own account and sync server.</li>
+        <li><strong>Content script on <code>https://keepit.website/*</code></strong>: Lets this website detect that KeepIt is installed and lets the &quot;Import into KeepIt&quot; button on a share page hand a session to the extension. You must still confirm the import inside the extension.</li>
       </ul>
     </section>
 
-    <!-- Section 5 -->
-    <section id="storage" class="policy-section">
-      <h2><span class="section-number">5</span> Data Storage & Security</h2>
-      <p>
-        <strong>Local Storage:</strong> Local sessions and auto-save snapshots are kept strictly inside Chrome's
-        isolated extension storage (<code>chrome.storage.local</code>) on your local hard drive.
-      </p>
-      <p>
-        <strong>Cloud Security:</strong> All cloud-synced data transmitted to Supabase is encrypted in transit using TLS
-        1.2/1.3 (HTTPS). Cloud database access is restricted using Supabase Row Level Security (RLS) policies—ensuring
-        your saved sessions and folders are only accessible by your authenticated Google account (or designated
-        recipients you explicitly share sessions with).
-      </p>
+    <!-- Section 5: Limited Use -->
+    <section id="limited-use" class="policy-section">
+      <h2><span class="section-number">5</span> Google User Data &amp; Limited Use</h2>
+      <p>KeepIt's use and transfer to any other app of information received from Google APIs will adhere to the <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use" target="_blank" rel="noopener">Chrome Web Store User Data Policy</a>, including the Limited Use requirements.</p>
+      <ul>
+        <li>We receive only your basic Google profile (email, name, picture, user ID) to sign you in and show your account.</li>
+        <li>We use it only to provide and improve the user-facing features described in this policy.</li>
+        <li>We do not transfer or sell it to third parties, except to the providers listed above as needed to run the service, to comply with law, or with your consent.</li>
+        <li>We do not use it for advertising, and no person reads it unless you ask for support, it is needed for security, or the law requires it.</li>
+      </ul>
     </section>
 
     <!-- Section 6 -->
-    <section id="retention" class="policy-section">
-      <h2><span class="section-number">6</span> Data Retention & Your Controls</h2>
-      <ul>
-        <li><strong>Local Deletion:</strong> You can edit or delete any saved session, folder, or auto-save snapshot
-          anytime inside the KeepIt extension. Uninstalling the extension automatically removes all local data stored in
-          <code>chrome.storage.local</code>.
-        </li>
-        <li><strong>Cloud Session Deletion:</strong> Deleting a cloud session inside KeepIt permanently removes it from
-          our cloud database.</li>
-        <li><strong>Full Account Deletion:</strong> You may request complete deletion of your KeepIt account, username
-          profile, and all associated cloud-stored data by emailing us at <a
-            href="mailto:contact.naveen.work@gmail.com">contact.naveen.work@gmail.com</a>. We will process and confirm
-          account deletion requests within <strong>30 days</strong>.</li>
-        <li><strong>Subscription Cancellation:</strong> You can cancel your Pro subscription anytime via the extension
-          settings. Subscription cancellation takes effect at the end of the current billing cycle.</li>
-      </ul>
+    <section id="storage" class="policy-section">
+      <h2><span class="section-number">6</span> Data Storage &amp; Security</h2>
+      <p>
+        <strong>On your device:</strong> Sessions, spaces, snapshots, notes and settings stay inside Chrome's isolated extension storage (<code>chrome.storage.local</code>).
+      </p>
+      <p>
+        <strong>In your account:</strong> Data sent to Supabase is encrypted in transit (TLS 1.2/1.3). Row Level Security means your sessions and spaces can be read only by your signed-in account, by recipients you share them with, or by people who have a link you created. Payment, subscription and offer actions run on server functions that verify your sign-in, and payment events are verified with a signed webhook.
+      </p>
+      <p>
+        <strong>Extension code:</strong> KeepIt validates the messages it receives, only opens http(s) and file addresses from saved or shared data, and uses a strict content security policy for its pages.
+      </p>
     </section>
 
     <!-- Section 7 -->
-    <section class="policy-section">
-      <h2><span class="section-number">7</span> Children's Privacy</h2>
-      <p>
-        KeepIt is not directed at children, and we do not knowingly collect personal information from children under the
-        age of 13 (or the minimum legal age in your jurisdiction). If we learn that a child under 13 has provided us
-        with personal information, we will delete it promptly.
-      </p>
+    <section id="retention" class="policy-section">
+      <h2><span class="section-number">7</span> Data Retention &amp; Your Controls</h2>
+      <ul>
+        <li><strong>On your device:</strong> Edit or delete any session, space, folder, note or snapshot inside KeepIt. Removing the extension deletes the data stored on your device.</li>
+        <li><strong>Account sync:</strong> Turn it off any time in KeepIt. Deleting a space or cloud session removes it from your account too.</li>
+        <li><strong>Links:</strong> You can revoke a share or live link; after that it stops working.</li>
+        <li><strong>Full account deletion:</strong> Email <a href="mailto:contact.naveen.work@gmail.com">contact.naveen.work@gmail.com</a> to delete your account and everything stored with it (sessions, spaces, username, subscription record and launch-offer record). We confirm within <strong>30 days</strong>.</li>
+        <li><strong>Uninstall feedback:</strong> The feedback form has no sign-in step. Email us and we will delete your answer.</li>
+        <li><strong>Subscription cancellation:</strong> Cancel Pro any time from the extension settings. It takes effect at the end of the current billing period. Billing records are kept by Lemon Squeezy as required by tax law.</li>
+      </ul>
     </section>
 
     <!-- Section 8 -->
     <section class="policy-section">
-      <h2><span class="section-number">8</span> Policy Updates</h2>
+      <h2><span class="section-number">8</span> Children's Privacy</h2>
       <p>
-        We may update this Privacy Policy from time to time to reflect feature additions or legal requirements. Material
-        updates will be posted on this page with a revised "Effective Date" at the top.
+        KeepIt is not directed at children, and we do not knowingly collect personal information from children under 13 (or the minimum legal age in your country). If we learn that a child under 13 has given us personal information, we will delete it promptly.
       </p>
     </section>
 
-    <!-- Section 9: Contact Card -->
+    <!-- Section 9 -->
+    <section class="policy-section">
+      <h2><span class="section-number">9</span> Policy Updates</h2>
+      <p>
+        We may update this Privacy Policy when features or laws change. Material updates will be posted here with a new &quot;Effective Date&quot; at the top.
+      </p>
+    </section>
+
+    
+<!-- Section 9: Contact Card -->
     <div class="contact-card">
       <h3>Questions or Data Requests?</h3>
       <p>If you have any questions about this Privacy Policy, data privacy rights, or wish to request complete account
@@ -915,7 +924,7 @@
     <footer>
       <p><a href="index.html">Home</a> • <a href="docs.html">Documentation</a> •
       <a href="blog.html">Blog</a> • <a href="privacy.html">Privacy
-          Policy</a> • <a href="terms.html">Terms of Service</a> • <a href="support.html">Support</a></p>
+          Policy</a> • <a href="terms.html">Terms of Service</a> • <a href="security.html">Security</a> • <a href="changelog.html">Changelog</a> • <a href="support.html">Support</a></p>
       <p style="margin-top: 8px;">© 2026 KeepIt. All rights reserved. Built for power browser users worldwide.</p>
     </footer>
 

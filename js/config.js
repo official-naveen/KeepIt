@@ -10,8 +10,8 @@ window.SUPABASE_CONFIG = {
 
 window.LEMONSQUEEZY_CONFIG = {
   storeId: "475355",
-  variantMonthlyId: "2132966",
-  variantYearlyId: "2133034"
+  variantMonthlyId: "2182395",
+  variantYearlyId: "2182397"
 };
 
 window.GOOGLE_CONFIG = {

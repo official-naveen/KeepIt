@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="referrer" content="no-referrer">
   <meta name="robots" content="noindex,nofollow">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-AUTzQoblivgIp6gSSxxn6pE1QL0LAKHKBVXspoxDTkU='; style-src 'sha256-6GBX+TAg5Md3q3PVJ5RQ9BTFyFWNvE7cqXSBWAa5q6E='; connect-src https://srcrhiirseqodxcbikph.supabase.co; img-src data:; base-uri 'none'; form-action 'none'; object-src 'none'; frame-src 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-9z/YiggJZre9d6RRr7dsRGF3DqJO1hcHyglsLOaNKCo='; style-src 'sha256-6GBX+TAg5Md3q3PVJ5RQ9BTFyFWNvE7cqXSBWAa5q6E='; connect-src https://srcrhiirseqodxcbikph.supabase.co; img-src data:; base-uri 'none'; form-action 'none'; object-src 'none'; frame-src 'none'">
   <title>Shared tabs · KeepIt</title>
   <style>
     :root { color-scheme: light dark; --bg:#f8fafc; --card:#fff; --text:#172033; --muted:#64748b; --accent:#4f46e5; --border:#e2e8f0; }
@@ -68,7 +68,7 @@
   </main>
   <script>
   (() => {
-    const CHROME_STORE_URL = 'https://chromewebstore.google.com/'; // TODO: replace with your KeepIt listing URL
+    const CHROME_STORE_URL = 'https://chromewebstore.google.com/detail/keepit/mhldbdlepccoejdjnhogckbgijohddlg';
     const SUPABASE_URL = 'https://srcrhiirseqodxcbikph.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNyY3JoaWlyc2Vxb2R4Y2Jpa3BoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1NzkxMDIsImV4cCI6MjEwMTE1NTEwMn0.JY6J50hfVo6kbQWoKLhNqgLka1Aga1G1J4Vn2eNizpw'; // public by design (it is also inside the extension); data access is controlled by the SQL functions
     const MAX_TABS = 500, POLL_MS = 15000, POLL_CAP_MS = 60 * 60 * 1000;

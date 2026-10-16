@@ -2,18 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://keepit.website/</loc>
+    <lastmod>2026-10-15</lastmod>
   </url>
   <url>
     <loc>https://keepit.website/docs.html</loc>
+    <lastmod>2026-10-15</lastmod>
   </url>
   <url>
     <loc>https://keepit.website/support.html</loc>
+    <lastmod>2026-10-15</lastmod>
   </url>
   <url>
     <loc>https://keepit.website/privacy.html</loc>
+    <lastmod>2026-10-15</lastmod>
   </url>
   <url>
     <loc>https://keepit.website/terms.html</loc>
+    <lastmod>2026-10-15</lastmod>
   </url>
   <url>
     <loc>https://keepit.website/blog.html</loc>
@@ -46,5 +51,37 @@
   <url>
     <loc>https://keepit.website/blog/stop-tab-hoarding.html</loc>
     <lastmod>2026-10-06</lastmod>
+  </url>
+  <url>
+    <loc>https://keepit.website/security.html</loc>
+    <lastmod>2026-10-15</lastmod>
+  </url>
+  <url>
+    <loc>https://keepit.website/changelog.html</loc>
+    <lastmod>2026-10-15</lastmod>
+  </url>
+  <url>
+    <loc>https://keepit.website/blog/how-to-organize-tabs-in-chrome.html</loc>
+    <lastmod>2026-10-16</lastmod>
+  </url>
+  <url>
+    <loc>https://keepit.website/blog/chrome-workspaces-switch-projects.html</loc>
+    <lastmod>2026-10-16</lastmod>
+  </url>
+  <url>
+    <loc>https://keepit.website/blog/why-chrome-uses-so-much-memory.html</loc>
+    <lastmod>2026-10-16</lastmod>
+  </url>
+  <url>
+    <loc>https://keepit.website/blog/sync-chrome-tabs-between-computers.html</loc>
+    <lastmod>2026-10-16</lastmod>
+  </url>
+  <url>
+    <loc>https://keepit.website/blog/chrome-tab-keyboard-shortcuts.html</loc>
+    <lastmod>2026-10-16</lastmod>
+  </url>
+  <url>
+    <loc>https://keepit.website/blog/tab-management-for-students-researchers.html</loc>
+    <lastmod>2026-10-16</lastmod>
   </url>
 </urlset>
